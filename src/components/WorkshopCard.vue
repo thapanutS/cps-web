@@ -1,6 +1,10 @@
 <template>
   <div>
-    <img id="poster" src="@/assets/Poster.png" alt="" />
+    <img
+      id="poster"
+      src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t39.30808-6/274674131_1121160405326217_4015574869830408627_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=5cd70e&_nc_eui2=AeErPUYiqm9lWirJCea4LEtjutwOGMOy8Ta63A4Yw7LxNoH7gbrHHjDvwTioCIpAyYGBFNkHLRB8pVFz4KCItqH1&_nc_ohc=rfk8GTPCibEAX-9CjAH&_nc_ht=scontent.fbkk22-2.fna&oh=00_AT9eD5LQG77I9i1GZrWkawz-4m0-FPz0zHT7XazyNmf2Ow&oe=62208DF0"
+      alt=""
+    />
     <div class="card_container">
       <div>
         <div>{{ topic }}</div>
@@ -30,6 +34,6 @@ export default {
   box-shadow: 2px;
 }
 #poster {
-  height: 50vh;
+  height: 100vh;
 }
 </style>
