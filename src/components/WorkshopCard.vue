@@ -13,11 +13,13 @@
           {{ description }}
         </div>
         <div class="flex my-2">
-          <div id="register-end">{{ registerEnd }}</div>
+          <div id="register-end">
+            เหลือเวลารับสมัครอีก {{ registerEnd }} วัน
+          </div>
           <div :class="`mx-2 px-2 event guild`">{{ type }}</div>
         </div>
       </div>
-      <div class="event">{{ point }} pt</div>
+      <div id="point">{{ point }} pt</div>
     </div>
   </div>
 </template>
