@@ -6,13 +6,13 @@
         alt=""
       />
     </div>
-    <div class="d-flex justify-space-between text-left px-3 mt-2">
+    <div class="flex justify-between text-left px-3 mt-2">
       <div>
         <div id="topic">{{ topic }}</div>
         <div id="description">
           {{ description }}
         </div>
-        <div class="d-flex my-2">
+        <div class="flex my-2">
           <div id="register-end">{{ registerEnd }}</div>
           <div :class="`mx-2 px-2 event guild`">{{ type }}</div>
         </div>

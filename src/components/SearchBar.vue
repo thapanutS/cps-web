@@ -2,7 +2,22 @@
   <div>
     <div class="search">
       <input type="text" placeholder="ค้นหาข้อมูล" />
-      <div class="icon"><v-icon color="#FFFFFF">mdi-magnify</v-icon></div>
+      <div class="icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="-2 -5 24 28"
+          stroke="white"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +40,8 @@ export default {
   width: 100%;
   outline: none;
   font-size: 12px;
+
+  background-color: transparent;
 }
 .search .icon {
   background-color: #15c5b5;
