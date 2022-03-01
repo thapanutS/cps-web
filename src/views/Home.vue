@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="Home">
     <section class="d-flex">
       <div class="flex-grow-1"><SearchBar /></div>
       <div class="flex-grow-0 px-0 py-0 align-center">
