@@ -203,6 +203,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home {
+  height: 100%;
+  min-height: 90vh;
+}
 .menu {
   height: 30px;
   .menu-btn {
