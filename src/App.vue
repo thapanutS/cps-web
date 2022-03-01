@@ -2,7 +2,7 @@
   <div>
     <div class="flex justify-center p-2">
       <div class="cps-logo">
-        <img src="@/assets/cps-logo.png" alt="cps-logo" />
+        <img src="@/assets/logo/cps-logo.png" alt="cps-logo" />
       </div>
 
       <!-- <router-link to="/">Home</router-link> |
