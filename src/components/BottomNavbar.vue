@@ -12,15 +12,15 @@
         </router-link>
       </div>
 
-      <router-link to="/" @click="currentPage('RANK')">
-        <GlobeIcon
-          :class="[`h-5 w-5`, isRank ? `text-primary` : `text-quaternary`]"
-        />
-      </router-link>
-
       <router-link to="/reward" @click="currentPage('REWARD')">
         <GiftIcon
           :class="[`h-5 w-5`, isReward ? `text-primary` : `text-quaternary`]"
+        />
+      </router-link>
+
+      <router-link to="/claim" @click="currentPage('CLAIM')">
+        <ClipboardIcon
+          :class="[`h-5 w-5`, isRank ? `text-primary` : `text-quaternary`]"
         />
       </router-link>
 
@@ -38,7 +38,7 @@ import {
   UserCircleIcon,
   GiftIcon,
   HomeIcon,
-  GlobeIcon,
+  ClipboardIcon,
 } from "@heroicons/vue/outline";
 
 export default {
@@ -54,7 +54,7 @@ export default {
     UserCircleIcon,
     GiftIcon,
     HomeIcon,
-    GlobeIcon,
+    ClipboardIcon,
   },
   methods: {
     currentPage(page) {
