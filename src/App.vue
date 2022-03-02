@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex justify-center p-2">
+    <div class="flex justify-center p-2 t-nav">
       <div class="cps-logo">
         <img src="@/assets/logo/cps-logo.png" alt="cps-logo" />
       </div>
@@ -25,6 +25,9 @@ export default {
   text-align: center;
 }
 
+.t-nav {
+  border-bottom: 1px solid #c7c7c7;
+}
 .cps-logo {
   width: 20vw;
 }

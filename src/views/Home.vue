@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="sticky top-0 z-1 bg-white pt-4">
+    <div class="sticky top-0 z-1 bg-white pt-2">
       <!-- SEARCH SECTION -->
       <section>
         <div class="flex-1">
@@ -11,7 +11,7 @@
           />
         </div>
 
-        <div class="my-2 py-1 filter-list flex flex-row">
+        <div class="my-2 py-2 filter-list flex flex-row">
           <div v-for="filter in filterList" :key="filter.id">
             <FilterChip
               class="ml-2"
@@ -225,6 +225,8 @@ export default {
 
   max-width: 100vw;
   background: white;
+  border-top: 1px solid #c7c7c7;
+  border-bottom: 1px solid #c7c7c7;
 }
 .filter-list::-webkit-scrollbar {
   display: none;
