@@ -1,4 +1,4 @@
-# bb-workshop-web
+# CPS-WEB
 
 ## Project setup
 ```
