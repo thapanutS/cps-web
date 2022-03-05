@@ -63,7 +63,7 @@ export default {
         this.isRank = false;
         this.isReward = false;
         this.isProfile = false;
-      } else if (page === "RANK") {
+      } else if (page === "CLAIM") {
         this.isHome = false;
         this.isRank = true;
         this.isReward = false;
