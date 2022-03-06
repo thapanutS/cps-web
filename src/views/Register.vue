@@ -204,7 +204,7 @@
           <button
             :class="[
               validate() ? 'bg-primary' : 'bg-gray-300 disabled',
-              'w-full py-3 rounded-xl font-medium text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105',
+              'w-full py-3 rounded-md font-medium text-white shadow-lg hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105',
             ]"
             @click="register()"
             :disabled="!validate()"
