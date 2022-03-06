@@ -24,20 +24,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
-
-.t-nav {
-  border-bottom: 1px solid #c7c7c7;
-}
 .cps-logo {
   width: 20vw;
-}
-#b-nav {
-  border-top: 1px solid #c7c7c7;
-}
-#b-nav :active {
-  stroke: #000;
-}
-#b-nav :active {
-  stroke: #000;
 }
 </style>
