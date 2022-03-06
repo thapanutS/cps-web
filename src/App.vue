@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-if="!$route.path === '/register'" class="flex justify-center p-2">
+    <div v-if="$route.path !== '/register'" class="flex justify-center p-2">
       <div class="cps-logo">
         <img src="@/assets/logo/cps-logo.png" alt="cps-logo" />
       </div>
     </div>
     <router-view />
-    <BottomNavbar v-if="!$route.path === '/register'" />
+    <BottomNavbar v-if="$route.path !== '/register'" />
   </div>
 </template>
 <script>
