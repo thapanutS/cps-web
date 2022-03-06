@@ -4,6 +4,7 @@ import Profile from "../views/Profile.vue";
 import Register from "../views/Register.vue";
 import Reward from "../views/Reward.vue";
 import Claim from "../views/Claim.vue";
+import Event from "../views/Event.vue";
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: "/claim",
     name: "Claim",
     component: Claim,
+  },
+  {
+    path: "/event/:id",
+    name: "Event",
+    component: Event,
   },
 ];
 
