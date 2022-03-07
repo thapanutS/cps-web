@@ -48,14 +48,14 @@
     <!-- DISPLAY EVENT LIST -->
     <section class="event-list px-4">
       <div v-if="menuType === `ALL_EVENT`">
-        <div v-for="event in allEventList" :key="event.id">
+        <div v-for="event in eventList" :key="event.id">
           <WorkshopCard
-            :poster="event.poster"
-            :topic="event.topic"
+            :poster="event.img"
+            :topic="event.name"
             :description="event.description"
             :registerEnd="event.registerEnd"
             :point="event.point"
-            :type="event.eventType"
+            :type="event.tags"
             class="mt-3"
           />
         </div>
@@ -85,6 +85,8 @@ import { ref } from "vue";
 import WorkshopCard from "@/components/WorkshopCard.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import FilterChip from "@/components/FilterChip.vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
 
 export default {
   name: "Home",
@@ -184,9 +186,17 @@ export default {
     const dialogm1 = ref("");
     const dialog = ref(false);
     const isFilter = ref(false);
-    const searchFunction = () => {
-      console.log("eieiei");
+    const store = useStore();
+    const searchFunction = async () => {
+      await store.dispatch("event/getAllEvent");
     };
+    const fetchData = async () => {
+      await store.dispatch("event/getAllEvent");
+    };
+
+    const eventList = computed(() => store.state.event.eventList);
+    fetchData();
+    console.log("eventList", eventList);
     return {
       searchValue,
       menuType,
@@ -196,7 +206,9 @@ export default {
       dialogm1,
       isFilter,
       filterList,
+      eventList,
       searchFunction,
+      fetchData,
     };
   },
 };
