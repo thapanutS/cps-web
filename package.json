@@ -13,6 +13,7 @@
     "@heroicons/vue": "^1.0.5",
     "@mdi/font": "5.9.55",
     "autoprefixer": "^10",
+    "axios": "^0.26.0",
     "postcss": "^8",
     "roboto-fontface": "*",
     "tailwindcss": "^3",
