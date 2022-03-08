@@ -98,45 +98,49 @@ export default {
   setup() {
     const searchValue = ref("");
     const filterList = ref([
-      { id: 1, type: "แนะแนว", isSelected: true },
+      { id: 1, type: "Workshop", isSelected: false },
       { id: 2, type: "Hackathon", isSelected: false },
-      { id: 3, type: "Workshop", isSelected: false },
-      { id: 4, type: "Workshop", isSelected: false },
-      { id: 5, type: "Workshop", isSelected: false },
-      { id: 6, type: "Workshop", isSelected: false },
-      { id: 7, type: "Workshop", isSelected: false },
-      { id: 8, type: "Workshop", isSelected: false },
-      { id: 9, type: "Workshop", isSelected: false },
-      { id: 10, type: "Workshop", isSelected: false },
-      { id: 11, type: "Workshop", isSelected: false },
-      { id: 12, type: "Workshop", isSelected: false },
-      { id: 13, type: "Workshop", isSelected: false },
+      { id: 2, type: "Guide", isSelected: false },
+      // { id: 3, type: "Workshop", isSelected: false },
+      // { id: 4, type: "Workshop", isSelected: false },
+      // { id: 5, type: "Workshop", isSelected: false },
     ]);
     let menuType = ref("ALL_EVENT");
-    const dialogm1 = ref("");
-    const dialog = ref(false);
-    const isFilter = ref(false);
     const store = useStore();
     const searchFunction = async () => {};
     const fetchData = async () => {
       await store.dispatch("event/getAllEvent");
       await store.dispatch(
         "event/getMyEventList",
-        "Uidasefmavkmaovdioxcvsaxcvrgqvascdasdc"
+        "Uidasefmavkmaovdioxcvsaxcvrgqvascdasdc" // mock user id
       );
     };
 
-    const eventList = computed(() => store.state.event.eventList);
+    const eventList = computed(() =>
+      store.state.event.eventList.filter((event) => {
+        // set isSelected filter
+        // event.tags.forEach((tag) => {
+        //   filterList.value.forEach((filter) => {
+        //     if (
+        //       tag.toLowerCase() === filter.type.toLowerCase() &&
+        //       filter.isSelected
+        //     ) {
+        //       console.log("tag", tag);
+        //     }
+        //   });
+        // });
+
+        return event.name
+          .toLowerCase()
+          .includes(searchValue.value.toLowerCase());
+      })
+    );
     const myEventList = computed(() => store.state.event.myEventList);
     fetchData();
-    console.log("eventList", eventList);
     return {
       searchValue,
       menuType,
       myEventList,
-      dialog,
-      dialogm1,
-      isFilter,
       filterList,
       eventList,
       searchFunction,
