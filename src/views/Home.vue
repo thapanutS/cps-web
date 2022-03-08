@@ -50,12 +50,12 @@
       <div v-if="menuType === `ALL_EVENT`">
         <div v-for="event in eventList" :key="event.id">
           <WorkshopCard
-            :poster="event.img"
-            :topic="event.name"
+            :img="event.img"
+            :name="event.name"
             :description="event.description"
             :registerEnd="event.registerEnd"
             :point="event.point"
-            :type="event.tags"
+            :tags="event.tags"
             class="mt-3"
           />
         </div>
@@ -63,12 +63,12 @@
       <div v-else>
         <div v-for="event in myEventList" :key="event.id">
           <WorkshopCard
-            :poster="event.poster"
-            :topic="event.topic"
+            :img="event.img"
+            :name="event.name"
             :description="event.description"
             :registerEnd="event.registerEnd"
             :point="event.point"
-            :type="event.eventType"
+            :tags="event.tags"
             class="mt-3"
           />
         </div>
@@ -112,95 +112,27 @@ export default {
       { id: 12, type: "Workshop", isSelected: false },
       { id: 13, type: "Workshop", isSelected: false },
     ]);
-    const allEventList = ref([
-      {
-        id: 1,
-        poster:
-          "https://scontent.fbkk22-2.fna.fbcdn.net/v/t39.30808-6/274674131_1121160405326217_4015574869830408627_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=5cd70e&_nc_eui2=AeErPUYiqm9lWirJCea4LEtjutwOGMOy8Ta63A4Yw7LxNoH7gbrHHjDvwTioCIpAyYGBFNkHLRB8pVFz4KCItqH1&_nc_ohc=rfk8GTPCibEAX-9CjAH&_nc_ht=scontent.fbkk22-2.fna&oh=00_AT9eD5LQG77I9i1GZrWkawz-4m0-FPz0zHT7XazyNmf2Ow&oe=62208DF0",
-        topic: "Kick-off Startup by SU Entrepreneur Club",
-        description:
-          "แชร์ประสบการณ์จากรุ่นพี่สู่รุ่นน้อง โดยนักศึกษาผู้ประกอบการ",
-        registerEnd: 3,
-        point: 300,
-        eventType: "แนะแนว",
-      },
-      {
-        id: 2,
-        poster:
-          "https://scontent.fbkk22-2.fna.fbcdn.net/v/t39.30808-6/274674131_1121160405326217_4015574869830408627_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=5cd70e&_nc_eui2=AeErPUYiqm9lWirJCea4LEtjutwOGMOy8Ta63A4Yw7LxNoH7gbrHHjDvwTioCIpAyYGBFNkHLRB8pVFz4KCItqH1&_nc_ohc=rfk8GTPCibEAX-9CjAH&_nc_ht=scontent.fbkk22-2.fna&oh=00_AT9eD5LQG77I9i1GZrWkawz-4m0-FPz0zHT7XazyNmf2Ow&oe=62208DF0",
-        topic: "Kick-off Startup by SU Entrepreneur Club",
-        description:
-          "แชร์ประสบการณ์จากรุ่นพี่สู่รุ่นน้อง โดยนักศึกษาผู้ประกอบการ",
-        registerEnd: 3,
-        point: 300,
-        eventType: "แนะแนว",
-      },
-      {
-        id: 3,
-        poster:
-          "https://scontent.fbkk22-2.fna.fbcdn.net/v/t39.30808-6/274674131_1121160405326217_4015574869830408627_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=5cd70e&_nc_eui2=AeErPUYiqm9lWirJCea4LEtjutwOGMOy8Ta63A4Yw7LxNoH7gbrHHjDvwTioCIpAyYGBFNkHLRB8pVFz4KCItqH1&_nc_ohc=rfk8GTPCibEAX-9CjAH&_nc_ht=scontent.fbkk22-2.fna&oh=00_AT9eD5LQG77I9i1GZrWkawz-4m0-FPz0zHT7XazyNmf2Ow&oe=62208DF0",
-        topic: "Kick-off Startup by SU Entrepreneur Club",
-        description:
-          "แชร์ประสบการณ์จากรุ่นพี่สู่รุ่นน้อง โดยนักศึกษาผู้ประกอบการ",
-        registerEnd: 3,
-        point: 300,
-        eventType: "แนะแนว",
-      },
-      {
-        id: 4,
-        poster:
-          "https://scontent.fbkk22-2.fna.fbcdn.net/v/t39.30808-6/274674131_1121160405326217_4015574869830408627_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=5cd70e&_nc_eui2=AeErPUYiqm9lWirJCea4LEtjutwOGMOy8Ta63A4Yw7LxNoH7gbrHHjDvwTioCIpAyYGBFNkHLRB8pVFz4KCItqH1&_nc_ohc=rfk8GTPCibEAX-9CjAH&_nc_ht=scontent.fbkk22-2.fna&oh=00_AT9eD5LQG77I9i1GZrWkawz-4m0-FPz0zHT7XazyNmf2Ow&oe=62208DF0",
-        topic: "Kick-off Startup by SU Entrepreneur Club",
-        description:
-          "แชร์ประสบการณ์จากรุ่นพี่สู่รุ่นน้อง โดยนักศึกษาผู้ประกอบการ",
-        registerEnd: 3,
-        point: 300,
-        eventType: "แนะแนว",
-      },
-      {
-        id: 5,
-        poster:
-          "https://scontent.fbkk22-2.fna.fbcdn.net/v/t39.30808-6/274674131_1121160405326217_4015574869830408627_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=5cd70e&_nc_eui2=AeErPUYiqm9lWirJCea4LEtjutwOGMOy8Ta63A4Yw7LxNoH7gbrHHjDvwTioCIpAyYGBFNkHLRB8pVFz4KCItqH1&_nc_ohc=rfk8GTPCibEAX-9CjAH&_nc_ht=scontent.fbkk22-2.fna&oh=00_AT9eD5LQG77I9i1GZrWkawz-4m0-FPz0zHT7XazyNmf2Ow&oe=62208DF0",
-        topic: "Kick-off Startup by SU Entrepreneur Club",
-        description:
-          "แชร์ประสบการณ์จากรุ่นพี่สู่รุ่นน้อง โดยนักศึกษาผู้ประกอบการ",
-        registerEnd: 3,
-        point: 300,
-        eventType: "แนะแนว",
-      },
-    ]);
-    const myEventList = ref([
-      {
-        id: 1,
-        poster:
-          "https://scontent.fbkk22-2.fna.fbcdn.net/v/t39.30808-6/274674131_1121160405326217_4015574869830408627_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=5cd70e&_nc_eui2=AeErPUYiqm9lWirJCea4LEtjutwOGMOy8Ta63A4Yw7LxNoH7gbrHHjDvwTioCIpAyYGBFNkHLRB8pVFz4KCItqH1&_nc_ohc=rfk8GTPCibEAX-9CjAH&_nc_ht=scontent.fbkk22-2.fna&oh=00_AT9eD5LQG77I9i1GZrWkawz-4m0-FPz0zHT7XazyNmf2Ow&oe=62208DF0",
-        topic: "Kick-off Startup by SU Entrepreneur Club",
-        description:
-          "แชร์ประสบการณ์จากรุ่นพี่สู่รุ่นน้อง โดยนักศึกษาผู้ประกอบการ",
-        registerEnd: 3,
-        point: 300,
-        eventType: "แนะแนว",
-      },
-    ]);
-    const menuType = ref("ALL_EVENT");
+    let menuType = ref("ALL_EVENT");
     const dialogm1 = ref("");
     const dialog = ref(false);
     const isFilter = ref(false);
     const store = useStore();
-    const searchFunction = async () => {
-      await store.dispatch("event/getAllEvent");
-    };
+    const searchFunction = async () => {};
     const fetchData = async () => {
       await store.dispatch("event/getAllEvent");
+      await store.dispatch(
+        "event/getMyEventList",
+        "Uidasefmavkmaovdioxcvsaxcvrgqvascdasdc"
+      );
     };
 
     const eventList = computed(() => store.state.event.eventList);
+    const myEventList = computed(() => store.state.event.myEventList);
     fetchData();
     console.log("eventList", eventList);
     return {
       searchValue,
       menuType,
-      allEventList,
       myEventList,
       dialog,
       dialogm1,

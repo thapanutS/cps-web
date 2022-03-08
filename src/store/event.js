@@ -17,6 +17,7 @@ const state = () => ({
     eventEnd: "07/03/22",
   },
   eventList: [],
+  myEventList: [],
 });
 
 // getters
@@ -42,8 +43,13 @@ const actions = {
   async getAllEvent({ commit }) {
     const eventList = await axios.get(`${process.env.VUE_APP_API_URL}/event`);
     console.log("eventList:", eventList.data);
-
     commit("setEventList", eventList.data);
+  },
+  async getMyEventList({ commit }, uid) {
+    const myEventList = await axios.get(
+      `${process.env.VUE_APP_API_URL}/event/list/${uid}`
+    );
+    commit("setMyEventList", myEventList.data);
   },
 };
 
@@ -51,6 +57,9 @@ const actions = {
 const mutations = {
   setEventList(state, eventList) {
     state.eventList = eventList;
+  },
+  setMyEventList(state, myEventList) {
+    state.myEventList = myEventList;
   },
 };
 
