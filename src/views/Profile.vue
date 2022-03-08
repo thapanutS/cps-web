@@ -39,11 +39,11 @@
         <div class="customBox">
           <div class="w-full">
             <div
-              class="flex w-2/5 items-center justify-center h-8 font-bold bg-secondary text-white rounded-xl"
+              class="flex w-2/5 items-center justify-center h-8 font-bold bg-secondary text-white shadow-lg rounded-xl"
             >
               Addresss
             </div>
-            <div class="py-4 px-4 mt-3 text-left bg-gray rounded-xl">
+            <div class="py-4 px-4 mt-3 text-left bg-gray  rounded-xl">
               <div class="h-20 overflow-y-auto">
                 176/284 M.1 T. Makham Tai Surat Thani 84000
               </div>
@@ -51,38 +51,39 @@
           </div>
           <div class="w-full mt-3">
             <div
-              class="flex w-2/5 items-center justify-center font-bold h-8 bg-secondary text-white rounded-xl"
+              class="flex w-2/5 items-center justify-center font-bold h-8 bg-secondary text-white shadow-lg rounded-xl"
             >
               Achivement
             </div>
-            <!-- เพิ่ม overflow xl ด้วย -->
             <div
               class="py-4 px-4 mt-3 h-32 flex flex-row text-left bg-gray rounded-xl"
             >
-              <div class="h-24 w-full flex overflow-y-auto">
-                <div class="flex flex-col items-center mr-2 w-1/2">
+              <div class="h-28 block w-full whitespace-nowrap overflow-scroll">
+
+                <div class="inline-block items-center w-1/2">
                   <div class="w-1/2 p-3 bg-white rounded-full shadow-lg">
                     <img src="@/assets/achivement/medal.png" />
                   </div>
                   <p class="mt-1 text-xs">เข้าร่วมกิจกรรมครบ 3 ครั้ง</p>
                 </div>
-                <div class="flex flex-col items-center mr-2 w-1/2">
+                <div class="inline-block items-center w-1/2">
                   <div class="w-1/2 p-3 bg-white rounded-full shadow-lg">
                     <img src="@/assets/achivement/coins.png" />
                   </div>
                   <p class="mt-1 text-xs">เข้าร่วมกิจกรรมครบ 3 ครั้ง</p>
                 </div>
+
               </div>
             </div>
           </div>
           <div class="w-full mt-3">
             <div
-              class="flex w-2/4 items-center justify-center h-8 font-bold bg-secondary text-white rounded-xl"
+              class="flex w-2/4 items-center justify-center h-8 font-bold bg-secondary text-white shadow-lg rounded-xl"
             >
               Active Workshop
             </div>
             <div class="py-4 px-4 mt-3 text-left bg-gray rounded-xl">
-              <div class="action-workshop h-24 overflow-y-auto">
+              <div class="action-workshop h-24 text-sm overflow-y-auto">
                 <div class="action-box pb-3 flex items-center my-3">
                   <div class="box1 text-center text-ellipsis">LINE Chatbot</div>
                   <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
@@ -100,12 +101,12 @@
           </div>
           <div class="w-full mt-3">
             <div
-              class="flex w-2/4 items-center justify-center h-8 font-bold bg-secondary text-white rounded-xl"
+              class="flex w-2/4 items-center justify-center h-8 font-bold bg-secondary text-white shadow-lg rounded-xl"
             >
               History Workshop
             </div>
             <div class="py-4 px-4 mt-3 text-left bg-gray rounded-xl">
-              <div class="action-workshop h-24 overflow-y-auto">
+              <div class="action-workshop h-24 text-sm overflow-y-auto">
                 <div class="action-box pb-3 flex items-center my-3">
                   <div class="box1 text-center text-ellipsis">EX10</div>
                   <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
@@ -153,12 +154,14 @@ export default {
         .action-box {
           border-bottom: 1px solid #bbb;
           margin-bottom: -1px;
-          // padding-bottom: 10px;
+          &:last-child{
+            border-bottom: 0px;
+          }
           .box1 {
-            width: 35%;
+            width: 38%;
           }
           .box2 {
-            width: 40%;
+            width: 37%;
           }
           .box3 {
             width: 25%;
