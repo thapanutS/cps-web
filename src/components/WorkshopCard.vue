@@ -1,14 +1,11 @@
 <template>
   <div class="card-container">
     <div id="poster">
-      <img
-        src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t39.30808-6/274674131_1121160405326217_4015574869830408627_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=5cd70e&_nc_eui2=AeErPUYiqm9lWirJCea4LEtjutwOGMOy8Ta63A4Yw7LxNoH7gbrHHjDvwTioCIpAyYGBFNkHLRB8pVFz4KCItqH1&_nc_ohc=rfk8GTPCibEAX-9CjAH&_nc_ht=scontent.fbkk22-2.fna&oh=00_AT9eD5LQG77I9i1GZrWkawz-4m0-FPz0zHT7XazyNmf2Ow&oe=62208DF0"
-        alt=""
-      />
+      <img :src="img" alt="" />
     </div>
     <div class="flex justify-between text-left px-3 mt-2">
       <div>
-        <div id="topic">{{ topic }}</div>
+        <div id="topic">{{ name }}</div>
         <div id="description">
           {{ description }}
         </div>
@@ -16,7 +13,13 @@
           <div id="register-end">
             เหลือเวลารับสมัครอีก {{ registerEnd }} วัน
           </div>
-          <div :class="`mx-2 px-2 event guild`">{{ type }}</div>
+          <div
+            v-for="item in tagsList"
+            :key="item.id"
+            :class="[`mx-1 px-2 event`, item.tag.toLowerCase()]"
+          >
+            {{ item.tag }}
+          </div>
         </div>
       </div>
       <div id="point">{{ point }} pt</div>
@@ -25,9 +28,20 @@
 </template>
 
 <script>
+import { ref } from "vue";
 export default {
   name: "WorkshopCard",
-  props: ["topic", "description", "registerEnd", "point", "type"],
+  props: ["name", "img", "description", "registerEnd", "point", "tags"],
+  setup(props) {
+    let tagsList = ref([]);
+    props.tags.forEach((tag, index) => {
+      tagsList.value.push({
+        id: index,
+        tag: tag,
+      });
+    });
+    return { tagsList };
+  },
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -51,20 +65,34 @@ export default {
 }
 #topic {
   font-weight: 500;
+  font-size: 14px;
 }
 #register-end {
-  font-size: 8px;
+  font-size: 10px;
 }
 #point {
+  position: absolute;
+  right: 8%;
   color: #3ebe4b;
-  font-size: 8px;
+  font-size: 10 px;
   font-weight: 600;
+}
+#description {
+  display: -webkit-box;
+  max-width: max-content;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .event {
   border-radius: 18px 18px 18px 18px;
-  font-size: 8px;
-  &.guild {
+  font-size: 10px;
+  text-transform: capitalize;
+  &.guide {
     background-color: #e1f8b0;
+  }
+  &.hackathon {
+    background-color: orange;
   }
 }
 </style>
