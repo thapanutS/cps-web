@@ -5,30 +5,30 @@
       <div class="flex flex-row bg-white rounded-xl shadow-lg">
         <div class="w-2/5 py-4 pl-3 pr-5">
           <img
-            src="@/assets/profile/profile-default.png"
+            :src="personalInfo.pictureUrl"
             width="150"
             alt="profile-default"
             class="object-cover rounded-full shadow-lg"
           />
         </div>
         <div class="w-3/5 py-4 pr-3 flex flex-col items-start">
-          <div class="text-2xl font-bold">Book</div>
+          <div class="text-2xl font-bold">{{ personalInfo.displayName }}</div>
           <div class="flex flex-row justify-start w-full mt-1">
             <div class="w-1/4 flex">Major</div>
             <div class="w-3/4 text-ellipsis whitespace-nowrap overflow-hidden">
-              Computer Science
+              {{ personalInfo.major }}
             </div>
           </div>
           <div class="flex flex-row justify-start w-full">
             <div class="w-1/4 flex">Name</div>
             <div class="w-3/4 text-ellipsis whitespace-nowrap overflow-hidden">
-              Thapanut Saripat
+              {{ `${personalInfo.firstName} ${personalInfo.lastName}` }}
             </div>
           </div>
           <div class="flex flex-row justify-start w-full">
             <div class="w-2/4 flex">Student ID</div>
             <div class="text-ellipsis whitespace-nowrap overflow-hidden">
-              07610414
+              {{ personalInfo.studentId }}
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
             </div>
             <div class="py-4 px-4 mt-3 text-left bg-gray rounded-xl">
               <div class="h-20 overflow-y-auto">
-                176/284 M.1 T. Makham Tai Surat Thani 84000
+                {{ personalInfo.address }}
               </div>
             </div>
           </div>
@@ -89,20 +89,23 @@
               Active Workshop
             </div>
             <div class="py-4 px-4 mt-3 text-left bg-gray rounded-xl">
-              <div class="action-workshop h-24 text-sm overflow-y-auto">
-                <div class="action-box pb-3 flex items-center my-3">
-                  <div class="box1 text-center text-ellipsis">LINE Chatbot</div>
-                  <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
-                  <div class="box3 text-center">3 Points</div>
-                </div>
-                <div class="action-box pb-3 flex items-center my-3">
-                  <div class="box1 text-center text-ellipsis">
-                    Java Spring Boot
+              <!-- <div
+                v-for="(item, index) in personalInfo.activeEvent"
+                :key="index"
+              > -->
+                <div class="action-workshop h-24 text-sm overflow-y-auto">
+                  <div v-for="(item, index) in personalInfo.activeEvent"
+                :key="index" class="action-box pb-3 flex items-center my-3">
+                    <div
+                      class="box1 text-center text-ellipsis whitespace-nowrap overflow-hidden"
+                    >
+                      {{ item }}
+                    </div>
+                    <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
+                    <div class="box3 text-center">3 Points</div>
                   </div>
-                  <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
-                  <div class="box3 text-center">3 Points</div>
                 </div>
-              </div>
+              <!-- </div> -->
             </div>
           </div>
           <div class="w-full mt-3">
@@ -112,20 +115,18 @@
               History Workshop
             </div>
             <div class="py-4 px-4 mt-3 text-left bg-gray rounded-xl">
-              <div class="action-workshop h-24 text-sm overflow-y-auto">
-                <div class="action-box pb-3 flex items-center my-3">
-                  <div class="box1 text-center text-ellipsis">EX10</div>
-                  <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
-                  <div class="box3 text-center">3 Points</div>
-                </div>
-                <div class="action-box pb-3 flex items-center my-3">
-                  <div class="box1 text-center text-ellipsis">
-                    Design Sticker
+                <div class="action-workshop h-24 text-sm overflow-y-auto">
+                  <div v-for="(item, index) in personalInfo.historyEvent"
+                :key="index" class="action-box pb-3 flex items-center my-3">
+                    <div
+                      class="box1 text-center text-ellipsis whitespace-nowrap overflow-hidden"
+                    >
+                      {{ item }}
+                    </div>
+                    <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
+                    <div class="box3 text-center">3 Points</div>
                   </div>
-                  <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
-                  <div class="box3 text-center">3 Points</div>
                 </div>
-              </div>
             </div>
           </div>
         </div>
@@ -135,8 +136,24 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
+import { computed } from "vue";
 export default {
-  setup() {},
+  setup() {
+    const store = useStore();
+    const fetchData = async () => {
+      await store.dispatch(
+        "user/getPersonalInfo",
+        "Uidasefmavkmaovdioxcvsaxcvrgqvascdasdc" // mock user id
+      );
+    };
+    fetchData();
+    const personalInfo = computed(() => store.state.user.personalInfo);
+    return {
+      fetchData,
+      personalInfo,
+    };
+  },
 };
 </script>
 <style lang="scss" scoped>
