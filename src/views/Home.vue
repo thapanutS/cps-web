@@ -49,7 +49,7 @@
     <section class="event-list px-4">
       <div v-if="menuType === `ALL_EVENT`">
         <div v-for="event in eventList" :key="event.id">
-          <WorkshopCard
+          <EventCard
             :img="event.img"
             :name="event.name"
             :description="event.description"
@@ -62,7 +62,7 @@
       </div>
       <div v-else>
         <div v-for="event in myEventList" :key="event.id">
-          <WorkshopCard
+          <EventCard
             :img="event.img"
             :name="event.name"
             :description="event.description"
@@ -82,7 +82,7 @@
 <script>
 // @ is an alias to /src
 import { ref } from "vue";
-import WorkshopCard from "@/components/WorkshopCard.vue";
+import EventCard from "@/components/EventCard.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import FilterChip from "@/components/FilterChip.vue";
 import { useStore } from "vuex";
@@ -91,7 +91,7 @@ import { computed } from "vue";
 export default {
   name: "Home",
   components: {
-    WorkshopCard,
+    EventCard,
     SearchBar,
     FilterChip,
   },

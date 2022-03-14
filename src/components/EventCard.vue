@@ -18,7 +18,7 @@
             :key="item.id"
             :class="[`mx-1 px-2 event`, item.tag.toLowerCase()]"
           >
-            {{ item.tag }}
+            {{ item.tagName }}
           </div>
         </div>
       </div>
@@ -35,9 +35,24 @@ export default {
   setup(props) {
     let tagsList = ref([]);
     props.tags.forEach((tag, index) => {
+      let tagName = ref("");
+      if (tag === "SKILL") {
+        tagName.value = "พัฒนาทักษะ";
+      } else if (tag === "CONTEST") {
+        tagName.value = "ประกวดแข่งขัน";
+      } else if (tag === "GUIDE") {
+        tagName.value = "แนะแนว";
+      } else if (tag === "CRAM") {
+        tagName.value = "ติวสอบ";
+      } else if (tag === "LANGUAGE") {
+        tagName.value = "พัฒนาภาษา";
+      } else if (tag === "OTHER") {
+        tagName.value = "กิจกรรมอื่นๆ";
+      }
       tagsList.value.push({
         id: index,
         tag: tag,
+        tagName: tagName.value,
       });
     });
     return { tagsList };
@@ -88,11 +103,23 @@ export default {
   border-radius: 18px 18px 18px 18px;
   font-size: 10px;
   text-transform: capitalize;
-  &.guide {
+  &.skill {
     background-color: #e1f8b0;
   }
-  &.hackathon {
+  &.contest {
     background-color: orange;
+  }
+  &.guide {
+    background-color: #957dad;
+  }
+  &.cram {
+    background-color: #add3fa;
+  }
+  &.language {
+    background-color: #e0787c;
+  }
+  &.other {
+    background-color: #9acfc4;
   }
 }
 </style>
