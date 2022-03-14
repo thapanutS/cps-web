@@ -148,14 +148,6 @@ export default {
     height: 67vh;
     .customBox {
       overflow-y: auto;
-      .no-scrollbar::-webkit-scrollbar {
-        display: none !important;
-      }
-
-      .no-scrollbar {
-        -ms-overflow-style: none !important; /* IE and Edge */
-        scrollbar-width: none !important; /* Firefox */
-      }
       .achivement-box {
         margin: 0 auto !important;
       }
