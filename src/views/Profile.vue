@@ -49,33 +49,33 @@
               </div>
             </div>
           </div>
-          <div class="w-full mt-3">
+          <div class="achivement-box w-full mt-3">
             <div
               class="flex w-2/5 items-center justify-center font-bold h-8 bg-secondary text-white shadow-lg rounded-xl"
             >
               Achivement
             </div>
             <div
-              class="py-4 px-4 mt-3 h-32 flex flex-row text-left bg-gray rounded-xl"
+              class="achivement-content py-4 px-4 mt-3 flex flex-row text-left bg-gray rounded-xl"
             >
-              <div class="h-28 block w-full whitespace-nowrap overflow-scroll">
-                <div class="inline-block items-center w-1/2">
+              <div class="block items-center h-28 w-full overflow-auto">
+                <div class="inline-block my-2 items-center w-1/2">
                   <div
-                    class="achivement-box w-1/2 p-3 bg-white rounded-full shadow-lg"
+                    class="achivement-image w-1/2 p-3 bg-white rounded-full shadow-lg"
                   >
                     <img src="@/assets/achivement/medal.png" />
                   </div>
-                  <p class="mt-1 text-xs items-center">
+                  <p class="achivement-description">
                     เข้าร่วมกิจกรรมครบ 3 ครั้ง
                   </p>
                 </div>
-                <div class="inline-block items-center w-1/2">
+                <div class="inline-block my-2 items-center w-1/2">
                   <div
-                    class="achivement-box w-1/2 p-3 bg-white rounded-full shadow-lg"
+                    class="achivement-image w-1/2 p-3 bg-white rounded-full shadow-lg"
                   >
                     <img src="@/assets/achivement/coins.png" />
                   </div>
-                  <p class="mt-1 text-xs items-center">
+                  <p class="achivement-description">
                     เข้าร่วมกิจกรรมครบ 3 ครั้ง
                   </p>
                 </div>
@@ -165,8 +165,19 @@ export default {
     height: 67vh;
     .customBox {
       overflow-y: auto;
-      .achivement-box {
-        margin: 0 auto !important;
+      .achivement-box{
+        .achivement-content {
+          height: 9rem;
+          .achivement-image {
+            margin: 0 auto !important;
+          }
+          .achivement-description{
+            margin-top: 0.25rem; /* 4px */
+            font-size: 0.75rem; /* 12px */
+            line-height: 1rem; /* 16px */
+            text-align: center !important;
+          }              
+        }
       }
       .action-workshop {
         .action-box {
@@ -187,6 +198,26 @@ export default {
         }
       }
     }
+  }
+    ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #15C5B5;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #15C5B5;
   }
 }
 </style>
