@@ -1,19 +1,37 @@
+import axios from "axios";
+
 // initial state
 const state = () => ({
   user: {
     activeEvent: ["1", "2", "3"],
     historyEvent: ["1", "2", "3"],
+    personalInfo: {},
   },
 });
 
 // getters
-const getters = {};
+const getters = {
+  getPersonalInfo(state) {
+    return state.personelInfo;
+  },
+};
 
 // actions
-const actions = {};
+const actions = {
+  async getPersonalInfo({ commit }, uid) {
+    const personalInfo = await axios.get(
+      `${process.env.VUE_APP_API_URL}/user/${uid}`
+    );
+    commit("setPersonalInfo", personalInfo.data);
+  },
+};
 
 // mutations
-const mutations = {};
+const mutations = {
+  setPersonalInfo(state, personalInfo) {
+    state.personalInfo = personalInfo;
+  },
+};
 
 export default {
   namespaced: true,
