@@ -15,7 +15,7 @@
           <div v-for="filter in filterList" :key="filter.id">
             <FilterChip
               class="ml-2"
-              :text="filter.type"
+              :text="filter.name"
               :isSelected="filter.isSelected"
               @click="filter.isSelected = !filter.isSelected"
             />
@@ -98,12 +98,12 @@ export default {
   setup() {
     const searchValue = ref("");
     const filterList = ref([
-      { id: 1, type: "Workshop", isSelected: false },
-      { id: 2, type: "Hackathon", isSelected: false },
-      { id: 2, type: "Guide", isSelected: false },
-      // { id: 3, type: "Workshop", isSelected: false },
-      // { id: 4, type: "Workshop", isSelected: false },
-      // { id: 5, type: "Workshop", isSelected: false },
+      { id: 0, type: "SKILL", name: "พัฒนาทักษะ", isSelected: false },
+      { id: 1, type: "CONTEST", name: "ประกวดแข่งขัน", isSelected: false },
+      { id: 2, type: "GUIDE", name: "แนะแนว", isSelected: false },
+      { id: 3, type: "CRAM", name: "ติวสอบ", isSelected: false },
+      { id: 4, type: "LANGUAGE", name: "พัฒนาภาษา", isSelected: false },
+      { id: 5, type: "OTHER", name: "กิจกรรมอื่นๆ", isSelected: false },
     ]);
     let menuType = ref("ALL_EVENT");
     const store = useStore();
@@ -118,21 +118,37 @@ export default {
 
     const eventList = computed(() =>
       store.state.event.eventList.filter((event) => {
-        // set isSelected filter
-        // event.tags.forEach((tag) => {
-        //   filterList.value.forEach((filter) => {
-        //     if (
-        //       tag.toLowerCase() === filter.type.toLowerCase() &&
-        //       filter.isSelected
-        //     ) {
-        //       console.log("tag", tag);
-        //     }
-        //   });
-        // });
-
-        return event.name
-          .toLowerCase()
-          .includes(searchValue.value.toLowerCase());
+        // EVENTLIST WITH TAG FILTER
+        if (
+          filterList.value[0].isSelected ||
+          filterList.value[1].isSelected ||
+          filterList.value[2].isSelected ||
+          filterList.value[3].isSelected ||
+          filterList.value[4].isSelected ||
+          filterList.value[5].isSelected
+        ) {
+          const displayEvent = ref(false);
+          event.tags.forEach((tag) => {
+            for (let index = 0; index < filterList.value.length; index++) {
+              if (
+                filterList.value[index].isSelected &&
+                filterList.value[index].type === tag
+              ) {
+                displayEvent.value = true;
+              }
+            }
+          });
+          if (displayEvent.value) {
+            return event.name
+              .toLowerCase()
+              .includes(searchValue.value.toLowerCase());
+          }
+        } else {
+          //EVENTLIST WITHOUT FILTER
+          return event.name
+            .toLowerCase()
+            .includes(searchValue.value.toLowerCase());
+        }
       })
     );
     const myEventList = computed(() => store.state.event.myEventList);
