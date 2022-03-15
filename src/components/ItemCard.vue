@@ -12,7 +12,12 @@
     <div class="mr-2">
       <div>{{ point }} Points</div>
       <div>
-        <button class="bg-secondary text-white rounded px-2">Claim</button>
+        <button
+          @click="$emit('update:claim')"
+          class="bg-secondary text-white rounded px-2"
+        >
+          Claim
+        </button>
       </div>
     </div>
   </div>
@@ -22,6 +27,7 @@
 export default {
   name: "ItemCard",
   props: ["img", "name", "count", "point"],
+  emits: ["update:claim"],
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
