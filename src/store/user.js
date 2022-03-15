@@ -24,6 +24,14 @@ const actions = {
     );
     commit("setPersonalInfo", personalInfo.data);
   },
+  async createUser({ commit }, infomation) {
+    console.log("Information : ", infomation);
+    const personalInfo = await axios.post(
+      `${process.env.VUE_APP_API_URL}/user/create`,
+      infomation
+    );
+    commit("setPersonalInfo", personalInfo.data);
+  },
 };
 
 // mutations

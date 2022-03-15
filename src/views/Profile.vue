@@ -93,18 +93,21 @@
                 v-for="(item, index) in personalInfo.activeEvent"
                 :key="index"
               > -->
-                <div class="action-workshop h-24 text-sm overflow-y-auto">
-                  <div v-for="(item, index) in personalInfo.activeEvent"
-                :key="index" class="action-box pb-3 flex items-center my-3">
-                    <div
-                      class="box1 text-center text-ellipsis whitespace-nowrap overflow-hidden"
-                    >
-                      {{ item }}
-                    </div>
-                    <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
-                    <div class="box3 text-center">3 Points</div>
+              <div class="action-workshop h-24 text-sm overflow-y-auto">
+                <div
+                  v-for="(item, index) in personalInfo.activeEvent"
+                  :key="index"
+                  class="action-box pb-3 flex items-center my-3"
+                >
+                  <div
+                    class="box1 text-center text-ellipsis whitespace-nowrap overflow-hidden"
+                  >
+                    {{ item }}
                   </div>
+                  <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
+                  <div class="box3 text-center">3 Points</div>
                 </div>
+              </div>
               <!-- </div> -->
             </div>
           </div>
@@ -115,18 +118,21 @@
               History Workshop
             </div>
             <div class="py-4 px-4 mt-3 text-left bg-gray rounded-xl">
-                <div class="action-workshop h-24 text-sm overflow-y-auto">
-                  <div v-for="(item, index) in personalInfo.historyEvent"
-                :key="index" class="action-box pb-3 flex items-center my-3">
-                    <div
-                      class="box1 text-center text-ellipsis whitespace-nowrap overflow-hidden"
-                    >
-                      {{ item }}
-                    </div>
-                    <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
-                    <div class="box3 text-center">3 Points</div>
+              <div class="action-workshop h-24 text-sm overflow-y-auto">
+                <div
+                  v-for="(item, index) in personalInfo.historyEvent"
+                  :key="index"
+                  class="action-box pb-3 flex items-center my-3"
+                >
+                  <div
+                    class="box1 text-center text-ellipsis whitespace-nowrap overflow-hidden"
+                  >
+                    {{ item }}
                   </div>
+                  <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
+                  <div class="box3 text-center">3 Points</div>
                 </div>
+              </div>
             </div>
           </div>
         </div>
@@ -165,18 +171,18 @@ export default {
     height: 67vh;
     .customBox {
       overflow-y: auto;
-      .achivement-box{
+      .achivement-box {
         .achivement-content {
           height: 9rem;
           .achivement-image {
             margin: 0 auto !important;
           }
-          .achivement-description{
+          .achivement-description {
             margin-top: 0.25rem; /* 4px */
             font-size: 0.75rem; /* 12px */
             line-height: 1rem; /* 16px */
             text-align: center !important;
-          }              
+          }
         }
       }
       .action-workshop {
@@ -199,7 +205,7 @@ export default {
       }
     }
   }
-    ::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 5px;
   }
 
@@ -211,13 +217,13 @@ export default {
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #15C5B5;
+    background: #15c5b5;
     border-radius: 10px;
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #15C5B5;
+    background: #15c5b5;
   }
 }
 </style>
