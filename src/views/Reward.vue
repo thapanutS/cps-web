@@ -16,8 +16,13 @@
 
     <!-- ITEM LIST  -->
     <section class="mt-2 pt-2 bg-white h-screen">
-      <div class="mt-2" v-for="item in itemList" :key="item.id">
-        <ItemCard :name="item.name" :count="item.count" :point="item.point" />
+      <div class="mt-2" v-for="item in itemList" :key="item._id">
+        <ItemCard
+          :img="item.img"
+          :name="item.name"
+          :count="item.totalItem"
+          :point="item.point"
+        />
       </div>
     </section>
   </div>
@@ -25,41 +30,26 @@
 
 <script>
 import ItemCard from "@/components/ItemCard.vue";
+import { ref } from "vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
 export default {
-  data() {
-    return {
-      studentId: "07610451",
-      name: "Piyabute Chairiboon",
-      itemList: [
-        {
-          id: 1,
-          name: "Apple watch",
-          count: 6,
-          point: 15000,
-        },
-        {
-          id: 2,
-          name: "Apple watch",
-          count: 6,
-          point: 15000,
-        },
-        {
-          id: 3,
-          name: "Apple watch",
-          count: 6,
-          point: 15000,
-        },
-        {
-          id: 4,
-          name: "Apple watch",
-          count: 6,
-          point: 15000,
-        },
-      ],
-    };
-  },
+  name: "Reward",
   components: {
     ItemCard,
+  },
+  setup() {
+    const store = useStore();
+    const studentId = ref("07610451");
+    const name = ref("Piyabute Chairiboon");
+
+    const fetchData = async () => {
+      await store.dispatch("item/fetchItemList");
+    };
+
+    const itemList = computed(() => store.state.item.itemList);
+    fetchData();
+    return { studentId, name, itemList };
   },
 };
 </script>
