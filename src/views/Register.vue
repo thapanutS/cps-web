@@ -23,171 +23,65 @@
             type="text"
             name="display"
             placeholder="Display"
-            class="
-              mt-1
-              px-3
-              block
-              w-full
-              border
-              bg-gray-100
-              h-11
-              rounded-xl
-              shadow-lg
-              focus:outline-none focus:bg-white-100 focus:ring-0
-            "
+            class="mt-1 px-3 block w-full border bg-white h-11 rounded-xl shadow-lg focus:outline-none focus:bg-white-100 focus:ring-0"
           />
         </div>
 
         <div class="w-full md:w-1/2 px-3 md:mb-0 mt-7">
           <span
-            class="
-              flex
-              justify-start
-              mb-3
-              text-base
-              font-medium
-              text-slate-700
-              after:content-['*'] after:ml-0.5 after:text-red-500
-            "
+            class="flex justify-start mb-3 text-base font-medium text-slate-700 after:content-['*'] after:ml-0.5 after:text-red-500"
             >Firstname</span
           >
           <input
             type="text"
-            name="firstname"
-            class="
-              mt-1
-              px-3
-              block
-              w-full
-              border
-              bg-white-100
-              h-11
-              rounded-xl
-              shadow-lg
-              hover:bg-white-100
-              focus:outline-none
-              focus:border-sky-500
-              focus:ring-sky-500
-              focus:ring-0
-            "
+            name="firstName"
+            class="mt-1 px-3 block w-full border bg-white-100 h-11 rounded-xl shadow-lg hover:bg-white-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-0"
             placeholder="xxxxxx"
-            v-model="form.firstname"
+            v-model="form.firstName"
             @keypress="onlyText($event)"
           />
         </div>
 
         <div class="w-full md:w-1/2 px-3 md:mb-0 mt-7">
           <span
-            class="
-              flex
-              justify-start
-              mb-3
-              text-base
-              font-medium
-              text-slate-700
-              after:content-['*'] after:ml-0.5 after:text-red-500
-            "
+            class="flex justify-start mb-3 text-base font-medium text-slate-700 after:content-['*'] after:ml-0.5 after:text-red-500"
             >Lastname
           </span>
           <input
             type="test"
-            name="lastname"
-            class="
-              mt-1
-              px-3
-              block
-              w-full
-              border
-              bg-gray-100
-              h-11
-              rounded-xl
-              shadow-lg
-              hover:bg-white-100
-              focus:outline-none
-              focus:border-sky-500
-              focus:ring-sky-500
-              focus:ring-0
-            "
+            name="lastName"
+            class="mt-1 px-3 block w-full border bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-white-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-0"
             placeholder="xxxxxx"
-            v-model="form.lastname"
+            v-model="form.lastName"
             @keypress="onlyText($event)"
           />
         </div>
 
         <div class="w-full md:w-1/2 px-3 md:mb-0 mt-7">
           <span
-            class="
-              flex
-              justify-start
-              mb-3
-              text-base
-              font-medium
-              text-slate-700
-              after:content-['*'] after:ml-0.5 after:text-red-500
-            "
+            class="flex justify-start mb-3 text-base font-medium text-slate-700 after:content-['*'] after:ml-0.5 after:text-red-500"
             >StudentID</span
           >
           <input
             type="tel"
             name="studentID"
-            class="
-              mt-1
-              px-3
-              block
-              w-full
-              border
-              bg-gray-100
-              h-11
-              rounded-xl
-              shadow-lg
-              hover:bg-white-100
-              focus:outline-none
-              focus:border-sky-500
-              focus:ring-sky-500
-              focus:ring-0
-            "
+            class="mt-1 px-3 block w-full border bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-white-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-0"
             placeholder="xxxxxxxx"
-            v-model="form.studentID"
+            v-model="form.studentId"
             @keypress="onlyNumber($event)"
           />
         </div>
 
         <div class="w-full md:w-1/2 px-3 md:mb-0 mt-7">
           <span
-            class="
-              flex
-              justify-start
-              mb-3
-              text-base
-              font-medium
-              text-slate-700
-              after:content-['*'] after:ml-0.5 after:text-red-500
-            "
+            class="flex justify-start mb-3 text-base font-medium text-slate-700 after:content-['*'] after:ml-0.5 after:text-red-500"
             >Major</span
           >
           <Listbox as="div" v-model="selected">
             <ListboxLabel class="block text-sm font-medium text-gray-700" />
             <div class="mt-1 relative">
               <ListboxButton
-                class="
-                  relative
-                  w-full
-                  bg-white
-                  border border-gray-300
-                  rounded-xl
-                  shadow-lg
-                  pl-3
-                  pr-10
-                  py-2
-                  text-left
-                  cursor-default
-                  hover:bg-white-100
-                  focus:outline-none
-                  focus:border-sky-500
-                  focus:ring-sky-500
-                  focus:ring-0
-                  sm:text-sm
-                "
+                class="relative w-full bg-white border border-gray-300 rounded-xl shadow-lg pl-3 pr-10 py-2 text-left cursor-default hover:bg-white-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-0 sm:text-sm"
               >
                 <span class="flex items-center">
                   <span
@@ -199,16 +93,7 @@
                   >
                 </span>
                 <span
-                  class="
-                    ml-3
-                    absolute
-                    inset-y-0
-                    right-0
-                    flex
-                    items-center
-                    pr-2
-                    pointer-events-none
-                  "
+                  class="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
                 >
                   <SelectorIcon
                     class="h-5 w-5 text-gray-400"
@@ -222,22 +107,7 @@
                 leave-to-class="opacity-0"
               >
                 <ListboxOptions
-                  class="
-                    absolute
-                    z-10
-                    mt-1
-                    w-full
-                    bg-white
-                    shadow-lg
-                    max-h-56
-                    rounded-md
-                    py-1
-                    text-base
-                    ring-1 ring-black ring-opacity-5
-                    overflow-auto
-                    focus:outline-none
-                    sm:text-sm
-                  "
+                  class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
                 >
                   <ListboxOption
                     as="template"
@@ -281,37 +151,13 @@
 
         <div class="w-full md:w-1/2 px-3 md:mb-0 mt-7">
           <span
-            class="
-              flex
-              justify-start
-              mb-3
-              text-base
-              font-medium
-              text-slate-700
-              after:content-['*'] after:ml-0.5 after:text-red-500
-            "
+            class="flex justify-start mb-3 text-base font-medium text-slate-700 after:content-['*'] after:ml-0.5 after:text-red-500"
             >Email
           </span>
           <input
             type="email"
             name="email"
-            class="
-              peer
-              mt-1
-              px-3
-              block
-              w-full
-              border
-              bg-gray-100
-              h-11
-              rounded-xl
-              shadow-lg
-              hover:bg-white-100
-              focus:outline-none
-              focus:border-sky-500
-              focus:ring-sky-500
-              focus:ring-0
-            "
+            class="peer mt-1 px-3 block w-full border bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-white-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-0"
             placeholder="xxxxxx_x@silpakorn.edu"
             v-model="form.email"
           />
@@ -319,14 +165,7 @@
             >กรุณากรอกเฉพาะอีเมลของมหาวิทยาลัย*
           </label>
           <p
-            class="
-              peer-invalid:visible
-              flex
-              justify-star
-              my-1
-              text-xs text-red-600
-              invisible
-            "
+            class="peer-invalid:visible flex justify-star my-1 text-xs text-red-600 invisible"
           >
             Please provide a valid email address.
           </p>
@@ -334,36 +173,13 @@
 
         <div class="w-full md:w-1/2 px-3 md:mb-0">
           <span
-            class="
-              flex
-              justify-start
-              mb-3
-              text-base
-              font-medium
-              text-slate-700
-              after:content-['*'] after:ml-0.5 after:text-red-500
-            "
+            class="flex justify-start mb-3 text-base font-medium text-slate-700 after:content-['*'] after:ml-0.5 after:text-red-500"
             >Phone</span
           >
           <input
             type="tel"
             name="Phone"
-            class="
-              mt-1
-              px-3
-              block
-              w-full
-              border
-              bg-gray-100
-              h-11
-              rounded-xl
-              shadow-lg
-              hover:bg-white-100
-              focus:outline-none
-              focus:border-sky-500
-              focus:ring-sky-500
-              focus:ring-0
-            "
+            class="mt-1 px-3 block w-full border bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-white-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-0"
             v-mask="'###-###-####'"
             placeholder="08x-xxx-xxxx"
             v-model="form.phone"
@@ -373,39 +189,13 @@
 
         <div class="w-full md:w-1/2 px-3 md:mb-0 mt-7">
           <span
-            class="
-              flex
-              justify-start
-              mb-3
-              text-base
-              font-medium
-              text-slate-700
-              after:content-['*'] after:ml-0.5 after:text-red-500
-            "
+            class="flex justify-start mb-3 text-base font-medium text-slate-700 after:content-['*'] after:ml-0.5 after:text-red-500"
             >Address</span
           >
           <textarea
             type="text"
             name="address"
-            class="
-              textareaforn
-              mt-1
-              p-3
-              block
-              w-full
-              min-h-full
-              border
-              bg-gray-100
-              h-11
-              resize-none
-              rounded-md
-              shadow-lg
-              hover:bg-white-100
-              focus:outline-none
-              focus:border-sky-500
-              focus:ring-sky-500
-              focus:ring-0
-            "
+            class="textareaforn mt-1 p-3 block w-full min-h-full border bg-gray-100 h-11 resize-none rounded-md shadow-lg hover:bg-white-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-0"
             placeholder="7/22 M.5, Soi Ta-iat, Chaofa West Rd., T.Chalong A. Phuket 83130 Thailand"
             v-model="form.address"
           />
@@ -413,7 +203,7 @@
         <div class="w-full md:w-1/2 px-3 md:mb-0 mt-7">
           <button
             :class="[
-              validate() ? 'bg-primary' : 'bg-gray-300 disabled',
+              validate() ? 'bg-primary' : 'bg-gray disabled',
               'w-full py-3 rounded-md font-medium text-white shadow-lg hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105',
             ]"
             @click="register()"
@@ -437,6 +227,8 @@ import {
   ListboxOptions,
 } from "@headlessui/vue";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
+import { useStore } from "vuex";
+
 const REGEX_TEXT = /^[a-zA-Z]*$/;
 const REGEX_NUMBER = /^[0-9]*$/;
 
@@ -462,15 +254,16 @@ export default {
     SelectorIcon,
   },
   setup() {
+    const store = useStore();
     const selected = ref(major[0]);
 
     var form = reactive({
       uid: "",
       pictureUrl: "",
       displayName: "",
-      firstname: "",
-      lastname: "",
-      studentID: "",
+      firstName: "",
+      lastName: "",
+      studentId: "",
       email: "",
       phone: "",
       role: "",
@@ -485,6 +278,7 @@ export default {
       major,
       selected,
       form,
+      store
     };
   },
   computed: {
@@ -503,17 +297,18 @@ export default {
       this.initialData();
     },
     async initialData() {
-      this.form.uid = "";
-      this.form.pictureUrl = "";
-      this.form.displayName = "";
-      this.form.firstname = "";
-      this.form.lastname = "";
-      this.form.studentID = "";
+      this.form.uid = "Ua28a9b8f51a7009c0361e8b9c3df674a";
+      this.form.pictureUrl =
+        "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png";
+      this.form.displayName = "Jack";
+      this.form.firstName = "";
+      this.form.lastName = "";
+      this.form.studentId = "";
       this.form.email = "";
       this.form.phone = "";
-      this.form.role = "STAFF";
+      this.form.role = "STUDENT";
       this.form.address = "";
-      this.form.major = "";
+      this.form.major = this.selectedMajor.name;
       this.form.historyEvent = [];
       this.form.activeEvent = [];
       this.form.point = 0;
@@ -543,9 +338,9 @@ export default {
     validate() {
       var status = false;
       if (
-        this.formValue.firstname &&
-        this.formValue.lastname &&
-        this.formValue.studentID &&
+        this.formValue.firstName &&
+        this.formValue.lastName &&
+        this.formValue.studentId &&
         (this.formValue.email.includes(`@su.ac.th`) ||
           this.formValue.email.includes(`@silpakorn.edu`)) &&
         this.formValue.phone &&
@@ -555,15 +350,16 @@ export default {
       }
       return status;
     },
-    register() {
-      this.form.firstname =
-        this.formValue.firstname.charAt(0).toUpperCase() +
-        this.formValue.firstname.slice(1);
-      this.form.lastname =
-        this.formValue.lastname.charAt(0).toUpperCase() +
-        this.formValue.lastname.slice(1);
+    async register() {
+      this.form.firstName =
+        this.formValue.firstName.charAt(0).toUpperCase() +
+        this.formValue.firstName.slice(1);
+      this.form.lastName =
+        this.formValue.lastName.charAt(0).toUpperCase() +
+        this.formValue.lastName.slice(1);
       this.form.major = this.selectedMajor.name;
       console.log("formValue : ", JSON.stringify(this.formValue, null, 4));
+      await this.$store.dispatch("user/createUser", this.formValue);
     },
   },
 };
