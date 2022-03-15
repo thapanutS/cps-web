@@ -1,21 +1,21 @@
 <template>
   <div class="event flex flex-col">
     <section class="mt-3">
-      <div>{{ eventData.name }}</div>
+      <div>{{ eventDetail.name }}</div>
       <div class="poster mt-3">
-        <img src="@/assets/poster.png" alt="" />
+        <img :src="eventDetail.img" class="mx-auto" alt="" />
       </div>
     </section>
     <section class="text-left mt-4 detail">
-      <div id="description">{{ eventData.description }}</div>
-      <div id="point" class="mt-2">{{ eventData.point }} pt</div>
+      <div id="description">{{ eventDetail.description }}</div>
+      <div id="point" class="mt-2">{{ eventDetail.point }} pt</div>
       <div class="date">
         <div class="mt-2">
-          กิจกรรมเริ่มวันที่ {{ eventData.eventStart }} ถึงวันที่
-          {{ eventData.eventEnd }}
+          กิจกรรมเริ่มวันที่ {{ eventDetail.eventStart }} ถึงวันที่
+          {{ eventDetail.eventEnd }}
         </div>
-        <div class="mt-2">ปิดรับสมัครวันที่ {{ eventData.registerEnd }}</div>
-        <div class="mt-2">{{ eventData.location }}</div>
+        <div class="mt-2">ปิดรับสมัครวันที่ {{ eventDetail.registerEnd }}</div>
+        <div class="mt-2">{{ eventDetail.location }}</div>
       </div>
     </section>
 
@@ -34,13 +34,22 @@
 <script>
 // import { ref } from "vue";
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
+import { useRoute } from "vue-router";
 export default {
   setup() {
+    const route = useRoute();
     const store = useStore();
+    const fetchData = async () => {
+      await store.dispatch("event/fetchEventDetail", route.params.id);
+    };
+    onMounted(() => {
+      fetchData();
+    });
+
     return {
       // access a state in computed function
-      eventData: computed(() => store.state.eventSelected),
+      eventDetail: computed(() => store.state.event.eventDetail),
       activeEvent: computed(() => store.state.user.activeEvent),
       historyEvent: computed(() => store.state.user.historyEvent),
       // // access a getter in computed function
@@ -63,7 +72,7 @@ export default {
 }
 .poster {
   img {
-    width: 300px;
+    width: 28rem;
   }
 }
 .detail {

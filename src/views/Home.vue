@@ -57,6 +57,7 @@
             :point="event.point"
             :tags="event.tags"
             class="mt-3"
+            @click="$router.push(`/event/${event._id}`)"
           />
         </div>
       </div>
@@ -70,6 +71,7 @@
             :point="event.point"
             :tags="event.tags"
             class="mt-3"
+            @click="$router.push(`/event/${event._id}`)"
           />
         </div>
       </div>
@@ -86,8 +88,7 @@ import EventCard from "@/components/EventCard.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import FilterChip from "@/components/FilterChip.vue";
 import { useStore } from "vuex";
-import { computed } from "vue";
-
+import { computed, onMounted } from "vue";
 export default {
   name: "Home",
   components: {
@@ -151,8 +152,19 @@ export default {
         }
       })
     );
-    const myEventList = computed(() => store.state.event.myEventList);
-    fetchData();
+
+    const myEventList = computed(() =>
+      store.state.event.myEventList.filter((event) => {
+        return event.name
+          .toLowerCase()
+          .includes(searchValue.value.toLowerCase());
+      })
+    );
+
+    onMounted(() => {
+      fetchData();
+    });
+
     return {
       searchValue,
       menuType,

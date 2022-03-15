@@ -2,20 +2,7 @@ import userStore from "../store/user";
 import axios from "axios";
 // initial state
 const state = () => ({
-  eventSelected: {
-    id: "4",
-    name: "Kick-off Startup by SU Entrepreneur Club",
-    img: "imgsrc",
-    description:
-      "แชร์ประสบการณ์จากรุ่นพี่สู่รุ่นน้องแชร์ประสบการณ์จากรุ่นพี่สู่รุ่นน้องแชร์ประสบการณ์จากรุ่นพี่สู่รุ่นน้อง",
-    tags: ["Hackathon", "Workshop"],
-    location: "สถานที่อบรมคือ Zoom",
-    status: "OPEN",
-    point: 300,
-    registerEnd: "12/12/21",
-    eventStart: "06/03/22",
-    eventEnd: "07/03/22",
-  },
+  eventDetail: {},
   eventList: [],
   myEventList: [],
 });
@@ -36,6 +23,9 @@ const getters = {
     });
     return status;
   },
+  getEventDetail(state) {
+    return state.eventDetail;
+  },
 };
 
 // actions action with data such as call api
@@ -51,6 +41,13 @@ const actions = {
     );
     commit("setMyEventList", myEventList.data);
   },
+  async fetchEventDetail({ commit }, _id) {
+    const event = await axios.get(
+      `${process.env.VUE_APP_API_URL}/event/${_id}`
+    );
+    console.log("event:", event.data);
+    commit("setEventDetail", event.data);
+  },
 };
 
 // mutations
@@ -60,6 +57,9 @@ const mutations = {
   },
   setMyEventList(state, myEventList) {
     state.myEventList = myEventList;
+  },
+  setEventDetail(state, event) {
+    state.eventDetail = event;
   },
 };
 
