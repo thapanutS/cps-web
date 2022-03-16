@@ -16,9 +16,10 @@
 
     <!-- ITEM LIST  -->
     <section class="mt-2 pt-2 bg-white h-screen">
-      <div class="mt-2" v-for="claim in claimList" :key="claim.id">
+      <div class="mt-2" v-for="claim in claimList" :key="claim._id">
         <ClaimCard
-          :name="claim.name"
+          :img="claim.itemImg"
+          :name="claim.itemName"
           :claimDate="claim.claimDate"
           :status="claim.status"
         />
@@ -28,43 +29,31 @@
 </template>
 
 <script>
+import { ref, computed, onMounted } from "vue";
+import { useStore } from "vuex";
 import ClaimCard from "@/components/ClaimCard.vue";
 export default {
   name: "Claim",
-  data() {
-    return {
-      studentId: "07610451",
-      name: "Piyabute Chairiboon",
-      claimList: [
-        {
-          id: 1,
-          name: "Apple watch",
-          claimDate: "12/02/22",
-          status: "WAITING",
-        },
-        {
-          id: 2,
-          name: "Apple watch",
-          claimDate: "12/02/22",
-          status: "CONFIRMED",
-        },
-        {
-          id: 3,
-          name: "Apple watch",
-          claimDate: "12/02/22",
-          status: "REJECTED",
-        },
-        {
-          id: 4,
-          name: "Apple watch",
-          claimDate: "12/02/22",
-          status: "CONFIRMED",
-        },
-      ],
-    };
-  },
   components: {
     ClaimCard,
+  },
+  setup() {
+    const store = useStore();
+    const studentId = ref("07610451");
+    const name = ref("Piyabute Chairiboon");
+    const claimList = computed(() => store.state.claim.claimList);
+    const uid = ref("Ua28a9b8f51a7009c0361e8b9c3df674a");
+    const fetchClaimList = async () => {
+      await store.dispatch("claim/fetchClaimListByUid", uid.value);
+    };
+    onMounted(() => {
+      fetchClaimList();
+    });
+    return {
+      studentId,
+      name,
+      claimList,
+    };
   },
 };
 </script>
