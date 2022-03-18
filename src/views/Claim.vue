@@ -1,18 +1,12 @@
 <template>
   <div class="reward bg-quaternary">
     <!-- POINT BAR -->
-    <section
-      class="flex items-center justify-between px-4 py-3 bg-white point-bar sticky top-0 z-1"
-    >
-      <p>{{ studentId }}</p>
-      <p>{{ name }}</p>
-      <div class="flex items-center">
-        <p class="mr-2">
-          <b>100</b>
-        </p>
-        <img src="@/assets/reward/token.png" alt="" />
-      </div>
-    </section>
+    <UserInfoBar
+      :studentId="personalInfo.studentId"
+      :firstName="personalInfo.firstName"
+      :lastName="personalInfo.lastName"
+      :point="personalInfo.point"
+    />
 
     <!-- ITEM LIST  -->
     <section class="mt-2 pt-2 bg-white h-screen">
@@ -29,29 +23,33 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useStore } from "vuex";
 import ClaimCard from "@/components/ClaimCard.vue";
+import UserInfoBar from "@/components/UserInfoBar.vue";
 export default {
   name: "Claim",
   components: {
     ClaimCard,
+    UserInfoBar,
   },
   setup() {
     const store = useStore();
-    const studentId = ref("07610451");
-    const name = ref("Piyabute Chairiboon");
-    const claimList = computed(() => store.state.claim.claimList);
-    const uid = ref("Ua28a9b8f51a7009c0361e8b9c3df674a");
-    const fetchClaimList = async () => {
-      await store.dispatch("claim/fetchClaimListByUid", uid.value);
+    const fetchData = async () => {
+      await store.dispatch(
+        "user/getPersonalInfo",
+        "Ua28a9b8f51a7009c0361e8b9c3df674a"
+      );
+      await store.dispatch(
+        "claim/fetchClaimListByUid",
+        store.state.user.personalInfo.uid
+      );
     };
-    onMounted(() => {
-      fetchClaimList();
-    });
+    const claimList = computed(() => store.state.claim.claimList);
+    const personalInfo = computed(() => store.state.user.personalInfo);
+    fetchData();
     return {
-      studentId,
-      name,
+      personalInfo,
       claimList,
     };
   },
@@ -62,11 +60,5 @@ export default {
 .reward {
   height: 100%;
   min-height: 90vh;
-}
-.point-bar {
-  border-bottom: 1px solid #c7c7c7;
-  img {
-    width: 4vw;
-  }
 }
 </style>

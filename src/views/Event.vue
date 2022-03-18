@@ -22,41 +22,75 @@
     <section
       :class="[
         ` rounded py-2 my-2`,
-        isRegister ? `bg-quaternary text-black` : `bg-secondary text-white`,
+        btnRegisterStatus(eventDetail)
+          ? `bg-secondary text-white`
+          : `bg-quaternary text-black`,
       ]"
     >
-      <button v-if="isRegister">ลงทะเบียนแล้ว</button>
-      <button v-else @click="joinEvent">เข้าร่วมกิจกรรม</button>
+      <button v-if="btnRegisterStatus(eventDetail)" @click="registerEvent()">
+        เข้าร่วมกิจกรรม
+      </button>
+      <button v-else>ปิดลงทะเบียนแล้ว</button>
     </section>
   </div>
 </template>
 
 <script>
-// import { ref } from "vue";
 import { useStore } from "vuex";
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
+import Swal from "sweetalert2";
 export default {
   setup() {
     const route = useRoute();
     const store = useStore();
+
     const fetchData = async () => {
       await store.dispatch("event/fetchEventDetail", route.params.id);
     };
-    onMounted(() => {
-      fetchData();
-    });
+    fetchData();
 
     return {
-      // access a state in computed function
       eventDetail: computed(() => store.state.event.eventDetail),
-      activeEvent: computed(() => store.state.user.activeEvent),
-      historyEvent: computed(() => store.state.user.historyEvent),
-      // // access a getter in computed function
-      isRegister: computed(() => store.getters.isRegister),
-      joinEvent: () => {
-        console.log("Join Event");
-        // waiting for commit and connect with api in store
+      userPersonalInfo: computed(() => store.state.user.user.personalInfo),
+      btnRegisterStatus: async (eventDetail) => {
+        const event = await eventDetail;
+        if (event.members.length < event.maxMember && event.status === "OPEN") {
+          return true;
+        }
+        return false;
+      },
+      registerEvent: () => {
+        Swal.fire({
+          title: `คุณแน่ใจว่าต้องการเข้าร่วมกิจกรรมนี้ ?`,
+          text: "เมื่อเข้าร่วมแล้วไม่สามารถยกเลิกได้",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "ใช่, เข้าร่วมเลย!",
+          cancelButtonText: "ยกเลิก",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            const registerStatus = await store.dispatch("event/register", {
+              uid: "Ua28a9b8f51a7009c0361e8b9c3df674a",
+              eventId: route.params.id,
+            });
+            if (registerStatus === "SUCCESSFUL") {
+              Swal.fire(
+                "เข้าร่วมกิจกรรมเรียบร้อย!",
+                "ตรวจสอบได้ที่รายการกิจกรรมของคุณ.",
+                "success"
+              );
+            } else {
+              Swal.fire(
+                "เข้าร่วมกิจกรรมไม่สำเร็จ!",
+                "จำนวนผู้เข้าร่วมเต็มแล้ว หรือ คุณเข้าร่วมกิจกรรมนี้แล้ว",
+                "error"
+              );
+            }
+          }
+        });
       },
     };
   },

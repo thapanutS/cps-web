@@ -88,7 +88,7 @@ import EventCard from "@/components/EventCard.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import FilterChip from "@/components/FilterChip.vue";
 import { useStore } from "vuex";
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 export default {
   name: "Home",
   components: {
@@ -161,9 +161,7 @@ export default {
       })
     );
 
-    onMounted(() => {
-      fetchData();
-    });
+    fetchData();
 
     return {
       searchValue,

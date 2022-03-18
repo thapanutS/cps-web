@@ -37,6 +37,13 @@ const routes = [
     name: "Event",
     component: Event,
   },
+  // {
+  //   path: "/:pathMatch(.*)*",
+  //   redirect: "/",
+  // },
+  // {
+  //   path: '/:catchAll(.*)'
+  // }
 ];
 
 const router = createRouter({

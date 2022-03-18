@@ -1,28 +1,14 @@
-import userStore from "../store/user";
 import axios from "axios";
 // initial state
 const state = () => ({
   eventDetail: {},
   eventList: [],
   myEventList: [],
+  registerStatus: null,
 });
 
 // getters
 const getters = {
-  isRegister(state) {
-    let status = false;
-    userStore.state.user.activeEvent.forEach((element) => {
-      if (state.eventSelected.id === element) {
-        status = true;
-      }
-    });
-    userStore.state.user.historyEvent.forEach((element) => {
-      if (state.eventSelected.id === element) {
-        status = true;
-      }
-    });
-    return status;
-  },
   getEventDetail(state) {
     return state.eventDetail;
   },
@@ -32,7 +18,6 @@ const getters = {
 const actions = {
   async getAllEvent({ commit }) {
     const eventList = await axios.get(`${process.env.VUE_APP_API_URL}/event`);
-    console.log("eventList:", eventList.data);
     commit("setEventList", eventList.data);
   },
   async getMyEventList({ commit }, uid) {
@@ -45,8 +30,15 @@ const actions = {
     const event = await axios.get(
       `${process.env.VUE_APP_API_URL}/event/${_id}`
     );
-    console.log("event:", event.data);
     commit("setEventDetail", event.data);
+  },
+  async register({ commit }, payload) {
+    const registerStatus = await axios.post(
+      `${process.env.VUE_APP_API_URL}/event/register`,
+      payload
+    );
+    commit("setRegisterStatus", registerStatus);
+    return registerStatus;
   },
 };
 
@@ -60,6 +52,9 @@ const mutations = {
   },
   setEventDetail(state, event) {
     state.eventDetail = event;
+  },
+  setRegisterStatus(state, registerStatus) {
+    state.registerStatus = registerStatus;
   },
 };
 
