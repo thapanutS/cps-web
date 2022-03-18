@@ -2,42 +2,49 @@ import axios from "axios";
 
 // initial state
 const state = () => ({
-  user: {
-    activeEvent: ["1", "2", "3"],
-    historyEvent: ["1", "2", "3"],
-    personalInfo: {},
-  },
+  userProfile: {},
+  lineProfile: {},
 });
 
 // getters
 const getters = {
-  getPersonalInfo(state) {
-    return state.personelInfo;
+  getUserProfile() {
+    return state.userProfile;
+  },
+  getLineProfile(state) {
+    return state.lineProfile;
   },
 };
 
 // actions
 const actions = {
-  async getPersonalInfo({ commit }, uid) {
-    const personalInfo = await axios.get(
-      `${process.env.VUE_APP_API_URL}/user/${uid}`
-    );
-    commit("setPersonalInfo", personalInfo.data);
+  async getUserProfile({ commit }, uid) {
+    const user = await axios.get(`${process.env.VUE_APP_API_URL}/user/${uid}`);
+    console.log("getUserProfile : ", user.data);
+    commit("setUserProfile", user.data);
   },
   async createUser({ commit }, infomation) {
-    console.log("Information : ", infomation);
-    const personalInfo = await axios.post(
+    const user = await axios.post(
       `${process.env.VUE_APP_API_URL}/user/create`,
       infomation
     );
-    commit("setPersonalInfo", personalInfo.data);
+    commit("setUserProfile", user.data);
+  },
+  async setLineProfile({ commit }, lineProfile) {
+    console.log("setLineProfile in Store");
+    commit("setLineProfile", lineProfile);
   },
 };
 
 // mutations
 const mutations = {
-  setPersonalInfo(state, personalInfo) {
-    state.personalInfo = personalInfo;
+  setUserProfile(state, userProfile) {
+    console.log("setUserProfile : ", userProfile);
+    state.userProfile = userProfile;
+    console.log("state.userProfile : ", state.userProfile);
+  },
+  setLineProfile(state, lineProfile) {
+    state.lineProfile = lineProfile;
   },
 };
 
