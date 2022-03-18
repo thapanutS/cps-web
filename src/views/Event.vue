@@ -37,7 +37,7 @@
 
 <script>
 import { useStore } from "vuex";
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
 import Swal from "sweetalert2";
 export default {
@@ -48,9 +48,7 @@ export default {
     const fetchData = async () => {
       await store.dispatch("event/fetchEventDetail", route.params.id);
     };
-    onMounted(() => {
-      fetchData();
-    });
+    fetchData();
 
     return {
       eventDetail: computed(() => store.state.event.eventDetail),
@@ -72,9 +70,9 @@ export default {
           cancelButtonColor: "#d33",
           confirmButtonText: "ใช่, เข้าร่วมเลย!",
           cancelButtonText: "ยกเลิก",
-        }).then((result) => {
+        }).then(async (result) => {
           if (result.isConfirmed) {
-            const registerStatus = store.dispatch("event/register", {
+            const registerStatus = await store.dispatch("event/register", {
               uid: "Ua28a9b8f51a7009c0361e8b9c3df674a",
               eventId: route.params.id,
             });
