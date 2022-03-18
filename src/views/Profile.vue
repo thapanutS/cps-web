@@ -150,7 +150,7 @@ export default {
     const fetchData = async () => {
       await store.dispatch(
         "user/getPersonalInfo",
-        "Uidasefmavkmaovdioxcvsaxcvrgqvascdasdc" // mock user id
+        "Ua28a9b8f51a7009c0361e8b9c3df674a" // mock user id
       );
     };
     fetchData();

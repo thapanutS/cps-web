@@ -3,9 +3,9 @@ import axios from "axios";
 // initial state
 const state = () => ({
   user: {
-    activeEvent: ["1", "2", "3"],
-    historyEvent: ["1", "2", "3"],
-    personalInfo: {},
+    personalInfo: {
+      uid: "Ua28a9b8f51a7009c0361e8b9c3df674a",
+    },
   },
 });
 
