@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.5.0",
     "@heroicons/vue": "^1.0.5",
+    "@line/liff": "^2.18.2",
     "@mdi/font": "5.9.55",
     "autoprefixer": "^10",
     "axios": "^0.26.0",
