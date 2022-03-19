@@ -7,28 +7,28 @@
           <img
             :src="personalInfo.pictureUrl"
             width="150"
-            alt="profile-default"
+            alt=""
             class="object-cover rounded-full shadow-lg"
           />
         </div>
         <div class="w-3/5 py-4 pr-3 flex flex-col items-start">
-          <div class="text-2xl font-bold">{{ personalInfo.displayName }}</div>
+          <div class="text-2xl font-bold">{{ personalInfo.displayName ? personalInfo.displayName : "?" }}</div>
           <div class="flex flex-row justify-start w-full mt-1">
             <div class="w-1/4 flex">Major</div>
             <div class="w-3/4 text-ellipsis whitespace-nowrap overflow-hidden">
-              {{ personalInfo.major }}
+              {{ personalInfo.major ? personalInfo.major : "?" }}
             </div>
           </div>
           <div class="flex flex-row justify-start w-full">
             <div class="w-1/4 flex">Name</div>
             <div class="w-3/4 text-ellipsis whitespace-nowrap overflow-hidden">
-              {{ `${personalInfo.firstName} ${personalInfo.lastName}` }}
+              {{ (personalInfo.firstName && personalInfo.lastName) ? `${personalInfo.firstName} ${personalInfo.lastName}` : "?" }}
             </div>
           </div>
           <div class="flex flex-row justify-start w-full">
             <div class="w-2/4 flex">Student ID</div>
             <div class="text-ellipsis whitespace-nowrap overflow-hidden">
-              {{ personalInfo.studentId }}
+              {{ personalInfo.studentId ? personalInfo.studentId : "?" }}
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@
               Addresss
             </div>
             <div class="py-4 px-4 mt-3 text-left bg-gray rounded-xl">
-              <div class="h-20 overflow-y-auto">
+              <div class="h-20 overflow-y-auto text-sm">
                 {{ personalInfo.address }}
               </div>
             </div>
@@ -89,26 +89,21 @@
               Active Workshop
             </div>
             <div class="py-4 px-4 mt-3 text-left bg-gray rounded-xl">
-              <!-- <div
-                v-for="(item, index) in personalInfo.activeEvent"
-                :key="index"
-              > -->
               <div class="action-workshop h-24 text-sm overflow-y-auto">
                 <div
-                  v-for="(item, index) in personalInfo.activeEvent"
+                  v-for="(item, index) in activeEvent"
                   :key="index"
                   class="action-box pb-3 flex items-center my-3"
                 >
-                  <div
+                  <b
                     class="box1 text-center text-ellipsis whitespace-nowrap overflow-hidden"
                   >
-                    {{ item }}
-                  </div>
-                  <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
-                  <div class="box3 text-center">3 Points</div>
+                    {{ item.name }}
+                  </b>
+                  <div class="box2 text-center">{{ `${item.eventStart.substring(0, 2)} - ${item.eventEnd}` }}</div>
+                  <div class="box3 text-center"><span style="color: green;">{{ item.point }}</span> Points</div>
                 </div>
               </div>
-              <!-- </div> -->
             </div>
           </div>
           <div class="w-full mt-3">
@@ -120,17 +115,17 @@
             <div class="py-4 px-4 mt-3 text-left bg-gray rounded-xl">
               <div class="action-workshop h-24 text-sm overflow-y-auto">
                 <div
-                  v-for="(item, index) in personalInfo.historyEvent"
+                  v-for="(item, index) in activeEvent"
                   :key="index"
                   class="action-box pb-3 flex items-center my-3"
                 >
-                  <div
+                  <b
                     class="box1 text-center text-ellipsis whitespace-nowrap overflow-hidden"
                   >
-                    {{ item }}
-                  </div>
-                  <div class="box2 text-center">22/02/2565 10:00 - 16.30</div>
-                  <div class="box3 text-center">3 Points</div>
+                    {{ item.name }}
+                  </b>
+                  <div class="box2 text-center">{{ `${item.eventStart.substring(0, 2)} - ${item.eventEnd}` }}</div>
+                  <div class="box3 text-center"><span style="color: green;">{{ item.point }}</span> Points</div>
                 </div>
               </div>
             </div>
@@ -150,14 +145,22 @@ export default {
     const fetchData = async () => {
       await store.dispatch(
         "user/getUserProfile",
-        "Ua28a9b8f51a7009c0361e8b9c3df674a" // mock user id
+        "Ua28a9b8f51a7009c0361e8b9c3df674a" // mock user id, get profile
+      );
+      await store.dispatch(
+        "user/getEventListByUid",
+        "Ua28a9b8f51a7009c0361e8b9c3df674a" // for get event list
       );
     };
     fetchData();
     const personalInfo = computed(() => store.state.user.userProfile);
+    const activeEvent = computed(() => (store.state.user.eventList));
+    const historyEvent = computed(() => (store.state.user.eventList));
     return {
       fetchData,
       personalInfo,
+      activeEvent,
+      historyEvent,
     };
   },
 };
@@ -197,6 +200,7 @@ export default {
           }
           .box2 {
             width: 37%;
+            color: blue;
           }
           .box3 {
             width: 25%;
