@@ -12,7 +12,7 @@ class LineUtil {
       .then(async () => {
         if (liff.isLoggedIn()) {
           const idToken = await this.getIDToken();
-
+          await this.verifyIDToken(idToken)
         } else {
           liff.login();
         }
@@ -24,14 +24,14 @@ class LineUtil {
 
   async getProfile() {
     const lineProfile = await liff.getProfile();
-    this.$store.dispatch("user/setLineProfile", lineProfile);
+    await this.$store.dispatch("user/setLineProfile", lineProfile);
   }
   async getIDToken() {
     return await liff.getIDToken();
   }
 
-  verifyIDToken(idToken) {
-    this.$store.dispatch("user/verifyIDToken", idToken);
+  async verifyIDToken(idToken) {
+    await this.$store.dispatch("user/verifyIDToken", idToken);
   }
 }
 
