@@ -3,7 +3,7 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import lineUtils from "@/utils/line.js";
 export default {
-  setup() {
+  async setup() {
     const router = useRouter();
     const store = useStore();
 
