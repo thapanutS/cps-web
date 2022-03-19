@@ -218,6 +218,7 @@
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 import { reactive, ref, computed } from "vue";
 import {
   Listbox,
@@ -244,6 +245,7 @@ export default {
     SelectorIcon,
   },
   setup() {
+    const router = useRouter();
     const store = useStore();
     const major = [
       {
@@ -310,6 +312,7 @@ export default {
           formValue.lastName.slice(1);
         form.major = ref(selected).name;
         await store.dispatch("user/createUser", formValue);
+        router.push("/");
       },
       onlyText: (event) => {
         if (!REGEX_TEXT.test(event.key)) {
