@@ -47,10 +47,11 @@ const actions = {
     );
     commit("setEventList", eventList.data);
   },
-  async verifyIDToken({ commit }, idToken, channelId) {
+  async verifyIDToken({ commit }, idToken) {
+    const channelId = process.env.VUE_APP_LINE_LIFF_CHANNEL_ID;
     const vertifyInfo = await axios.post(
       `${process.env.VUE_APP_API_URL}/user/verify/idToken/`, /// รอ แบงค์ต่อ API
-      {idToken,channelId}
+      { idToken, channelId }
     );
     commit("setVertifyInfo", vertifyInfo);
   },
