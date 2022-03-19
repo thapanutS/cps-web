@@ -7,34 +7,31 @@ class LineUtil {
     });
   }
 
-  login(redirectUri) {
+  login() {
     liff.ready
-      .then(() => {
+      .then(async () => {
         if (liff.isLoggedIn()) {
-          this.getProfile();
+          const idToken = await this.getIDToken();
+          await this.verifyIDToken(idToken)
         } else {
-          liff.login(
-            redirectUri
-              ? {
-                  redirectUri,
-                }
-              : null
-          );
+          liff.login();
         }
       })
       .catch((err) => {
         console.log("Login error", err);
       });
   }
-  getProfile() {
-    liff
-      .getProfile()
-      .then((profile) => {
-        this.$store.dispatch("user/setLineProfile", profile);
-      })
-      .catch((err) => {
-        console.log("getProfile error", err);
-      });
+
+  async getProfile() {
+    const lineProfile = await liff.getProfile();
+    await this.$store.dispatch("user/setLineProfile", lineProfile);
+  }
+  async getIDToken() {
+    return await liff.getIDToken();
+  }
+
+  async verifyIDToken(idToken) {
+    await this.$store.dispatch("user/verifyIDToken", idToken);
   }
 }
 
