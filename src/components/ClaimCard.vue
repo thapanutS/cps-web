@@ -3,7 +3,7 @@
     class="card-container bg-white flex items-center justify-between mx-2 rounded"
   >
     <div>
-      <img src="@/assets/reward/item.png" alt="" />
+      <img :src="img" alt="" />
     </div>
     <div>
       <div class="my-1">{{ name }}</div>
