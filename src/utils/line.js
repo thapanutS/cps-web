@@ -9,9 +9,10 @@ class LineUtil {
 
   login(redirectUri) {
     liff.ready
-      .then(() => {
+      .then(async () => {
         if (liff.isLoggedIn()) {
-          this.getProfile();
+          const idToken = await this.getIDToken();
+
         } else {
           liff.login(
             redirectUri
@@ -26,15 +27,17 @@ class LineUtil {
         console.log("Login error", err);
       });
   }
-  getProfile() {
-    liff
-      .getProfile()
-      .then((profile) => {
-        this.$store.dispatch("user/setLineProfile", profile);
-      })
-      .catch((err) => {
-        console.log("getProfile error", err);
-      });
+
+  async getProfile() {
+    const lineProfile = await liff.getProfile();
+    this.$store.dispatch("user/setLineProfile", lineProfile);
+  }
+  async getIDToken() {
+    return await liff.getIDToken();
+  }
+
+  verifyIDToken(idToken) {
+    this.$store.dispatch("user/verifyIDToken", idToken);
   }
 }
 
