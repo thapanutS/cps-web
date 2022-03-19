@@ -7,20 +7,14 @@ class LineUtil {
     });
   }
 
-  login(redirectUri) {
+  login() {
     liff.ready
       .then(async () => {
         if (liff.isLoggedIn()) {
           const idToken = await this.getIDToken();
 
         } else {
-          liff.login(
-            redirectUri
-              ? {
-                  redirectUri,
-                }
-              : null
-          );
+          liff.login();
         }
       })
       .catch((err) => {
