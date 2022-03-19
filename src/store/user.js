@@ -3,7 +3,7 @@ import axios from "axios";
 // initial state
 const state = () => ({
   userProfile: {},
-  lineProfile: {},
+  // lineProfile: {}, // get data from line
 });
 
 // getters
@@ -11,9 +11,9 @@ const getters = {
   getUserProfile() {
     return state.userProfile;
   },
-  getLineProfile(state) {
-    return state.lineProfile;
-  },
+  // getLineProfile(state) {
+  //   return state.lineProfile;
+  // },
 };
 
 // actions
@@ -34,6 +34,10 @@ const actions = {
     console.log("setLineProfile in Store");
     commit("setLineProfile", lineProfile);
   },
+  // async setLineProfile({ commit }, lineProfile) {
+  //   console.log("setLineProfile in Store");
+  //   commit("setLineProfile", lineProfile);
+  // },
 };
 
 // mutations
@@ -44,8 +48,11 @@ const mutations = {
     console.log("state.userProfile : ", state.userProfile);
   },
   setLineProfile(state, lineProfile) {
-    state.lineProfile = lineProfile;
+    state.userProfile = lineProfile;
   },
+  // setLineProfile(state, lineProfile) {
+  //   state.lineProfile = lineProfile;
+  // },
 };
 
 export default {

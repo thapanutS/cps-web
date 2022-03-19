@@ -149,12 +149,12 @@ export default {
     const store = useStore();
     const fetchData = async () => {
       await store.dispatch(
-        "user/getPersonalInfo",
+        "user/getUserProfile",
         "Ua28a9b8f51a7009c0361e8b9c3df674a" // mock user id
       );
     };
     fetchData();
-    const personalInfo = computed(() => store.state.user.personalInfo);
+    const personalInfo = computed(() => store.state.user.userProfile);
     return {
       fetchData,
       personalInfo,

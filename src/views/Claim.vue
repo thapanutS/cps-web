@@ -2,10 +2,10 @@
   <div class="reward bg-quaternary">
     <!-- POINT BAR -->
     <UserInfoBar
-      :studentId="personalInfo.studentId"
-      :firstName="personalInfo.firstName"
-      :lastName="personalInfo.lastName"
-      :point="personalInfo.point"
+      :studentId="userProfile.studentId"
+      :firstName="userProfile.firstName"
+      :lastName="userProfile.lastName"
+      :point="userProfile.point"
     />
 
     <!-- ITEM LIST  -->
@@ -37,19 +37,19 @@ export default {
     const store = useStore();
     const fetchData = async () => {
       await store.dispatch(
-        "user/getPersonalInfo",
+        "user/getUserProfile",
         "Ua28a9b8f51a7009c0361e8b9c3df674a"
       );
       await store.dispatch(
         "claim/fetchClaimListByUid",
-        store.state.user.personalInfo.uid
+        store.state.user.userProfile.uid
       );
     };
     const claimList = computed(() => store.state.claim.claimList);
-    const personalInfo = computed(() => store.state.user.personalInfo);
+    const userProfile = computed(() => store.state.user.userProfile);
     fetchData();
     return {
-      personalInfo,
+      userProfile,
       claimList,
     };
   },

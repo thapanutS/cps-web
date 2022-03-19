@@ -278,7 +278,7 @@ export default {
       major,
       selected,
       form,
-      store
+      store,
     };
   },
   computed: {

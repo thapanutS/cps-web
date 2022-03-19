@@ -40,7 +40,7 @@ export default {
     const store = useStore();
     const fetchData = async () => {
       await store.dispatch(
-        "user/getPersonalInfo",
+        "user/getUserProfile",
         "Ua28a9b8f51a7009c0361e8b9c3df674a"
       );
       await store.dispatch("item/fetchItemList");
@@ -48,7 +48,7 @@ export default {
 
     fetchData();
     const itemList = computed(() => store.state.item.itemList);
-    const personalInfo = computed(() => store.state.user.personalInfo);
+    const personalInfo = computed(() => store.state.user.userProfile);
     const claimItem = (item) => {
       Swal.fire({
         title: `คุณแน่ใจว่าต้องการแลก ${item.name} ?`,
