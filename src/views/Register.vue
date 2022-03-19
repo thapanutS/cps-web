@@ -203,11 +203,11 @@
         <div class="w-full md:w-1/2 px-3 md:mb-0 mt-7">
           <button
             :class="[
-              validate() ? 'bg-primary' : 'bg-gray disabled',
+              validate(formValue) ? 'bg-primary' : 'bg-gray disabled',
               'w-full py-3 rounded-md font-medium text-white shadow-lg hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105',
             ]"
-            @click="register()"
-            :disabled="!validate()"
+            @click="register(form, formValue)"
+            :disabled="!validate(formValue)"
           >
             Registrar
           </button>
@@ -218,7 +218,7 @@
 </template>
 
 <script>
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import {
   Listbox,
   ListboxButton,
@@ -232,18 +232,8 @@ import { useStore } from "vuex";
 const REGEX_TEXT = /^[a-zA-Z]*$/;
 const REGEX_NUMBER = /^[0-9]*$/;
 
-const major = [
-  {
-    id: 1,
-    name: "CS",
-  },
-  {
-    id: 2,
-    name: "IT",
-  },
-];
-
 export default {
+  name: "RegisterPage",
   components: {
     Listbox,
     ListboxButton,
@@ -255,18 +245,28 @@ export default {
   },
   setup() {
     const store = useStore();
+    const major = [
+      {
+        id: 1,
+        name: "CS",
+      },
+      {
+        id: 2,
+        name: "IT",
+      },
+    ];
     const selected = ref(major[0]);
-
     var form = reactive({
-      uid: "",
-      pictureUrl: "",
-      displayName: "",
+      uid: "Ua28a9b8f51a7009c0361e8b9c3df674a", // mock up
+      pictureUrl:
+        "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png", // mock up
+      displayName: "Jack", // mock up
       firstName: "",
       lastName: "",
       studentId: "",
       email: "",
       phone: "",
-      role: "",
+      role: "STUDENT",
       address: "",
       major: "",
       historyEvent: [],
@@ -274,93 +274,54 @@ export default {
       point: 0,
       achievement: [],
     });
+
+    const formValue = computed(() => reactive(form));
+    const selectedMajor = computed(() => ref(selected));
+
     return {
       major,
       selected,
       form,
       store,
+      selectedMajor,
+      formValue,
+
+      validate: (formValue) => {
+        var status = false;
+        if (
+          formValue.firstName &&
+          formValue.lastName &&
+          formValue.studentId &&
+          (formValue.email.includes(`@su.ac.th`) ||
+            formValue.email.includes(`@silpakorn.edu`)) &&
+          formValue.phone &&
+          formValue.address
+        ) {
+          status = true;
+        }
+        return status;
+      },
+      register: async (form, formValue) => {
+        form.firstName =
+          formValue.firstName.charAt(0).toUpperCase() +
+          formValue.firstName.slice(1);
+        form.lastName =
+          formValue.lastName.charAt(0).toUpperCase() +
+          formValue.lastName.slice(1);
+        form.major = ref(selected).name;
+        await store.dispatch("user/createUser", formValue);
+      },
+      onlyText: (event) => {
+        if (!REGEX_TEXT.test(event.key)) {
+          return event.preventDefault();
+        }
+      },
+      onlyNumber: (event) => {
+        if (!REGEX_NUMBER.test(event.key)) {
+          return event.preventDefault();
+        }
+      },
     };
-  },
-  computed: {
-    formValue() {
-      return this.form;
-    },
-    selectedMajor() {
-      return this.selected;
-    },
-  },
-  async created() {
-    await this.fetchData();
-  },
-  methods: {
-    fetchData() {
-      this.initialData();
-    },
-    async initialData() {
-      this.form.uid = "Ua28a9b8f51a7009c0361e8b9c3df674a";
-      this.form.pictureUrl =
-        "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png";
-      this.form.displayName = "Jack";
-      this.form.firstName = "";
-      this.form.lastName = "";
-      this.form.studentId = "";
-      this.form.email = "";
-      this.form.phone = "";
-      this.form.role = "STUDENT";
-      this.form.address = "";
-      this.form.major = this.selectedMajor.name;
-      this.form.historyEvent = [];
-      this.form.activeEvent = [];
-      this.form.point = 0;
-      this.form.achievement = [];
-    },
-    // setFormInput(field, event) {
-    //   const obj = {};
-    //   if(field === "phone") {
-    //     obj[field] = event.target.value.replace(/-/g, "");
-    //     console.log(`${field} : `, obj[field]);
-    //   }
-    //   if (field !== "phone") {
-    //     obj[field] = event.target.value;
-    //   }
-    //   this.form = obj[field];
-    // },
-    onlyText(event) {
-      if (!REGEX_TEXT.test(event.key)) {
-        return event.preventDefault();
-      }
-    },
-    onlyNumber(event) {
-      if (!REGEX_NUMBER.test(event.key)) {
-        return event.preventDefault();
-      }
-    },
-    validate() {
-      var status = false;
-      if (
-        this.formValue.firstName &&
-        this.formValue.lastName &&
-        this.formValue.studentId &&
-        (this.formValue.email.includes(`@su.ac.th`) ||
-          this.formValue.email.includes(`@silpakorn.edu`)) &&
-        this.formValue.phone &&
-        this.formValue.address
-      ) {
-        status = true;
-      }
-      return status;
-    },
-    async register() {
-      this.form.firstName =
-        this.formValue.firstName.charAt(0).toUpperCase() +
-        this.formValue.firstName.slice(1);
-      this.form.lastName =
-        this.formValue.lastName.charAt(0).toUpperCase() +
-        this.formValue.lastName.slice(1);
-      this.form.major = this.selectedMajor.name;
-      console.log("formValue : ", JSON.stringify(this.formValue, null, 4));
-      await this.$store.dispatch("user/createUser", this.formValue);
-    },
   },
 };
 </script>
