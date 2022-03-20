@@ -106,6 +106,7 @@ export default {
 
     const lineProfile = await store.state.user.lineProfile;
     const registerStatus =  await store.dispatch("user/getEventListByUid",lineProfile.sub);
+    
     if (registerStatus === false) {
       router.push("/register");
     }
