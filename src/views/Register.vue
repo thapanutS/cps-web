@@ -4,11 +4,17 @@
       <img src="@/assets/logo/cps-logo.png" width="250" alt="cps-logo" />
       <div>
         <img
-          src="@/assets/profile/profile-default.png"
+          :src="form.pictureUrl"
           width="150"
           alt="profile-default"
           class="mt-6 object-cover rounded-full shadow-lg"
         />
+        <!-- <img
+          src="@/assets/profile/profile-default.png"
+          width="150"
+          alt="profile-default"
+          class="mt-6 object-cover rounded-full shadow-lg"
+        /> -->
       </div>
     </div>
     <div class="container px-5">
@@ -23,6 +29,7 @@
             type="text"
             name="display"
             placeholder="Display"
+            :value="form.displayName"
             class="mt-1 px-3 block w-full border bg-white h-11 rounded-xl shadow-lg focus:outline-none focus:bg-white-100 focus:ring-0"
           />
         </div>
@@ -258,11 +265,19 @@ export default {
       },
     ];
     const selected = ref(major[0]);
+
+    const formValue = computed(() => reactive(form));
+    const selectedMajor = computed(() => ref(selected));
+    const lineVertifyInfo = computed(() => store.state.user.lineVertifyInfo);
+    
     var form = reactive({
-      uid: "Ua28a9b8f51a7009c0361e8b9c3df674a", // mock up
-      pictureUrl:
-        "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png", // mock up
-      displayName: "Jack", // mock up
+      uid: this.lineVertifyInfo.sub, // mock up
+      // uid: "Ua28a9b8f51a7009c0361e8b9c3df674a", // mock up
+      pictureUrl: this.lineVertifyInfo.picture,
+      // pictureUrl:
+      //   "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png", // mock up
+      displayName: this.lineVertifyInfo.name, // mock up
+      // displayName: "Jack", // mock up
       firstName: "",
       lastName: "",
       studentId: "",
@@ -277,9 +292,6 @@ export default {
       achievement: [],
     });
 
-    const formValue = computed(() => reactive(form));
-    const selectedMajor = computed(() => ref(selected));
-
     return {
       major,
       selected,
@@ -287,6 +299,7 @@ export default {
       store,
       selectedMajor,
       formValue,
+      lineVertifyInfo,
 
       validate: (formValue) => {
         var status = false;
