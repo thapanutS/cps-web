@@ -48,11 +48,14 @@ const actions = {
     commit("setEventList", eventList.data);
   },
   async verifyIDToken({ commit }, idToken) {
+    console.log('verifyIDToken user store');
+    console.log('ID Token : ',idToken);
     const channelId = process.env.VUE_APP_LINE_LIFF_CHANNEL_ID;
     const vertifyInfo = await axios.post(
       `${process.env.VUE_APP_API_URL}/user/verify/idToken/`, /// รอ แบงค์ต่อ API
       { idToken, channelId }
     );
+    console.log('Vertify Info : ',vertifyInfo);
     commit("setVertifyInfo", vertifyInfo);
   },
   // async setLineProfile({ commit }, lineProfile) {
@@ -73,7 +76,9 @@ const mutations = {
     state.eventList = eventList;
   },
   setVertifyInfo(state, vertifyInfo) {
+    console.log('setVertifyInfo : ',vertifyInfo);
     state.lineVertifyInfo = vertifyInfo; /// for data from vertify ID token (Line)
+    console.log('State Line Vertify Info : ',state.lineVertifyInfo);
   },
   // setLineProfile(state, lineProfile) {
   //   state.lineProfile = lineProfile;
