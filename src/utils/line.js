@@ -11,10 +11,10 @@ class LineUtil {
     liff.ready
       .then(async () => {
         if (liff.isLoggedIn()) {
-          const idToken = await this.getIDToken();
-          await this.verifyIDToken(idToken)
+          const decodedIDToke = await this.getDecodedIDToken();
+          await this.$store.dispatch("user/setLineProfile", decodedIDToke);
         } else {
-          liff.login();
+          liff.login({ redirectUri: "" });
         }
       })
       .catch((err) => {
@@ -26,13 +26,15 @@ class LineUtil {
     const lineProfile = await liff.getProfile();
     await this.$store.dispatch("user/setLineProfile", lineProfile);
   }
+
   async getIDToken() {
     return await liff.getIDToken();
   }
 
-  async verifyIDToken(idToken) {
-    await this.$store.dispatch("user/verifyIDToken", idToken);
+  async getDecodedIDToken() {
+    return await liff.getDecodedIDToken();
   }
+
 }
 
 const lineUtil = new LineUtil();
