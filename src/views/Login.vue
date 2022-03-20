@@ -12,7 +12,7 @@ export default {
 
     const lineVertifyInfo = store.state.user.lineVertifyInfo;
     if (lineVertifyInfo) {
-        router.push("/");
+      router.push("/");
     } else {
       router.push("/register");
     }
