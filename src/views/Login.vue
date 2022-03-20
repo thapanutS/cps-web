@@ -1,3 +1,8 @@
+<template>
+  <div>
+
+  </div>
+</template>
 <script>
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -21,3 +26,6 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+
+</style>
