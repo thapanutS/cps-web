@@ -5,7 +5,6 @@ import Register from "../views/Register.vue";
 import Reward from "../views/Reward.vue";
 import Claim from "../views/Claim.vue";
 import Event from "../views/Event.vue";
-import Login from "../views/Login.vue";
 
 const routes = [
   {
@@ -37,11 +36,6 @@ const routes = [
     path: "/event/:id",
     name: "Event",
     component: Event,
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
   },
   // {
   //   path: "/:pathMatch(.*)*",
