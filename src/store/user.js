@@ -56,7 +56,7 @@ const actions = {
       { idToken, channelId }
     );
     console.log('Vertify Info : ',vertifyInfo);
-    commit("setVertifyInfo", vertifyInfo);
+    commit("setVertifyInfo", vertifyInfo.data);
   },
   // async setLineProfile({ commit }, lineProfile) {
   //   console.log("setLineProfile in Store");
