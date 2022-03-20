@@ -4,8 +4,8 @@
       <img src="@/assets/logo/cps-logo.png" width="250" alt="cps-logo" />
       <div>
         <img
-          v-if="Object.keys(lineVertifyInfo).length > 0"
-          :src="lineVertifyInfo.pictureUrl"
+          v-if="Object.keys(lineProfile).length > 0"
+          :src="lineProfile.pictureUrl"
           width="150"
           alt=""
           class="mt-6 object-cover rounded-full shadow-lg"
@@ -31,7 +31,7 @@
             type="text"
             name="display"
             placeholder="Display"
-            :value="lineVertifyInfo.displayName"
+            :value="lineProfile.displayName"
             class="mt-1 px-3 block w-full border bg-white h-11 rounded-xl shadow-lg focus:outline-none focus:bg-white-100 focus:ring-0"
           />
         </div>
@@ -270,14 +270,14 @@ export default {
 
     const formValue = computed(() => reactive(form));
     const selectedMajor = computed(() => ref(selected));
-    const lineVertifyInfo = computed(() => store.state.user.lineVertifyInfo);
+    const lineProfile = computed(() => store.state.user.lineProfile);
     
     var form = reactive({
       uid: "", // mock up
-      // uid: this.lineVertifyInfo.sub, // mock up
+      // uid: this.lineProfile.sub, // mock up
       // uid: "Ua28a9b8f51a7009c0361e8b9c3df674a", // mock up
       pictureUrl: "",
-      // pictureUrl: this.lineVertifyInfo.picture,
+      // pictureUrl: this.lineProfile.picture,
       // pictureUrl:
       //   "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png", // mock up
       displayName: "", // mock up
@@ -303,7 +303,7 @@ export default {
       store,
       selectedMajor,
       formValue,
-      lineVertifyInfo,
+      lineProfile,
 
       validate: (formValue) => {
         var status = false;
@@ -328,8 +328,8 @@ export default {
           formValue.lastName.charAt(0).toUpperCase() +
           formValue.lastName.slice(1);
         form.major = ref(selected).name;
-        form.uid = this.lineVertifyInfo.sub;
-        form.pictureUrl = this.lineVertifyInfo.pictureUrl;
+        form.uid = this.lineProfile.sub;
+        form.pictureUrl = this.lineProfile.pictureUrl;
         await store.dispatch("user/createUser", formValue);
         router.push("/");
       },
