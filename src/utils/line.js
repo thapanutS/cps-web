@@ -23,9 +23,7 @@ class LineUtil {
           await this.$store.dispatch("user/setLineProfile", decodedIDToke);
         } else {
           console.log('LIFF Login & redirectUri Starting');
-          liff.login({
-            redirectUri: ""
-          });
+          liff.login();
         }
       })
       .catch((err) => {
