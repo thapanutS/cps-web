@@ -45,6 +45,7 @@
         <div class="customBox">
           <div class="w-full">
             <div
+            @click="pushPage()"
               class="flex w-2/5 items-center justify-center h-8 font-bold bg-secondary text-white shadow-lg rounded-xl"
             >
               Addresss
@@ -157,6 +158,7 @@
 <script>
 import { useStore } from "vuex";
 import { computed } from "vue";
+import router from "../router/index.js"
 export default {
   setup() {
     const store = useStore();
@@ -179,6 +181,9 @@ export default {
       personalInfo,
       activeEvent,
       historyEvent,
+      pushPage: () => {
+        router.push({name: 'Login'})
+      },
     };
   },
 };
