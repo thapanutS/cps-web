@@ -89,7 +89,6 @@ import SearchBar from "@/components/SearchBar.vue";
 import FilterChip from "@/components/FilterChip.vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { useRouter } from "vue-router";
 import lineUtils from "@/utils/line.js";
 export default {
   name: "Home",
@@ -99,7 +98,6 @@ export default {
     FilterChip,
   },
   async setup() {
-    const router = useRouter();
 
     await lineUtils.init();
     await lineUtils.login();
@@ -107,9 +105,9 @@ export default {
     const lineProfile = await store.state.user.lineProfile;
     const registerStatus =  await store.dispatch("user/getEventListByUid",lineProfile.sub);
     
-    // if (registerStatus === false) {
-    //   router.push("/register");
-    // }
+    if (registerStatus === false) {
+      this.$router.push('/register');
+    }
 
     const searchValue = ref("");
     const filterList = ref([
