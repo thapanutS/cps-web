@@ -20,6 +20,7 @@ class LineUtil {
         if (liff.isLoggedIn()) {
           console.log('LIFF getDecodedIDToken Starting');
           const decodedIDToke = await this.getDecodedIDToken();
+          console.log(`DecodeIDToken : ${decodedIDToke}`);
           await this.$store.dispatch("user/setLineProfile", decodedIDToke);
         } else {
           console.log('LIFF Login & redirectUri Starting');
