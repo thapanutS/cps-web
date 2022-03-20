@@ -12,7 +12,9 @@
           />
         </div>
         <div class="w-3/5 py-4 pr-3 flex flex-col items-start">
-          <div class="text-2xl font-bold">{{ personalInfo.displayName ? personalInfo.displayName : "?" }}</div>
+          <div class="text-2xl font-bold">
+            {{ personalInfo.displayName ? personalInfo.displayName : "?" }}
+          </div>
           <div class="flex flex-row justify-start w-full mt-1">
             <div class="w-1/4 flex">Major</div>
             <div class="w-3/4 text-ellipsis whitespace-nowrap overflow-hidden">
@@ -22,7 +24,11 @@
           <div class="flex flex-row justify-start w-full">
             <div class="w-1/4 flex">Name</div>
             <div class="w-3/4 text-ellipsis whitespace-nowrap overflow-hidden">
-              {{ (personalInfo.firstName && personalInfo.lastName) ? `${personalInfo.firstName} ${personalInfo.lastName}` : "?" }}
+              {{
+                personalInfo.firstName && personalInfo.lastName
+                  ? `${personalInfo.firstName} ${personalInfo.lastName}`
+                  : "?"
+              }}
             </div>
           </div>
           <div class="flex flex-row justify-start w-full">
@@ -100,8 +106,14 @@
                   >
                     {{ item.name }}
                   </b>
-                  <div class="box2 text-center">{{ `${item.eventStart.substring(0, 2)} - ${item.eventEnd}` }}</div>
-                  <div class="box3 text-center"><span style="color: green;">{{ item.point }}</span> Points</div>
+                  <div class="box2 text-center">
+                    {{
+                      `${item.eventStart.substring(0, 2)} - ${item.eventEnd}`
+                    }}
+                  </div>
+                  <div class="box3 text-center">
+                    <span style="color: green">{{ item.point }}</span> Points
+                  </div>
                 </div>
               </div>
             </div>
@@ -124,8 +136,14 @@
                   >
                     {{ item.name }}
                   </b>
-                  <div class="box2 text-center">{{ `${item.eventStart.substring(0, 2)} - ${item.eventEnd}` }}</div>
-                  <div class="box3 text-center"><span style="color: green;">{{ item.point }}</span> Points</div>
+                  <div class="box2 text-center">
+                    {{
+                      `${item.eventStart.substring(0, 2)} - ${item.eventEnd}`
+                    }}
+                  </div>
+                  <div class="box3 text-center">
+                    <span style="color: green">{{ item.point }}</span> Points
+                  </div>
                 </div>
               </div>
             </div>
@@ -154,8 +172,8 @@ export default {
     };
     fetchData();
     const personalInfo = computed(() => store.state.user.userProfile);
-    const activeEvent = computed(() => (store.state.user.eventList));
-    const historyEvent = computed(() => (store.state.user.eventList));
+    const activeEvent = computed(() => store.state.user.eventList);
+    const historyEvent = computed(() => store.state.user.eventList);
     return {
       fetchData,
       personalInfo,
