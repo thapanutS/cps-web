@@ -36,18 +36,19 @@ const actions = {
     commit("setEventList", eventList.data);
   },
   async checkRegister(uid) {
-    const registerStatus = await axios.get(
-      `${process.env.VUE_APP_API_URL}/event/list/${uid}`
-    );
-    return registerStatus.status === "200" ? true : false;
+    try {
+      await axios.get(`${process.env.VUE_APP_API_URL}/event/list/${uid}`);
+      return true;
+    } catch (error) {
+      return false;
+    }
   },
 
   setVertifyInfo(state, vertifyInfo) {
-    console.log('setVertifyInfo : ',vertifyInfo);
+    console.log("setVertifyInfo : ", vertifyInfo);
     state.lineVertifyInfo = vertifyInfo; /// for data from vertify ID token (Line)
-    console.log('State Line Vertify Info : ',state.lineVertifyInfo);
+    console.log("State Line Vertify Info : ", state.lineVertifyInfo);
   },
-
 };
 
 // mutations
