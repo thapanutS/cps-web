@@ -89,8 +89,8 @@ import SearchBar from "@/components/SearchBar.vue";
 import FilterChip from "@/components/FilterChip.vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { useRouter } from "vue-router";
-import lineUtils from "@/utils/line.js";
+// import { useRouter } from "vue-router";
+// import lineUtils from "@/utils/line.js";
 export default {
   name: "Home",
   components: {
@@ -100,26 +100,26 @@ export default {
   },
   async setup() {
     const store = useStore();
-    const router = useRouter();
+    // const router = useRouter();
 
-    await lineUtils.init();
-    await lineUtils.login();
+    // await lineUtils.init();
+    // await lineUtils.login();
 
-    const lineProfile = localStorage.getItem(
-      `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
-    );
+    // const lineProfile = localStorage.getItem(
+    //   `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
+    // );
 
-    const registerStatus = await store.dispatch(
-      "user/checkRegister",
-      lineProfile.sub
-    );
+    // const registerStatus = await store.dispatch(
+    //   "user/checkRegister",
+    //   lineProfile.sub
+    // );
 
-    if (registerStatus === false) {
-      console.log("Before router");
-      router.push("/register").then(()=>{ return;});
-    }
+    // if (registerStatus === false) {
+    //   console.log("Before router");
+    //   router.push("/register").then(()=>{ return;});
+    // }
 
-    console.log("After router");
+    // console.log("After router");
 
     const searchValue = ref("");
     const filterList = ref([
