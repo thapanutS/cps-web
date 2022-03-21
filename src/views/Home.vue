@@ -98,6 +98,7 @@ export default {
     FilterChip,
   },
   async setup() {
+    const store = useStore();
     await lineUtils.init();
     await lineUtils.login();
 
@@ -121,7 +122,6 @@ export default {
       { id: 5, type: "OTHER", name: "กิจกรรมอื่นๆ", isSelected: false },
     ]);
     let menuType = ref("ALL_EVENT");
-    const store = useStore();
     const searchFunction = async () => {};
     const fetchData = async () => {
       // await store.dispatch("event/getAllEvent");
