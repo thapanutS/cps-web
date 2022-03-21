@@ -4,7 +4,6 @@ import axios from "axios";
 const state = () => ({
   userProfile: {},
   eventList: {},
-  lineProfile: {}, // get data from line
 });
 
 // getters
@@ -14,9 +13,6 @@ const getters = {
   },
   getEventList() {
     return state.eventList;
-  },
-  getLineProfile(state) {
-    return state.lineProfile;
   },
 };
 
@@ -32,10 +28,6 @@ const actions = {
       infomation
     );
     commit("setUserProfile", user.data);
-  },
-  async setLineProfile({ commit }, lineProfile) {
-    console.log("setLineProfile in Action : ",lineProfile);
-    commit("setLineProfile", lineProfile);
   },
   async getEventListByUid({ commit }, uid) {
     const eventList = await axios.get(
@@ -62,12 +54,6 @@ const actions = {
 const mutations = {
   setUserProfile(state, userProfile) {
     state.userProfile = userProfile; // for data from register
-  },
-  setLineProfile(state, lineProfile) {
-    console.log('setLineProfile in Mutations : ',lineProfile);
-    state.lineProfile = lineProfile; /// for data from line
-    console.log('lineProfile Value : ', getters.getLineProfile(state));
-
   },
   setEventList(state, eventList) {
     state.eventList = eventList;
