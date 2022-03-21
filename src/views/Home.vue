@@ -109,10 +109,14 @@ export default {
       `${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
     );
 
+    console.log("decodedIDToken : ", lineProfile);
+
     const registerStatus = await store.dispatch(
       "user/getEventListByUid",
       lineProfile.sub
     );
+
+    console.log("registerStatus : ", registerStatus);
 
     if (registerStatus === false) {
       router.push("/register");
