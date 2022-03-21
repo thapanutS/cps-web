@@ -5,12 +5,18 @@ import Register from "../views/Register.vue";
 import Reward from "../views/Reward.vue";
 import Claim from "../views/Claim.vue";
 import Event from "../views/Event.vue";
+import Login from "../views/Login.vue";
 
 const routes = [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/",
+    name: "Login",
+    component: Login,
   },
   {
     path: "/profile",
