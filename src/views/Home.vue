@@ -109,19 +109,17 @@ export default {
       `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
     );
 
-    console.log("decodedIDToken : ", lineProfile);
-    console.log("decodedIDToken : ", lineProfile.sub);
-
     const registerStatus = await store.dispatch(
       "user/checkRegister",
       lineProfile.sub
     );
 
-    console.log("registerStatus : ", registerStatus);
-
     if (registerStatus === false) {
+      console.log("Before router");
       router.push("/register");
     }
+
+    console.log("After router");
 
     const searchValue = ref("");
     const filterList = ref([
@@ -135,11 +133,11 @@ export default {
     let menuType = ref("ALL_EVENT");
     const searchFunction = async () => {};
     const fetchData = async () => {
-      // await store.dispatch("event/getAllEvent");
-      // await store.dispatch(
-      //   "event/getMyEventList",
-      //   "Ua28a9b8f51a7009c0361e8b9c3df674a" // mock user id
-      // );
+      await store.dispatch("event/getAllEvent");
+      await store.dispatch(
+        "event/getMyEventList",
+        lineProfile.sub
+      );
     };
 
     const eventList = computed(() =>
