@@ -98,16 +98,18 @@ export default {
     FilterChip,
   },
   async setup() {
-
     await lineUtils.init();
-    await lineUtils.login();
+    // await lineUtils.login();
 
-    const lineProfile = await store.state.user.lineProfile;
-    const registerStatus =  await store.dispatch("user/getEventListByUid",lineProfile.sub);
-    
-    if (registerStatus === false) {
-      this.$router.push('/register');
-    }
+    // const lineProfile = await store.state.user.lineProfile;
+    // const registerStatus = await store.dispatch(
+    //   "user/getEventListByUid",
+    //   lineProfile.sub
+    // );
+
+    // if (registerStatus === false) {
+    //   this.$router.push("/register");
+    // }
 
     const searchValue = ref("");
     const filterList = ref([
