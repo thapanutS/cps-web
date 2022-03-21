@@ -2,6 +2,7 @@
 import liff from "@line/liff";
 import { useStore } from "vuex";
 class LineUtil {
+
   init() {
     console.log("LIFF INIT Starting");
     console.log(`LINE_LIFF_ID : ${process.env.VUE_APP_LINE_LIFF_ID}`);
@@ -26,7 +27,8 @@ class LineUtil {
           console.log("LIFF getDecodedIDToken Starting");
           const decodedIDToke = await this.getDecodedIDToken();
           console.log(`DecodeIDToken : `, decodedIDToke);
-          await useStore().dispatch("user/setLineProfile", decodedIDToke);
+          const store = useStore();
+          await store.dispatch("user/setLineProfile", decodedIDToke);
         } else {
           console.log("LIFF Login & redirectUri Starting");
           liff
