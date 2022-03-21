@@ -6,7 +6,7 @@ class LineUtil {
     console.log(`LINE_LIFF_ID : ${process.env.VUE_APP_LINE_LIFF_ID}`);
     return liff
       .init({
-        liffId: "1656906142-Zqr44N10",
+        liffId: `${process.env.VUE_APP_LINE_LIFF_ID}`,
       })
       .then(() => {
         console.log("LIFF INIT Success");
@@ -29,7 +29,7 @@ class LineUtil {
         } else {
           console.log("LIFF Login & redirectUri Starting");
           liff
-            .login({ redirectUri: "" })
+            .login({ redirectUri: window.location })
             .then(() => {
               console.log(`LIFF Login Success`);
             })
