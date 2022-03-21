@@ -2,33 +2,40 @@
 import liff from "@line/liff";
 class LineUtil {
   init() {
-    console.log('LIFF INIT Starting');
+    console.log("LIFF INIT Starting");
     console.log(`LINE_LIFF_ID : ${process.env.VUE_APP_LINE_LIFF_ID}`);
-    return liff.init({
-      liffId: "1656906142-Zqr44N10"
-    }).then(() => {
-      console.log('LIFF INIT Success');
-    }).catch((err) => {
-      console.log("Init error", err);
-    });
+    return liff
+      .init({
+        liffId: "1656906142-Zqr44N10",
+      })
+      .then(() => {
+        console.log("LIFF INIT Success");
+      })
+      .catch((err) => {
+        console.log("Init error", err);
+      });
   }
 
   login() {
+    console.log("LIFF Ready Starting");
     liff.ready
       .then(async () => {
-        console.log('LIFF isLoggedIn Starting');
+        console.log("LIFF isLoggedIn Starting");
         if (liff.isLoggedIn()) {
-          console.log('LIFF getDecodedIDToken Starting');
+          console.log("LIFF getDecodedIDToken Starting");
           const decodedIDToke = await this.getDecodedIDToken();
           console.log(`DecodeIDToken : ${decodedIDToke}`);
           await this.$store.dispatch("user/setLineProfile", decodedIDToke);
         } else {
-          console.log('LIFF Login & redirectUri Starting');
-          liff.login().then(()=>{
-            console.log(`LIFF Login Success`);
-          }).catch((err)=>{
-            console.log("Login error", err);
-          });
+          console.log("LIFF Login & redirectUri Starting");
+          liff
+            .login({ redirectUri: "" })
+            .then(() => {
+              console.log(`LIFF Login Success`);
+            })
+            .catch((err) => {
+              console.log("Login error", err);
+            });
         }
       })
       .catch((err) => {
@@ -48,7 +55,6 @@ class LineUtil {
   async getDecodedIDToken() {
     return await liff.getDecodedIDToken();
   }
-
 }
 
 const lineUtil = new LineUtil();
