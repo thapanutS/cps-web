@@ -125,10 +125,10 @@ export default {
     const searchFunction = async () => {};
     const fetchData = async () => {
       // await store.dispatch("event/getAllEvent");
-      await store.dispatch(
-        "event/getMyEventList",
-        "Ua28a9b8f51a7009c0361e8b9c3df674a" // mock user id
-      );
+      // await store.dispatch(
+      //   "event/getMyEventList",
+      //   "Ua28a9b8f51a7009c0361e8b9c3df674a" // mock user id
+      // );
     };
 
     const eventList = computed(() =>
