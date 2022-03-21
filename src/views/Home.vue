@@ -105,19 +105,15 @@ export default {
     await lineUtils.init();
     await lineUtils.login();
 
-    console.log(
-      `localStorage : `,
-      `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
-    );
-
     const lineProfile = localStorage.getItem(
       `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
     );
 
     console.log("decodedIDToken : ", lineProfile);
+    console.log("decodedIDToken : ", lineProfile.sub);
 
     const registerStatus = await store.dispatch(
-      "user/getEventListByUid",
+      "user/checkRegister",
       lineProfile.sub
     );
 
