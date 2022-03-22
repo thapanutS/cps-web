@@ -3,10 +3,12 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import lineUtils from "@/utils/line.js";
 export default {
-  setup() {
+  async setup() {
+    const store = useStore();
     const router = useRouter();
 
     await lineUtils.init();
