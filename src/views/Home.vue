@@ -105,9 +105,9 @@ export default {
     // await lineUtils.init();
     // await lineUtils.login();
 
-    // const lineProfile = localStorage.getItem(
-    //   `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
-    // );
+    const lineProfile = localStorage.getItem(
+      `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
+    );
 
     // const registerStatus = await store.dispatch(
     //   "user/checkRegister",
@@ -134,10 +134,7 @@ export default {
     const searchFunction = async () => {};
     const fetchData = async () => {
       await store.dispatch("event/getAllEvent");
-      await store.dispatch(
-        "event/getMyEventList",
-        lineProfile.sub
-      );
+      await store.dispatch("event/getMyEventList", lineProfile.sub);
     };
 
     const eventList = computed(() =>
