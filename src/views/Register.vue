@@ -271,7 +271,7 @@ export default {
     const formValue = computed(() => reactive(form));
     const selectedMajor = computed(() => ref(selected));
     const lineProfile = computed(() => store.state.user.lineProfile);
-    
+
     var form = reactive({
       uid: "", // mock up
       // uid: this.lineProfile.sub, // mock up

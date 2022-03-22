@@ -1,7 +1,6 @@
 // import Config from '~/config'
 import liff from "@line/liff";
 class LineUtil {
-
   init() {
     console.log("LIFF INIT Starting");
     console.log(`LINE_LIFF_ID : ${process.env.VUE_APP_LINE_LIFF_ID}`);
@@ -31,7 +30,9 @@ class LineUtil {
         } else {
           console.log("LIFF Login & redirectUri Starting");
           liff
-            .login({ redirectUri: window.location })
+            .login({
+              redirectUri: window.location,
+            })
             .then(() => {
               console.log(`LIFF Login Success`);
             })
