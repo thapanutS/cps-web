@@ -24,9 +24,9 @@ export default {
     );
 
     if (registerStatus === false) {
-      router.push("/register");
+      router.push({ name: "Register" });
     } else {
-      router.push("/home");
+      router.push({ name: "Home" });
     }
   },
 };
