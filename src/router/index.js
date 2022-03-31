@@ -5,9 +5,14 @@ import Register from "../views/Register.vue";
 import Reward from "../views/Reward.vue";
 import Claim from "../views/Claim.vue";
 import Event from "../views/Event.vue";
-import Login from "../views/Login.vue";
+import Index from "../views/index.vue";
 
 const routes = [
+  {
+    path: "/",
+    name: "Index",
+    component: Index,
+  },
   {
     path: "/home",
     name: "Home",
