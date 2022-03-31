@@ -66,8 +66,6 @@ const mutations = {
   setLineProfile(state, lineProfile) {
     console.log('setLineProfile in Mutations : ',lineProfile);
     state.lineProfile = lineProfile; /// for data from line
-    console.log('lineProfile Value : ', getters.getLineProfile(state));
-
   },
   setEventList(state, eventList) {
     state.eventList = eventList;

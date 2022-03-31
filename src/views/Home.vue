@@ -89,8 +89,6 @@ import SearchBar from "@/components/SearchBar.vue";
 import FilterChip from "@/components/FilterChip.vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { useRouter } from "vue-router";
-import lineUtils from "@/utils/line.js";
 export default {
   name: "Home",
   components: {
@@ -99,18 +97,6 @@ export default {
     FilterChip,
   },
   async setup() {
-    const router = useRouter();
-
-    await lineUtils.init();
-    await lineUtils.login();
-
-    const lineProfile = await store.state.user.lineProfile;
-    const registerStatus =  await store.dispatch("user/getEventListByUid",lineProfile.sub);
-    
-    if (registerStatus === false) {
-      router.push("/register");
-    }
-
     const searchValue = ref("");
     const filterList = ref([
       { id: 0, type: "SKILL", name: "พัฒนาทักษะ", isSelected: false },
