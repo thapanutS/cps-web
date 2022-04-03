@@ -46,7 +46,7 @@
     </div>
 
     <!-- DISPLAY EVENT LIST -->
-    <section class="event-list px-4">
+    <!-- <section class="event-list px-4">
       <div v-if="menuType === `ALL_EVENT`">
         <div v-for="event in eventList" :key="event.id">
           <EventCard
@@ -75,7 +75,7 @@
           />
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- DISPLAY FILTER -->
   </div>
@@ -84,42 +84,26 @@
 <script>
 // @ is an alias to /src
 import { ref } from "vue";
-import EventCard from "@/components/EventCard.vue";
+// import EventCard from "@/components/EventCard.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import FilterChip from "@/components/FilterChip.vue";
-import { useStore } from "vuex";
-import { computed } from "vue";
+// import { useStore } from "vuex";
+// import { computed } from "vue";
 // import { useRouter } from "vue-router";
 // import lineUtils from "@/utils/line.js";
 export default {
   name: "Home",
   components: {
-    EventCard,
+    // EventCard,
     SearchBar,
     FilterChip,
   },
   async setup() {
-    const store = useStore();
-    // const router = useRouter();
+    // const store = useStore();
 
-    // await lineUtils.init();
-    // await lineUtils.login();
-
-    const lineProfile = localStorage.getItem(
-      `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
-    );
-
-    // const registerStatus = await store.dispatch(
-    //   "user/checkRegister",
-    //   lineProfile.sub
+    // const lineProfile = localStorage.getItem(
+    //   `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
     // );
-
-    // if (registerStatus === false) {
-    //   console.log("Before router");
-    //   router.push("/register").then(()=>{ return;});
-    // }
-
-    // console.log("After router");
 
     const searchValue = ref("");
     const filterList = ref([
@@ -131,66 +115,137 @@ export default {
       { id: 5, type: "OTHER", name: "กิจกรรมอื่นๆ", isSelected: false },
     ]);
     let menuType = ref("ALL_EVENT");
-    const searchFunction = async () => {};
-    const fetchData = async () => {
-      await store.dispatch("event/getAllEvent");
-      await store.dispatch("event/getMyEventList", lineProfile.sub);
-    };
+    // const searchFunction = async () => {};
+    // const fetchData = async () => {
+    //   await store.dispatch("event/getAllEvent");
+    //   await store.dispatch(
+    //     "event/getMyEventList",
+    //     "Ua28a9b8f51a7009c0361e8b9c3df674a"
+    //   );
+    //   // await store.dispatch("event/getMyEventList", lineProfile.sub);
+    // };
 
-    const eventList = computed(() =>
-      store.state.event.eventList.filter((event) => {
-        // EVENTLIST WITH TAG FILTER
-        if (
-          filterList.value[0].isSelected ||
-          filterList.value[1].isSelected ||
-          filterList.value[2].isSelected ||
-          filterList.value[3].isSelected ||
-          filterList.value[4].isSelected ||
-          filterList.value[5].isSelected
-        ) {
-          const displayEvent = ref(false);
-          event.tags.forEach((tag) => {
-            for (let index = 0; index < filterList.value.length; index++) {
-              if (
-                filterList.value[index].isSelected &&
-                filterList.value[index].type === tag
-              ) {
-                displayEvent.value = true;
-              }
-            }
-          });
-          if (displayEvent.value) {
-            return event.name
-              .toLowerCase()
-              .includes(searchValue.value.toLowerCase());
-          }
-        } else {
-          //EVENTLIST WITHOUT FILTER
-          return event.name
-            .toLowerCase()
-            .includes(searchValue.value.toLowerCase());
-        }
-      })
-    );
+    // const myEventList1 = [
+    //   {
+    //     _id: "623cb8b0fe8f465ebc1e0f32",
+    //     name: "TestTestc",
+    //     img: "https://www.img.in.th/images/456eb560d8ef1d02809ed192ef69bb96.jpg",
+    //     description:
+    //       "แชร์ประสบการณ์จากรุ่นพี่สู่รุ่นน้อง โดยนักศึกษาผู้ประกอบการ",
+    //     tags: ["skill"],
+    //     location: "ascasc",
+    //     status: "opened",
+    //     point: 300,
+    //     members: [
+    //       "Ua28a9b8f51a7009c0361e8b9c3df674a",
+    //       "Ua28a9b8f51a7009c0361e8b9c3df674b",
+    //     ],
+    //     maxMember: 20,
+    //     section: 4,
+    //     registerStart: "2022-03-31T15:42:51.000Z",
+    //     registerEnd: "2022-03-31T15:42:51.000Z",
+    //     eventStart: "2022-03-31T15:42:51.000Z",
+    //     eventEnd: "2022-03-31T15:42:51.000Z",
+    //   },
+    //   {
+    //     _id: "623cb8b0fe8f465ebc1e0f32",
+    //     name: "TestTestc",
+    //     img: "https://www.img.in.th/images/456eb560d8ef1d02809ed192ef69bb96.jpg",
+    //     description:
+    //       "แชร์ประสบการณ์จากรุ่นพี่สู่รุ่นน้อง โดยนักศึกษาผู้ประกอบการ",
+    //     tags: ["skill"],
+    //     location: "ascasc",
+    //     status: "opened",
+    //     point: 300,
+    //     members: [
+    //       "Ua28a9b8f51a7009c0361e8b9c3df674a",
+    //       "Ua28a9b8f51a7009c0361e8b9c3df674b",
+    //     ],
+    //     maxMember: 20,
+    //     section: 4,
+    //     registerStart: "2022-03-31T15:42:51.000Z",
+    //     registerEnd: "2022-03-31T15:42:51.000Z",
+    //     eventStart: "2022-03-31T15:42:51.000Z",
+    //     eventEnd: "2022-03-31T15:42:51.000Z",
+    //   },
+    //   {
+    //     _id: "623cb8b0fe8f465ebc1e0f32",
+    //     name: "TestTestc",
+    //     img: "https://www.img.in.th/images/456eb560d8ef1d02809ed192ef69bb96.jpg",
+    //     description:
+    //       "แชร์ประสบการณ์จากรุ่นพี่สู่รุ่นน้อง โดยนักศึกษาผู้ประกอบการ",
+    //     tags: ["skill"],
+    //     location: "ascasc",
+    //     status: "opened",
+    //     point: 300,
+    //     members: [
+    //       "Ua28a9b8f51a7009c0361e8b9c3df674a",
+    //       "Ua28a9b8f51a7009c0361e8b9c3df674b",
+    //     ],
+    //     maxMember: 20,
+    //     section: 4,
+    //     registerStart: "2022-03-31T15:42:51.000Z",
+    //     registerEnd: "2022-03-31T15:42:51.000Z",
+    //     eventStart: "2022-03-31T15:42:51.000Z",
+    //     eventEnd: "2022-03-31T15:42:51.000Z",
+    //   },
+    // ];
 
-    const myEventList = computed(() =>
-      store.state.event.myEventList.filter((event) => {
-        return event.name
-          .toLowerCase()
-          .includes(searchValue.value.toLowerCase());
-      })
-    );
+    // const eventList = computed(() =>
+    //   store.state.event.eventList.filter((event) => {
+    //     // EVENTLIST WITH TAG FILTER
+    //     if (
+    //       filterList.value[0].isSelected ||
+    //       filterList.value[1].isSelected ||
+    //       filterList.value[2].isSelected ||
+    //       filterList.value[3].isSelected ||
+    //       filterList.value[4].isSelected ||
+    //       filterList.value[5].isSelected
+    //     ) {
+    //       const displayEvent = ref(false);
+    //       event.tags.forEach((tag) => {
+    //         for (let index = 0; index < filterList.value.length; index++) {
+    //           if (
+    //             filterList.value[index].isSelected &&
+    //             filterList.value[index].type === tag
+    //           ) {
+    //             displayEvent.value = true;
+    //           }
+    //         }
+    //       });
+    //       if (displayEvent.value) {
+    //         return event.name
+    //           .toLowerCase()
+    //           .includes(searchValue.value.toLowerCase());
+    //       }
+    //     } else {
+    //       //EVENTLIST WITHOUT FILTER
+    //       return event.name
+    //         .toLowerCase()
+    //         .includes(searchValue.value.toLowerCase());
+    //     }
+    //   })
+    // );
 
-    fetchData();
+    // const myEventList = computed(() =>
+    //   this.myEventList1.filter((event) => {
+    //     return event.name
+    //       .toLowerCase()
+    //       .includes(searchValue.value.toLowerCase());
+    //   })
+    // );
+
+    // fetchData();
 
     return {
       searchValue,
       menuType,
-      myEventList,
+      // myEventList,
       filterList,
-      eventList,
-      searchFunction,
-      fetchData,
+      // eventList,
+      // searchFunction,
+      // fetchData,
+      // myEventList1
     };
   },
 };
@@ -226,3 +281,4 @@ export default {
   display: none;
 }
 </style>
+
