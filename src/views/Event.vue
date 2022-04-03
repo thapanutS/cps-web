@@ -41,6 +41,7 @@ import { computed } from "vue";
 import { useRoute } from "vue-router";
 import Swal from "sweetalert2";
 export default {
+  components: {},
   setup() {
     const route = useRoute();
     const store = useStore();
