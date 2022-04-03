@@ -9,7 +9,7 @@
     />
 
     <!-- ITEM LIST  -->
-    <section class="mt-2 pt-2 bg-white h-screen">
+    <section class="mt-2 pt-2 bg-white" style="height: 130vh">
       <div class="mt-2" v-for="item in itemList" :key="item._id">
         <div class="flex space-x-2 justify-center"></div>
         <ItemCard

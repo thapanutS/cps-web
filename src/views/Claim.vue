@@ -9,7 +9,7 @@
     />
 
     <!-- ITEM LIST  -->
-    <section class="mt-2 pt-2 bg-white h-screen">
+    <section class="mt-2 pt-2 bg-white" style="height: 130vh">
       <div class="mt-2" v-for="claim in claimList" :key="claim._id">
         <ClaimCard
           :img="claim.itemImg"
