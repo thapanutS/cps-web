@@ -109,7 +109,7 @@
                   </b>
                   <div class="box2 text-center">
                     {{
-                      `${item.eventStart.substring(0, 2)} - ${item.eventEnd}`
+                      formatDate(item.eventStart,item.eventEnd)
                     }}
                   </div>
                   <div class="box3 text-center">
@@ -139,7 +139,7 @@
                   </b>
                   <div class="box2 text-center">
                     {{
-                      `${item.eventStart.substring(0, 2)} - ${item.eventEnd}`
+                      formatDate(item.eventStart,item.eventEnd)
                     }}
                   </div>
                   <div class="box3 text-center">
@@ -159,6 +159,7 @@
 import { useStore } from "vuex";
 import { computed } from "vue";
 import router from "../router/index.js";
+import moment from "moment";
 export default {
   components: {},
   setup() {
@@ -177,6 +178,13 @@ export default {
     const personalInfo = computed(() => store.state.user.userProfile);
     const activeEvent = computed(() => store.state.user.eventList);
     const historyEvent = computed(() => store.state.user.eventList);
+    const formatDate = (eventStart, eventEnd) => {
+      return `${moment(eventStart).format("DD/MM/YYYY")}
+      \n-\n
+      ${moment(
+        eventEnd
+      ).format("DD/MM/YYYY")}`;
+    };
     return {
       fetchData,
       personalInfo,
@@ -185,6 +193,7 @@ export default {
       pushPage: () => {
         router.push({ name: "Login" });
       },
+      formatDate,
     };
   },
 };
