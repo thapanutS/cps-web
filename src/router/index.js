@@ -1,23 +1,24 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
+// import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
 import Register from "../views/Register.vue";
 import Reward from "../views/Reward.vue";
 import Claim from "../views/Claim.vue";
 import Event from "../views/Event.vue";
-import Index from "../views/index.vue";
+// import Index from "../views/index.vue";
+import Test from "../views/test.vue";
 
 const routes = [
-  {
-    path: "/",
-    name: "Index",
-    component: Index,
-  },
-  {
-    path: "/home",
-    name: "Home",
-    component: Home,
-  },
+  // {
+  //   path: "/index",
+  //   name: "Index",
+  //   component: Index,
+  // },
+  // {
+  //   path: "/",
+  //   name: "Home",
+  //   component: Home,
+  // },
   {
     path: "/profile",
     name: "Profile",
@@ -42,6 +43,11 @@ const routes = [
     path: "/event/:id",
     name: "Event",
     component: Event,
+  },
+  {
+    path: "/",
+    name: "Test",
+    component: Test,
   },
   // {
   //   path: "/:pathMatch(.*)*",

@@ -8,7 +8,12 @@
     <div>
       <div class="my-1">{{ name }}</div>
       <div class="flex justify-center">
-        <div class="card-tube rounded-full px-3 whitespace-nowrap flex justify-center" style="width: 180px !important">เหลือ {{ count }} ชิ้น</div>
+        <div
+          class="card-tube rounded-full px-3 whitespace-nowrap flex justify-center"
+          style="width: 180px !important"
+        >
+          เหลือ {{ count }} ชิ้น
+        </div>
       </div>
     </div>
     <div class="mr-2">

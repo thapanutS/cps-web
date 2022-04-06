@@ -2,8 +2,9 @@
   <div class="home">
     <div class="sticky top-0 z-1 bg-white pt-2">
       <!-- SEARCH SECTION -->
+      <b>Hello Bug</b>
       <section>
-        <div class="flex-1">
+        <!-- <div class="flex-1">
           <SearchBar
             :searchValue="searchValue"
             :searchFunction="searchFunction"
@@ -20,7 +21,7 @@
               @click="filter.isSelected = !filter.isSelected"
             />
           </div>
-        </div>
+        </div> -->
       </section>
       <!-- MENU SELECT EVENT LIST -->
       <section class="menu my-2">
@@ -46,7 +47,7 @@
     </div>
 
     <!-- DISPLAY EVENT LIST -->
-    <!-- <section class="event-list px-4">
+    <section class="event-list px-4">
       <div v-if="menuType === `ALL_EVENT`">
         <div v-for="event in eventList" :key="event.id">
           <EventCard
@@ -61,7 +62,7 @@
           />
         </div>
       </div>
-      <div v-else>
+      <!-- <div v-else>
         <div v-for="event in myEventList" :key="event.id">
           <EventCard
             :img="event.img"
@@ -74,8 +75,8 @@
             @click="$router.push(`/event/${event._id}`)"
           />
         </div>
-      </div>
-    </section> -->
+      </div> -->
+    </section>
 
     <!-- DISPLAY FILTER -->
   </div>
@@ -87,8 +88,8 @@ import { ref } from "vue";
 // import EventCard from "@/components/EventCard.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import FilterChip from "@/components/FilterChip.vue";
-// import { useStore } from "vuex";
-// import { computed } from "vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
 // import { useRouter } from "vue-router";
 // import lineUtils from "@/utils/line.js";
 export default {
@@ -99,7 +100,7 @@ export default {
     FilterChip,
   },
   async setup() {
-    // const store = useStore();
+    const store = useStore();
 
     // const lineProfile = localStorage.getItem(
     //   `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
@@ -115,15 +116,15 @@ export default {
       { id: 5, type: "OTHER", name: "กิจกรรมอื่นๆ", isSelected: false },
     ]);
     let menuType = ref("ALL_EVENT");
-    // const searchFunction = async () => {};
-    // const fetchData = async () => {
-    //   await store.dispatch("event/getAllEvent");
-    //   await store.dispatch(
-    //     "event/getMyEventList",
-    //     "Ua28a9b8f51a7009c0361e8b9c3df674a"
-    //   );
-    //   // await store.dispatch("event/getMyEventList", lineProfile.sub);
-    // };
+    const searchFunction = async () => {};
+    const fetchData = async () => {
+      await store.dispatch("event/getAllEvent");
+      // await store.dispatch(
+      //   "event/getMyEventList",
+      //   "Ua28a9b8f51a7009c0361e8b9c3df674a"
+      // );
+      // await store.dispatch("event/getMyEventList", lineProfile.sub);
+    };
 
     // const myEventList1 = [
     //   {
@@ -191,41 +192,41 @@ export default {
     //   },
     // ];
 
-    // const eventList = computed(() =>
-    //   store.state.event.eventList.filter((event) => {
-    //     // EVENTLIST WITH TAG FILTER
-    //     if (
-    //       filterList.value[0].isSelected ||
-    //       filterList.value[1].isSelected ||
-    //       filterList.value[2].isSelected ||
-    //       filterList.value[3].isSelected ||
-    //       filterList.value[4].isSelected ||
-    //       filterList.value[5].isSelected
-    //     ) {
-    //       const displayEvent = ref(false);
-    //       event.tags.forEach((tag) => {
-    //         for (let index = 0; index < filterList.value.length; index++) {
-    //           if (
-    //             filterList.value[index].isSelected &&
-    //             filterList.value[index].type === tag
-    //           ) {
-    //             displayEvent.value = true;
-    //           }
-    //         }
-    //       });
-    //       if (displayEvent.value) {
-    //         return event.name
-    //           .toLowerCase()
-    //           .includes(searchValue.value.toLowerCase());
-    //       }
-    //     } else {
-    //       //EVENTLIST WITHOUT FILTER
-    //       return event.name
-    //         .toLowerCase()
-    //         .includes(searchValue.value.toLowerCase());
-    //     }
-    //   })
-    // );
+    const eventList = computed(() =>
+      store.state.event.eventList.filter((event) => {
+        // EVENTLIST WITH TAG FILTER
+        if (
+          filterList.value[0].isSelected ||
+          filterList.value[1].isSelected ||
+          filterList.value[2].isSelected ||
+          filterList.value[3].isSelected ||
+          filterList.value[4].isSelected ||
+          filterList.value[5].isSelected
+        ) {
+          const displayEvent = ref(false);
+          event.tags.forEach((tag) => {
+            for (let index = 0; index < filterList.value.length; index++) {
+              if (
+                filterList.value[index].isSelected &&
+                filterList.value[index].type === tag
+              ) {
+                displayEvent.value = true;
+              }
+            }
+          });
+          if (displayEvent.value) {
+            return event.name
+              .toLowerCase()
+              .includes(searchValue.value.toLowerCase());
+          }
+        } else {
+          //EVENTLIST WITHOUT FILTER
+          return event.name
+            .toLowerCase()
+            .includes(searchValue.value.toLowerCase());
+        }
+      })
+    );
 
     // const myEventList = computed(() =>
     //   this.myEventList1.filter((event) => {
@@ -235,15 +236,15 @@ export default {
     //   })
     // );
 
-    // fetchData();
+    fetchData();
 
     return {
       searchValue,
       menuType,
       // myEventList,
       filterList,
-      // eventList,
-      // searchFunction,
+      eventList,
+      searchFunction,
       // fetchData,
       // myEventList1
     };
@@ -281,4 +282,3 @@ export default {
   display: none;
 }
 </style>
-

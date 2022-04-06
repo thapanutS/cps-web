@@ -5,7 +5,7 @@
     </div>
     <div class="flex justify-between text-left px-3 mt-2">
       <div>
-        <div id="topic">{{ name }}</div>
+        <div id="topic">{{ nameEvent }}</div>
         <div id="description">
           {{ description }}
         </div>
@@ -18,7 +18,7 @@
             :key="item.id"
             :class="[`mx-1 px-2 event`, item.tag.toLowerCase()]"
           >
-            {{ item.tagName }}
+            <!-- {{ item.tagName }} -->
           </div>
         </div>
       </div>
@@ -28,35 +28,71 @@
 </template>
 
 <script>
-import { ref } from "vue";
 export default {
   name: "WorkshopCard",
-  props: ["name", "img", "description", "registerEnd", "point", "tags"],
-  setup(props) {
-    let tagsList = ref([]);
-    props.tags.forEach((tag, index) => {
-      let tagName = ref("");
-      if (tag === "SKILL") {
-        tagName.value = "พัฒนาทักษะ";
+  props: ["nameEvent", "img", "description", "registerEnd",  "point"],
+  mounted() {
+    this.customTagList();
+  },
+  data() {
+    return {
+      tagsList: [],
+    };
+  },
+  methods: {
+    customTagList() {
+      console.log("Props : ", this.nameEvent);
+      console.log("Props : ", this.img);
+      let tagsList = [];
+    this.tags.forEach((tag, index) => {
+      let tagName = ""
+      if (tag === `SKILL`) {
+        tagName = "พัฒนาทักษะ"
       } else if (tag === "CONTEST") {
-        tagName.value = "ประกวดแข่งขัน";
+        tagName = "ประกวดแข่งขัน"
       } else if (tag === "GUIDE") {
-        tagName.value = "แนะแนว";
+        tagName = "แนะแนว"
       } else if (tag === "CRAM") {
-        tagName.value = "ติวสอบ";
+        tagName = "ติวสอบ"
       } else if (tag === "LANGUAGE") {
-        tagName.value = "พัฒนาภาษา";
-      } else if (tag === "OTHER") {
-        tagName.value = "กิจกรรมอื่นๆ";
+        tagName = "พัฒนาภาษา"
+      } else {
+        tagName = "กิจกรรมอื่นๆ"
       }
-      tagsList.value.push({
+      tagsList.push({
         id: index,
         tag: tag,
-        tagName: tagName.value,
+        tagName: tagName,
       });
     });
-    return { tagsList };
+    },
   },
+  // props: ["nameEvent", "img", "description", "registerEnd", "point", "tags"],
+  // setup(props) {
+  //   let tagsList = [];
+  //   props.tags.forEach((tag, index) => {
+  //     let tagName = "",
+  //     if (tag === `SKILL`) {
+  //       tagName = "พัฒนาทักษะ"
+  //     } else if (tag === "CONTEST") {
+  //       tagName = "ประกวดแข่งขัน"
+  //     } else if (tag === "GUIDE") {
+  //       tagName = "แนะแนว"
+  //     } else if (tag === "CRAM") {
+  //       tagName = "ติวสอบ"
+  //     } else if (tag === "LANGUAGE") {
+  //       tagName = "พัฒนาภาษา"
+  //     } else if (tag === "OTHER") {
+  //       tagName = "กิจกรรมอื่นๆ"
+  //     }
+  //     tagsList.push({
+  //       id: index,
+  //       tag: tag,
+  //       tagName: tagName,
+  //     });
+  //   });
+  //   return { tagsList };
+  // },
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -67,6 +103,7 @@ export default {
   border-radius: 0px 0px 8px 8px;
   box-shadow: 1px 2px #e6e6e6;
   font-size: 12px;
+  padding: 0 5px;
 }
 #poster {
   display: flex;

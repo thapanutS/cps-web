@@ -57,7 +57,7 @@ const mutations = {
     state.userProfile = userProfile; // for data from register
   },
   setLineProfile(state, lineProfile) {
-    console.log('setLineProfile in Mutations : ',lineProfile);
+    console.log("setLineProfile in Mutations : ", lineProfile);
     state.lineProfile = lineProfile; /// for data from line
   },
   setEventList(state, eventList) {
