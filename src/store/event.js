@@ -2,8 +2,8 @@ import axios from "axios";
 // initial state
 const state = () => ({
   eventDetail: {},
-  eventList: [],
-  myEventList: [],
+  eventList: null,
+  myEventList: null,
   registerStatus: null,
 });
 
@@ -15,13 +15,15 @@ const getters = {
   getEventList(state) {
     return state.eventList;
   },
+  getMyEventList(state) {
+    return state.myEventList;
+  },
 };
 
 // actions action with data such as call api
 const actions = {
   async getAllEvent({ commit }) {
     const eventList = await axios.get(`${process.env.VUE_APP_API_URL}/event`);
-    console.log('getAllEvent ->> ',eventList.data);
     commit("setEventList", eventList.data);
   },
   async getMyEventList({ commit }, uid) {
@@ -49,7 +51,6 @@ const actions = {
 // mutations
 const mutations = {
   setEventList(state, eventList) {
-    console.log('setEventList ->> ',eventList);
     state.eventList = eventList;
   },
   setMyEventList(state, myEventList) {
