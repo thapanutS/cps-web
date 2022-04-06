@@ -45,7 +45,7 @@
         <div class="customBox">
           <div class="w-full">
             <div
-              @click="pushPage()"
+              @click="$router.push(`/`)"
               class="flex w-2/5 items-center justify-center h-8 font-bold bg-secondary text-white shadow-lg rounded-xl"
             >
               Addresss
@@ -108,9 +108,7 @@
                     {{ item.name }}
                   </b>
                   <div class="box2 text-center">
-                    {{
-                      formatDate(item.eventStart,item.eventEnd)
-                    }}
+                    {{ formatDate(item.eventStart, item.eventEnd) }}
                   </div>
                   <div class="box3 text-center">
                     <span style="color: green">{{ item.point }}</span> Points
@@ -138,9 +136,7 @@
                     {{ item.name }}
                   </b>
                   <div class="box2 text-center">
-                    {{
-                      formatDate(item.eventStart,item.eventEnd)
-                    }}
+                    {{ formatDate(item.eventStart, item.eventEnd) }}
                   </div>
                   <div class="box3 text-center">
                     <span style="color: green">{{ item.point }}</span> Points
@@ -158,7 +154,6 @@
 <script>
 import { useStore } from "vuex";
 import { computed } from "vue";
-import router from "../router/index.js";
 import moment from "moment";
 export default {
   components: {},
@@ -181,18 +176,13 @@ export default {
     const formatDate = (eventStart, eventEnd) => {
       return `${moment(eventStart).format("DD/MM/YYYY")}
       \n-\n
-      ${moment(
-        eventEnd
-      ).format("DD/MM/YYYY")}`;
+      ${moment(eventEnd).format("DD/MM/YYYY")}`;
     };
     return {
       fetchData,
       personalInfo,
       activeEvent,
       historyEvent,
-      pushPage: () => {
-        router.push({ name: "Login" });
-      },
       formatDate,
     };
   },

@@ -28,9 +28,7 @@ export default {
           // "Ua28a9b8f51a7009c0361e8b9c3df674c"
           lineProfile.sub
         );
-        registerStatus
-          ? this.$router.push("/home")
-          : this.$router.push("/register");
+        registerStatus ? $router.push("/") : $router.push("/register");
       }
     },
   },
