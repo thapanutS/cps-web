@@ -6,14 +6,9 @@ import Reward from "../views/Reward.vue";
 import Claim from "../views/Claim.vue";
 import Event from "../views/Event.vue";
 // import Index from "../views/index.vue";
-import Test from "../views/test.vue";
+import HomePage from "../views/HomePage.vue";
 
 const routes = [
-  // {
-  //   path: "/index",
-  //   name: "Index",
-  //   component: Index,
-  // },
   // {
   //   path: "/",
   //   name: "Home",
@@ -47,7 +42,7 @@ const routes = [
   {
     path: "/",
     name: "Test",
-    component: Test,
+    component: HomePage,
   },
   // {
   //   path: "/:pathMatch(.*)*",
