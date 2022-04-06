@@ -14,11 +14,11 @@
             เหลือเวลารับสมัครอีก {{ registerEnd }} วัน
           </div>
           <div
-            v-for="item in tagsList"
-            :key="item.id"
-            :class="[`mx-1 px-2 event`, item.tag.toLowerCase()]"
+            v-for="(item, index) in tagsList"
+            :key="index"
+            :class="[`mx-1 px-2 event`, item.toLowerCase()]"
           >
-            <!-- {{ item.tagName }} -->
+            {{ item }}
           </div>
         </div>
       </div>
@@ -30,72 +30,22 @@
 <script>
 export default {
   name: "WorkshopCard",
-  props: ["nameEvent", "img", "description", "registerEnd",  "point"],
-  mounted() {
-    this.customTagList();
-  },
+  props: ["nameEvent", "img", "description", "registerEnd", "point", "tags"],
   data() {
     return {
       tagsList: [],
     };
   },
+  async created() {
+    await this.initailData();
+  },
   methods: {
-    customTagList() {
-      console.log("Props : ", this.nameEvent);
-      console.log("Props : ", this.img);
-      let tagsList = [];
-    this.tags.forEach((tag, index) => {
-      let tagName = ""
-      if (tag === `SKILL`) {
-        tagName = "พัฒนาทักษะ"
-      } else if (tag === "CONTEST") {
-        tagName = "ประกวดแข่งขัน"
-      } else if (tag === "GUIDE") {
-        tagName = "แนะแนว"
-      } else if (tag === "CRAM") {
-        tagName = "ติวสอบ"
-      } else if (tag === "LANGUAGE") {
-        tagName = "พัฒนาภาษา"
-      } else {
-        tagName = "กิจกรรมอื่นๆ"
-      }
-      tagsList.push({
-        id: index,
-        tag: tag,
-        tagName: tagName,
-      });
-    });
+    initailData() {
+      this.tagsList = JSON.parse(JSON.stringify(this.tags));
     },
   },
-  // props: ["nameEvent", "img", "description", "registerEnd", "point", "tags"],
-  // setup(props) {
-  //   let tagsList = [];
-  //   props.tags.forEach((tag, index) => {
-  //     let tagName = "",
-  //     if (tag === `SKILL`) {
-  //       tagName = "พัฒนาทักษะ"
-  //     } else if (tag === "CONTEST") {
-  //       tagName = "ประกวดแข่งขัน"
-  //     } else if (tag === "GUIDE") {
-  //       tagName = "แนะแนว"
-  //     } else if (tag === "CRAM") {
-  //       tagName = "ติวสอบ"
-  //     } else if (tag === "LANGUAGE") {
-  //       tagName = "พัฒนาภาษา"
-  //     } else if (tag === "OTHER") {
-  //       tagName = "กิจกรรมอื่นๆ"
-  //     }
-  //     tagsList.push({
-  //       id: index,
-  //       tag: tag,
-  //       tagName: tagName,
-  //     });
-  //   });
-  //   return { tagsList };
-  // },
 };
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style lang="scss" scoped>
 .card-container {
