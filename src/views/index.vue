@@ -20,8 +20,8 @@ export default {
       const lineProfile = localStorage.getItem(
         `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
       );
-      console.log("lineProfile : ", lineProfile);
-      console.log("lineProfile : ", JSON.stringify(lineProfile));
+      const decode =  await lineUtils.getDecodedIDToken();
+      console.log("decode : ",JSON.parse(decode));
       console.log("lineProfile : ", JSON.parse(lineProfile));
       // if (lineProfile) {
       //   const registerStatus = await this.$store.dispatch(

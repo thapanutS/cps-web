@@ -28,11 +28,6 @@ class LineUtil {
             `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`,
             decodedIDToken
           );
-          console.log(
-            `DecodeIDToken : `, decodedIDToken
-          );
-          // const store = useStore();
-          // await store.dispatch("user/setLineProfile", decodedIDToken);
         } else {
           console.log("LIFF Login & redirectUri Starting");
           liff
