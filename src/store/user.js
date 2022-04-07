@@ -4,7 +4,6 @@ import axios from "axios";
 const state = () => ({
   userProfile: null,
   eventList: null,
-  registered: null
 });
 
 // getters
@@ -15,9 +14,6 @@ const getters = {
   getEventList() {
     return state.eventList;
   },
-  getRegisted() {
-    return state.registered;
-  },
 };
 
 // actions
@@ -25,11 +21,6 @@ const actions = {
   async getUserProfile({ commit }, uid) {
     const user = await axios.get(`${process.env.VUE_APP_API_URL}/user/${uid}`);
     commit("setUserProfile", user.data);
-  },
-  async checkRegistered({ commit }, uid) {
-    const response = await axios.get(`${process.env.VUE_APP_API_URL}/user/registered/${uid}`);
-    console.log('Response : ',response);
-    commit("setRegisted", response.registed);
   },
   async createUser({ commit }, infomation) {
     const user = await axios.post(
@@ -46,8 +37,8 @@ const actions = {
   },
   async checkRegister(uid) {
     try {
-      await axios.get(`${process.env.VUE_APP_API_URL}/user/${uid}`);
-      return true;
+      const response = await axios.get(`${process.env.VUE_APP_API_URL}/user/registered/${uid}`);
+      return response.registed;
     } catch (error) {
       return false;
     }
