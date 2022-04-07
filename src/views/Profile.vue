@@ -1,11 +1,27 @@
 <template>
   <div class="register">
-    <div class="h-2"></div>
-    <div class="container px-3">
+    <loading
+      :active="isLoadingStatus"
+      :can-cancel="false"
+      is-full-page="true"
+      color="#15C5B5"
+      loader="dots"
+      height="60"
+      width="70"
+    ></loading>
+    <div class="container px-3 pt-3">
       <div class="flex flex-row bg-white rounded-xl shadow-lg">
         <div class="w-2/5 py-4 pl-3 pr-5">
           <img
+            v-if="personalInfo.pictureUrl"
             :src="personalInfo.pictureUrl"
+            width="150"
+            alt=""
+            class="object-cover rounded-full shadow-lg"
+          />
+          <img
+            v-else
+            src="@/assets/profile/profile-default.png"
             width="150"
             alt=""
             class="object-cover rounded-full shadow-lg"
@@ -13,28 +29,24 @@
         </div>
         <div class="w-3/5 py-4 pr-3 flex flex-col items-start">
           <div class="text-2xl font-bold">
-            {{ personalInfo.displayName ? personalInfo.displayName : "?" }}
+            {{ personalInfo.displayName }}
           </div>
           <div class="flex flex-row justify-start w-full mt-1">
             <div class="w-1/4 flex">Major</div>
             <div class="w-3/4 text-ellipsis whitespace-nowrap overflow-hidden">
-              {{ personalInfo.major ? personalInfo.major : "?" }}
+              {{ personalInfo.major }}
             </div>
           </div>
           <div class="flex flex-row justify-start w-full">
             <div class="w-1/4 flex">Name</div>
             <div class="w-3/4 text-ellipsis whitespace-nowrap overflow-hidden">
-              {{
-                personalInfo.firstName && personalInfo.lastName
-                  ? `${personalInfo.firstName} ${personalInfo.lastName}`
-                  : "?"
-              }}
+              {{ `${personalInfo.firstName} ${personalInfo.lastName}` }}
             </div>
           </div>
           <div class="flex flex-row justify-start w-full">
             <div class="w-2/4 flex">Student ID</div>
             <div class="text-ellipsis whitespace-nowrap overflow-hidden">
-              {{ personalInfo.studentId ? personalInfo.studentId : "?" }}
+              {{ personalInfo.studentId }}
             </div>
           </div>
         </div>
@@ -155,11 +167,16 @@
 import { useStore } from "vuex";
 import { computed } from "vue";
 import moment from "moment";
+import { ref } from "vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
-  components: {},
+  components: { Loading },
   setup() {
+    const isLoading = ref(false);
     const store = useStore();
     const fetchData = async () => {
+      isLoading.value = true;
       await store.dispatch(
         "user/getUserProfile",
         "Ua28a9b8f51a7009c0361e8b9c3df674a" // mock user id, get profile
@@ -168,22 +185,26 @@ export default {
         "user/getEventListByUid",
         "Ua28a9b8f51a7009c0361e8b9c3df674a" // for get event list
       );
+      isLoading.value = false;
     };
     fetchData();
     const personalInfo = computed(() => store.state.user.userProfile);
     const activeEvent = computed(() => store.state.user.eventList);
     const historyEvent = computed(() => store.state.user.eventList);
+    const isLoadingStatus = computed(() => isLoading.value);
     const formatDate = (eventStart, eventEnd) => {
       return `${moment(eventStart).format("DD/MM/YYYY")}
       \n-\n
       ${moment(eventEnd).format("DD/MM/YYYY")}`;
     };
     return {
+      isLoading,
       fetchData,
       personalInfo,
       activeEvent,
       historyEvent,
       formatDate,
+      isLoadingStatus,
     };
   },
 };

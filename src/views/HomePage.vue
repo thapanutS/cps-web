@@ -1,5 +1,14 @@
 <template>
   <div class="home">
+    <loading
+      :active="isLoading"
+      :can-cancel="false"
+      is-full-page="true"
+      color="#15C5B5"
+      loader="dots"
+      height="60"
+      width="70"
+    ></loading>
     <div class="sticky top-0 z-1 bg-white pt-2">
       <section>
         <div class="flex-1 px-5">
@@ -85,6 +94,8 @@
 </template>
 
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 import SearchBar from "@/components/SearchBar.vue";
 import FilterChip from "@/components/FilterChip.vue";
 import EventCard from "@/components/EventCard.vue";
@@ -96,6 +107,7 @@ export default {
     EventCard,
     SearchBar,
     FilterChip,
+    Loading,
   },
   created() {
     this.initailData();
@@ -152,6 +164,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       searchValue: "",
       filterList: [
         { id: 0, type: "SKILL", name: "พัฒนาทักษะ", isSelected: false },
@@ -166,11 +179,13 @@ export default {
   },
   methods: {
     async initailData() {
+      this.isLoading = true;
       await this.$store.dispatch("event/getAllEvent");
       await this.$store.dispatch(
         `event/getMyEventList`,
         "Ua28a9b8f51a7009c0361e8b9c3df674a"
       );
+      this.isLoading = false;
     },
     searchFunction(newValue) {
       this.searchValue = newValue;

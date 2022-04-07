@@ -1,6 +1,15 @@
 <template>
   <div class="reward bg-quaternary">
     <!-- POINT BAR -->
+    <loading
+      :active="isLoadingStatus"
+      :can-cancel="false"
+      is-full-page="true"
+      color="#15C5B5"
+      loader="dots"
+      height="60"
+      width="70"
+    ></loading>
     <UserInfoBar
       :studentId="personalInfo.studentId"
       :firstName="personalInfo.firstName"
@@ -30,25 +39,34 @@ import UserInfoBar from "@/components/UserInfoBar.vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
 import Swal from "sweetalert2";
+import { ref } from "vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
   name: "Reward",
   components: {
     ItemCard,
     UserInfoBar,
+    Loading,
   },
   setup() {
+    const isLoading = ref(false);
     const store = useStore();
     const fetchData = async () => {
+      isLoading.value = true;
+
       await store.dispatch(
         "user/getUserProfile",
         "Ua28a9b8f51a7009c0361e8b9c3df674a"
       );
       await store.dispatch("item/fetchItemList");
+      isLoading.value = false;
     };
 
     fetchData();
     const itemList = computed(() => store.state.item.itemList);
     const personalInfo = computed(() => store.state.user.userProfile);
+    const isLoadingStatus = computed(() => isLoading.value);
     const claimItem = (item) => {
       Swal.fire({
         title: `คุณแน่ใจว่าต้องการแลก ${item.name} ?`,
@@ -85,7 +103,7 @@ export default {
         }
       });
     };
-    return { itemList, personalInfo, claimItem };
+    return { isLoading, itemList, personalInfo, claimItem, isLoadingStatus };
   },
 };
 </script>
