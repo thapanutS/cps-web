@@ -37,6 +37,8 @@ const actions = {
   },
   async checkRegister(uid) {
     try {
+      console.log("checkRegister : ", uid);
+
       const response = await axios.get(
         `${process.env.VUE_APP_API_URL}/user/registered/${uid}`
       );
