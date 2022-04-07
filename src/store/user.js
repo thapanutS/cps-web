@@ -40,6 +40,7 @@ const actions = {
       const response = await axios.get(
         `${process.env.VUE_APP_API_URL}/user/registered/${uid}`
       );
+      console.log('checkRegister ->> ',response);
       return response.registed;
     } catch (error) {
       return false;
