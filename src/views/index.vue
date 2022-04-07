@@ -5,12 +5,13 @@
 <script>
 import lineUtils from "@/utils/line.js";
 export default {
-  async create() {
-    await this.fetchData();
+  created() {
+    console.log("Create starting");
+    // this.fetchData();
   },
   methods: {
     async fetchData() {
-      console.log('Line init');
+      console.log("Line init");
       await lineUtils.init();
       this.isRegistered();
     },
