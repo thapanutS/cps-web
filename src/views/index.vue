@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div><b>Index Page</b></div>
 </template>
 
 <script>
@@ -9,12 +9,10 @@ export default {
     await this.fetchData();
   },
   methods: {
-    fetchData() {
-      this.connectingLine();
-    },
-    async connectingLine() {
+    async fetchData() {
+      console.log('Line init');
       await lineUtils.init();
-      await this.isRegistered();
+      this.isRegistered();
     },
     async isRegistered() {
       await lineUtils.login();
