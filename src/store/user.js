@@ -3,7 +3,8 @@ import axios from "axios";
 // initial state
 const state = () => ({
   userProfile: null,
-  eventList: null
+  eventList: null,
+  registered: null
 });
 
 // getters
@@ -14,6 +15,9 @@ const getters = {
   getEventList() {
     return state.eventList;
   },
+  getRegisted() {
+    return state.registered;
+  },
 };
 
 // actions
@@ -21,6 +25,11 @@ const actions = {
   async getUserProfile({ commit }, uid) {
     const user = await axios.get(`${process.env.VUE_APP_API_URL}/user/${uid}`);
     commit("setUserProfile", user.data);
+  },
+  async checkRegistered({ commit }, uid) {
+    const response = await axios.get(`${process.env.VUE_APP_API_URL}/user/registered/${uid}`);
+    console.log('Response : ',response);
+    commit("setRegisted", response.registed);
   },
   async createUser({ commit }, infomation) {
     const user = await axios.post(
@@ -43,7 +52,6 @@ const actions = {
       return false;
     }
   },
-
   setVertifyInfo(state, vertifyInfo) {
     state.lineVertifyInfo = vertifyInfo; /// for data from vertify ID token (Line)
   },
@@ -53,6 +61,9 @@ const actions = {
 const mutations = {
   setUserProfile(state, userProfile) {
     state.userProfile = userProfile; // for data from register
+  },
+  setRegisted(state, status) {
+    state.registered = status; // check register
   },
   setLineProfile(state, lineProfile) {
     state.lineProfile = lineProfile; /// for data from line
