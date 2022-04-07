@@ -23,6 +23,8 @@ export default {
       console.log("lineProfile : ", lineProfile);
       // console.log("lineProfile : ", JSON.parse(lineProfile));
       if (lineProfile) {
+      console.log("lineProfile.sub : ", lineProfile.sub);
+
         const registerStatus = await this.$store.dispatch(
           "user/checkRegister",
           // "Ua28a9b8f51a7009c0361e8b9c3df674c"
