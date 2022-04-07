@@ -21,6 +21,8 @@ export default {
         `${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
       );
       console.log("lineProfile : ", lineProfile);
+      console.log("lineProfile : ", JSON.stringify(lineProfile));
+      console.log("lineProfile : ", JSON.parse(lineProfile));
       // if (lineProfile) {
       //   const registerStatus = await this.$store.dispatch(
       //     "user/checkRegister",
