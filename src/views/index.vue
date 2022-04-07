@@ -7,7 +7,7 @@ import lineUtils from "@/utils/line.js";
 export default {
   created() {
     console.log("Create starting");
-    // this.fetchData();
+    this.fetchData();
   },
   methods: {
     async fetchData() {
