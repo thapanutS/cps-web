@@ -17,10 +17,11 @@ export default {
     },
     async isRegistered() {
       await lineUtils.login();
-      const lineProfile = localStorage.getItem(
+      const lineProfile = JSON.parse(localStorage.getItem(
         `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
-      );
-      console.log("lineProfile : ", JSON.parse(lineProfile));
+      ));
+      console.log("lineProfile : ", lineProfile);
+      // console.log("lineProfile : ", JSON.parse(lineProfile));
       if (lineProfile) {
         const registerStatus = await this.$store.dispatch(
           "user/checkRegister",
