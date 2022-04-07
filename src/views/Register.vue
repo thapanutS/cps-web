@@ -4,14 +4,6 @@
       <img src="@/assets/logo/cps-logo.png" width="250" alt="cps-logo" />
       <div>
         <img
-          v-if="Object.keys(lineProfile).length > 0"
-          :src="lineProfile.pictureUrl"
-          width="150"
-          alt=""
-          class="mt-6 object-cover rounded-full shadow-lg"
-        />
-        <img
-          v-else
           src="@/assets/profile/profile-default.png"
           width="150"
           alt=""
@@ -31,7 +23,6 @@
             type="text"
             name="display"
             placeholder="Display"
-            :value="lineProfile.displayName"
             class="mt-1 px-3 block w-full border bg-white h-11 rounded-xl shadow-lg focus:outline-none focus:bg-white-100 focus:ring-0"
           />
         </div>
@@ -270,7 +261,9 @@ export default {
 
     const formValue = computed(() => reactive(form));
     const selectedMajor = computed(() => ref(selected));
-    const lineProfile = computed(() => store.state.user.lineProfile);
+    const lineProfile = JSON.parse(localStorage.getItem(
+      `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
+    ));
 
     var form = reactive({
       uid: "", // mock up
