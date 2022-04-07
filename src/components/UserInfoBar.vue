@@ -3,7 +3,7 @@
     <section
       class="flex items-center justify-between px-4 py-3 bg-white point-bar sticky top-0 z-1"
     >
-      <p class="student-id">{{ studentId }}123</p>
+      <p class="student-id">{{ studentId }}</p>
       <p class="name px-2 w-6/12">{{ firstName + " " + lastName }}</p>
       <div class="flex items-center">
         <p class="mr-2">
