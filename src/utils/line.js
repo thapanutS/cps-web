@@ -22,7 +22,11 @@ class LineUtil {
       .then(async () => {
         console.log("LIFF isLoggedIn Starting");
         if (liff.isLoggedIn()) {
-          
+          const decodedIDToken = await this.getDecodedIDToken();
+          localStorage.setItem(
+            `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`,
+            decodedIDToken
+          );
         } else {
           console.log("LIFF Login & redirectUri Starting");
           liff

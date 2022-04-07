@@ -17,13 +17,15 @@ export default {
     },
     async isRegistered() {
       await lineUtils.login();
-      const decodeIDToken =  await lineUtils.getDecodedIDToken();
-      console.log("decode : ",decodeIDToken);
-      if (decodeIDToken) {
+      const lineProfile = localStorage.getItem(
+        `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
+      );
+      console.log("lineProfile : ", JSON.parse(lineProfile));
+      if (lineProfile) {
         const registerStatus = await this.$store.dispatch(
-          "user/checkRegistered",
+          "user/checkRegister",
           // "Ua28a9b8f51a7009c0361e8b9c3df674c"
-          decodeIDToken.sub
+          lineProfile.sub
         );
         registerStatus
           ? this.$router.push("/homepage")
