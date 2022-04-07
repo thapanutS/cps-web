@@ -2,8 +2,8 @@ import axios from "axios";
 
 // initial state
 const state = () => ({
-  userProfile: {},
-  eventList: {},
+  userProfile: null,
+  eventList: null
 });
 
 // getters
@@ -45,9 +45,7 @@ const actions = {
   },
 
   setVertifyInfo(state, vertifyInfo) {
-    console.log("setVertifyInfo : ", vertifyInfo);
     state.lineVertifyInfo = vertifyInfo; /// for data from vertify ID token (Line)
-    console.log("State Line Vertify Info : ", state.lineVertifyInfo);
   },
 };
 
@@ -57,7 +55,6 @@ const mutations = {
     state.userProfile = userProfile; // for data from register
   },
   setLineProfile(state, lineProfile) {
-    console.log("setLineProfile in Mutations : ", lineProfile);
     state.lineProfile = lineProfile; /// for data from line
   },
   setEventList(state, eventList) {
