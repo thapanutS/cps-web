@@ -23,8 +23,12 @@ class LineUtil {
         console.log("LIFF isLoggedIn Starting");
         if (liff.isLoggedIn()) {
           // console.log("LIFF getDecodedIDToken Starting");
-          // const decodedIDToken = await this.getDecodedIDToken();
-          // console.log(`DecodeIDToken : `, decodedIDToken);
+          const decodedIDToken = await this.getDecodedIDToken();
+          localStorage.setItem(`LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`, decodedIDToken);
+          console.log(`DecodeIDToken : `, localStorage.getItem(
+            `LIFF_STORE:1656906142-Zqr44N10:decodedIDToken`
+            // `${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
+          ));
           // const store = useStore();
           // await store.dispatch("user/setLineProfile", decodedIDToken);
         } else {

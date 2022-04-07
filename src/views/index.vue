@@ -18,8 +18,7 @@ export default {
     async isRegistered() {
       await lineUtils.login();
       const lineProfile = localStorage.getItem(
-        `LIFF_STORE:1656906142-Zqr44N10:decodedIDToken`
-        // `${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
+        `${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
       );
       console.log("lineProfile : ", lineProfile);
       // if (lineProfile) {
