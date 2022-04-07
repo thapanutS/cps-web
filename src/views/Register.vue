@@ -261,9 +261,9 @@ export default {
 
     const formValue = computed(() => reactive(form));
     const selectedMajor = computed(() => ref(selected));
-    const lineProfile = JSON.parse(localStorage.getItem(
-      `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
-    ));
+    // const lineProfile = JSON.parse(localStorage.getItem(
+    //   `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
+    // ));
 
     var form = reactive({
       uid: "", // mock up
@@ -296,7 +296,7 @@ export default {
       store,
       selectedMajor,
       formValue,
-      lineProfile,
+      // lineProfile,
 
       validate: (formValue) => {
         var status = false;
