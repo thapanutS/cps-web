@@ -22,14 +22,16 @@ export default {
         `${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
       );
       console.log("lineProfile : ", lineProfile);
-      if (lineProfile) {
-        const registerStatus = await this.$store.dispatch(
-          "user/checkRegister",
-          // "Ua28a9b8f51a7009c0361e8b9c3df674c"
-          lineProfile.sub
-        );
-        registerStatus ? $router.push("/") : $router.push("/register");
-      }
+      // if (lineProfile) {
+      //   const registerStatus = await this.$store.dispatch(
+      //     "user/checkRegister",
+      //     // "Ua28a9b8f51a7009c0361e8b9c3df674c"
+      //     lineProfile.sub
+      //   );
+      //   registerStatus
+      //     ? this.$router.push("/homepage")
+      //     : this.$router.push("/register");
+      // }
     },
   },
 };
