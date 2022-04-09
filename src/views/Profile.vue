@@ -3,11 +3,12 @@
     <loading
       :active="isLoadingStatus"
       :can-cancel="false"
-      is-full-page="true"
+      :is-full-page="true"
       color="#15C5B5"
       loader="dots"
-      height="60"
-      width="70"
+      :height="60"
+      :width="70"
+      :lock-scroll="true"
     ></loading>
     <div class="container px-3 pt-3">
       <div class="flex flex-row bg-white rounded-xl shadow-lg">

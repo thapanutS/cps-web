@@ -3,11 +3,12 @@
     <loading
       :active="isLoading"
       :can-cancel="false"
-      is-full-page="true"
+      :is-full-page="true"
       color="#15C5B5"
       loader="dots"
-      height="60"
-      width="70"
+      :height="60"
+      :width="70"
+      :lock-scroll="true"
     ></loading>
     <div class="sticky top-0 z-1 bg-white pt-2">
       <section>
