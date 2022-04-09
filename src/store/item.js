@@ -17,7 +17,6 @@ const getters = {
 const actions = {
   async fetchItemList({ commit }) {
     const itemList = await axios.get(`${config.api.baseUrl}/item`);
-    console.log("itemList:", itemList.data);
     commit("setItemList", itemList.data);
   },
 };

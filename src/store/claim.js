@@ -20,7 +20,6 @@ const actions = {
     const claimList = await axios.get(
       `${config.api.baseUrl}/claim/${uid}`
     );
-    console.log("claimList", claimList.data);
     commit("setClaimList", claimList.data);
     return claimList;
   },
