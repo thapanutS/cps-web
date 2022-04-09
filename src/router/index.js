@@ -4,15 +4,15 @@ import Register from "../views/Register.vue";
 import Reward from "../views/Reward.vue";
 import Claim from "../views/Claim.vue";
 import Event from "../views/Event.vue";
-// import Index from "../views/index.vue";
+import Index from "../views/index.vue";
 import HomePage from "../views/HomePage.vue";
 
 const routes = [
-  // {
-  //   path: "/",
-  //   name: "Index",
-  //   component: Index,
-  // },
+  {
+    path: "/",
+    name: "Index",
+    component: Index,
+  },
   {
     path: "/profile",
     name: "Profile",
@@ -39,7 +39,7 @@ const routes = [
     component: Event,
   },
   {
-    path: "/",
+    path: "/homepage",
     name: "HomePage",
     component: HomePage,
   },

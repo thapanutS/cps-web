@@ -74,7 +74,7 @@ export default {
       if (this.userProfile !== null) {
         console.log("user is registered");
         this.isLoading = false;
-        this.$router.push("/");
+        this.$router.push("/homepage");
       } else {
         console.log("user is not registered");
         this.isLoading = false;
