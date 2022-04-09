@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from "../../config"
 // initial state
 const state = () => ({
   eventDetail: {},
@@ -23,24 +24,24 @@ const getters = {
 // actions action with data such as call api
 const actions = {
   async getAllEvent({ commit }) {
-    const eventList = await axios.get(`${process.env.VUE_APP_API_URL}/event`);
+    const eventList = await axios.get(`${config.api.baseUrl}/event`);
     commit("setEventList", eventList.data);
   },
   async getMyEventList({ commit }, uid) {
     const myEventList = await axios.get(
-      `${process.env.VUE_APP_API_URL}/event/list/${uid}`
+      `${config.api.baseUrl}/event/list/${uid}`
     );
     commit("setMyEventList", myEventList.data);
   },
   async fetchEventDetail({ commit }, _id) {
     const event = await axios.get(
-      `${process.env.VUE_APP_API_URL}/event/${_id}`
+      `${config.api.baseUrl}/event/${_id}`
     );
     commit("setEventDetail", event.data);
   },
   async register({ commit }, payload) {
     const registerStatus = await axios.post(
-      `${process.env.VUE_APP_API_URL}/event/register`,
+      `${config.api.baseUrl}/event/register`,
       payload
     );
     commit("setRegisterStatus", registerStatus);

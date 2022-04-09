@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import config from "../../config"
 // initial state
 const state = () => ({
   userProfile: null,
@@ -19,19 +19,19 @@ const getters = {
 // actions
 const actions = {
   async getUserProfile({ commit }, uid) {
-    const user = await axios.get(`${process.env.VUE_APP_API_URL}/user/${uid}`);
+    const user = await axios.get(`${config.api.baseUrl}/user/${uid}`);
     commit("setUserProfile", user.data);
   },
   async createUser({ commit }, infomation) {
     const user = await axios.post(
-      `${process.env.VUE_APP_API_URL}/user/create`,
+      `${config.api.baseUrl}/user/create`,
       infomation
     );
     commit("setUserProfile", user.data);
   },
   async getEventListByUid({ commit }, uid) {
     const eventList = await axios.get(
-      `${process.env.VUE_APP_API_URL}/event/list/${uid}`
+      `${config.api.baseUrl}/event/list/${uid}`
     );
     commit("setEventList", eventList.data);
   },
@@ -40,7 +40,7 @@ const actions = {
       console.log("checkRegister : ", uid);
 
       const response = await axios.get(
-        `${process.env.VUE_APP_API_URL}/user/registered/${uid}`
+        `${config.api.baseUrl}/user/registered/${uid}`
       );
       console.log('checkRegister ->> ',response);
       return response.registed;

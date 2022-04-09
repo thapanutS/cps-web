@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from "../../config"
 
 const state = () => ({
   claimList: null,
@@ -17,7 +18,7 @@ const getters = {
 const actions = {
   async fetchClaimListByUid({ commit }, uid) {
     const claimList = await axios.get(
-      `${process.env.VUE_APP_API_URL}/claim/${uid}`
+      `${config.api.baseUrl}/claim/${uid}`
     );
     console.log("claimList", claimList.data);
     commit("setClaimList", claimList.data);
@@ -25,7 +26,7 @@ const actions = {
   },
   async createClaimRequest({ commit }, payload) {
     const claimCreated = await axios.post(
-      `${process.env.VUE_APP_API_URL}/claim/create`,
+      `${config.api.baseUrl}/claim/create`,
       {
         uid: payload.uid,
         itemId: payload.itemId,

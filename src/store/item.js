@@ -1,4 +1,6 @@
 import axios from "axios";
+import config from "../../config"
+
 // initial state
 const state = () => ({
   itemList: [],
@@ -14,7 +16,7 @@ const getters = {
 // actions action with data such as call api
 const actions = {
   async fetchItemList({ commit }) {
-    const itemList = await axios.get(`${process.env.VUE_APP_API_URL}/item`);
+    const itemList = await axios.get(`${config.api.baseUrl}/item`);
     console.log("itemList:", itemList.data);
     commit("setItemList", itemList.data);
   },
