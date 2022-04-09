@@ -35,31 +35,12 @@ const actions = {
     );
     commit("setEventList", eventList.data);
   },
-  async checkRegister(uid) {
-    try {
-      console.log("checkRegister : ", uid);
-
-      const response = await axios.get(
-        `${config.api.baseUrl}/user/registered/${uid}`
-      );
-      console.log('checkRegister ->> ',response);
-      return response.registed;
-    } catch (error) {
-      return false;
-    }
-  },
-  setVertifyInfo(state, vertifyInfo) {
-    state.lineVertifyInfo = vertifyInfo; /// for data from vertify ID token (Line)
-  },
 };
 
 // mutations
 const mutations = {
   setUserProfile(state, userProfile) {
     state.userProfile = userProfile; // for data from register
-  },
-  setRegisted(state, status) {
-    state.registered = status; // check register
   },
   setLineProfile(state, lineProfile) {
     state.lineProfile = lineProfile; /// for data from line

@@ -1,5 +1,6 @@
 // import Config from '~/config'
 import liff from "@line/liff";
+import config from "../../config";
 class LineUtil {
   init() {
     console.log("LIFF INIT Starting");
@@ -24,7 +25,7 @@ class LineUtil {
         if (liff.isLoggedIn()) {
           const decodedIDToken = await this.getDecodedIDToken();
           localStorage.setItem(
-            `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`,
+            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`,
             decodedIDToken
           );
         } else {
