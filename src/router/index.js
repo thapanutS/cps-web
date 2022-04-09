@@ -1,19 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
 import Register from "../views/Register.vue";
 import Reward from "../views/Reward.vue";
 import Claim from "../views/Claim.vue";
 import Event from "../views/Event.vue";
-import Index from "../views/index.vue";
+// import Index from "../views/index.vue";
 import HomePage from "../views/HomePage.vue";
 
 const routes = [
-  {
-    path: "/",
-    name: "Index",
-    component: Index,
-  },
+  // {
+  //   path: "/",
+  //   name: "Index",
+  //   component: Index,
+  // },
   {
     path: "/profile",
     name: "Profile",
@@ -40,7 +39,7 @@ const routes = [
     component: Event,
   },
   {
-    path: "/homepage",
+    path: "/",
     name: "HomePage",
     component: HomePage,
   },

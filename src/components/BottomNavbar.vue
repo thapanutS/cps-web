@@ -5,7 +5,7 @@
       class="flex justify-between fixed bottom-0 w-full py-3 px-4 bg-white"
     >
       <div>
-        <router-link to="/homepage" @click="currentPage('HOME')">
+        <router-link to="/" @click="currentPage('HOME')">
           <HomeIcon
             :class="[`h-5 w-5`, isHome ? `text-primary` : `text-quaternary`]"
           />

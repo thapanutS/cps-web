@@ -118,40 +118,40 @@ export default {
       myEventListData: "event/getMyEventList",
     }),
     eventList() {
-      return this.eventListData;
-      // return this.eventList.filter((event) => {
-      //   // EVENTLIST WITH TAG FILTER
-      //   if (
-      //     this.filterList[0].isSelected ||
-      //     this.filterList[1].isSelected ||
-      //     this.filterList[2].isSelected ||
-      //     this.filterList[3].isSelected ||
-      //     this.filterList[4].isSelected ||
-      //     this.filterList[5].isSelected
-      //   ) {
-      //     const displayEvent = false;
-      //     event.tags.forEach((tag) => {
-      //       for (let index = 0; index < this.filterList.length; index++) {
-      //         if (
-      //           this.filterList[index].isSelected &&
-      //           this.filterList[index].type === tag
-      //         ) {
-      //           displayEvent = true;
-      //         }
-      //       }
-      //     });
-      //     if (displayEvent) {
-      //       return event.name
-      //         .toLowerCase()
-      //         .includes(this.searchValue.toLowerCase());
-      //     }
-      //   } else {
-      //     //EVENTLIST WITHOUT FILTER
-      //     return event.name
-      //       .toLowerCase()
-      //       .includes(this.searchValue.toLowerCase());
-      //   }
-      // });
+      // return this.eventListData;
+      return this.eventListData.filter((event) => {
+        // EVENTLIST WITH TAG FILTER
+        if (
+          this.filterList[0].isSelected ||
+          this.filterList[1].isSelected ||
+          this.filterList[2].isSelected ||
+          this.filterList[3].isSelected ||
+          this.filterList[4].isSelected ||
+          this.filterList[5].isSelected
+        ) {
+          let displayEvent = false;
+          event.tags.forEach((tag) => {
+            for (let index = 0; index < this.filterList.length; index++) {
+              if (
+                this.filterList[index].isSelected &&
+                this.filterList[index].type === tag
+              ) {
+                displayEvent = true;
+              }
+            }
+          });
+          if (displayEvent) {
+            return event.name
+              .toLowerCase()
+              .includes(this.searchValue.toLowerCase());
+          }
+        } else {
+          //EVENTLIST WITHOUT FILTER
+          return event.name
+            .toLowerCase()
+            .includes(this.searchValue.toLowerCase());
+        }
+      });
     },
     myEventList() {
       return this.myEventListData;
@@ -167,12 +167,12 @@ export default {
       isLoading: false,
       searchValue: "",
       filterList: [
-        { id: 0, type: "SKILL", name: "พัฒนาทักษะ", isSelected: false },
-        { id: 1, type: "CONTEST", name: "ประกวดแข่งขัน", isSelected: false },
-        { id: 2, type: "GUIDE", name: "แนะแนว", isSelected: false },
-        { id: 3, type: "CRAM", name: "ติวสอบ", isSelected: false },
-        { id: 4, type: "LANGUAGE", name: "พัฒนาภาษา", isSelected: false },
-        { id: 5, type: "OTHER", name: "กิจกรรมอื่นๆ", isSelected: false },
+        { id: 0, type: "skill", name: "พัฒนาทักษะ", isSelected: false },
+        { id: 1, type: "contest", name: "ประกวดแข่งขัน", isSelected: false },
+        { id: 2, type: "guide", name: "แนะแนว", isSelected: false },
+        { id: 3, type: "cram", name: "ติวสอบ", isSelected: false },
+        { id: 4, type: "language", name: "พัฒนาภาษา", isSelected: false },
+        { id: 5, type: "other", name: "กิจกรรมอื่นๆ", isSelected: false },
       ],
       menuType: "ALL_EVENT",
     };
@@ -187,9 +187,7 @@ export default {
       );
       this.isLoading = false;
     },
-    searchFunction(newValue) {
-      this.searchValue = newValue;
-    },
+    searchFunction() {},
   },
 };
 </script>
