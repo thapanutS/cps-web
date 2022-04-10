@@ -69,9 +69,13 @@ export default {
       await this.isRegistered();
     },
     async isRegistered() {
-      console.log("isRegistered");
-      await this.$store.dispatch("user/getUserProfile", this.uid);
-      if (this.userProfile !== null) {
+      console.log("isRegistered Method");
+      const response = await this.$store.dispatch(
+        "user/getUserProfile",
+        this.uid
+      );
+      console.log("Response --> ", response);
+      if (response) {
         console.log("user is registered");
         this.isLoading = false;
         this.$router.push("/homepage");
