@@ -1,5 +1,5 @@
 import axios from "axios";
-import config from "../../config"
+import config from "../../config";
 // initial state
 const state = () => ({
   userProfile: null,
@@ -9,6 +9,7 @@ const state = () => ({
 // getters
 const getters = {
   getUserProfile() {
+    console.log('getUserProfile ->> : ',state.userProfile);
     return state.userProfile;
   },
   getEventList() {
@@ -18,11 +19,24 @@ const getters = {
 
 // actions
 const actions = {
-  async getUserProfile({ commit }, uid) {
-    const user = await axios.get(`${config.api.baseUrl}/user/${uid}`);
-    commit("setUserProfile", user.data);
+  // async getUserProfile(uid) {
+    async getUserProfile({ commit }, uid) {
+      let response = null;
+    try {
+      response = await axios.get(`${config.api.baseUrl}/user/${uid}`);
+      console.log("User.data : ", response.data);
+      commit("setUserProfile", response.data);
+    } catch (error) {
+      console.log(error);
+    }
+    return response;
   },
+  async setUserProfile({ commit }, profile) {
+    commit("setUserProfile", profile);
+  },
+  // async createUser(infomation) {
   async createUser({ commit }, infomation) {
+    console.log("infomation : ",infomation);
     const user = await axios.post(
       `${config.api.baseUrl}/user/create`,
       infomation
@@ -40,10 +54,9 @@ const actions = {
 // mutations
 const mutations = {
   setUserProfile(state, userProfile) {
+    console.log("setUserProfile : ", userProfile);
     state.userProfile = userProfile; // for data from register
-  },
-  setLineProfile(state, lineProfile) {
-    state.lineProfile = lineProfile; /// for data from line
+    console.log("state.userProfile : ", state.userProfile);
   },
   setEventList(state, eventList) {
     state.eventList = eventList;
