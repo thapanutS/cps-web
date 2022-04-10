@@ -226,7 +226,6 @@ import {
   ListboxOptions,
 } from "@headlessui/vue";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
-import config from "../../config";
 
 const REGEX_TEXT = /^[a-zA-Z]*$/;
 const REGEX_NUMBER = /^[0-9]*$/;
@@ -259,21 +258,9 @@ export default {
         name: "CS",
       },
       form: {
-        uid: JSON.parse(
-          localStorage.getItem(
-            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
-          )
-        ).sub,
-        pictureUrl: JSON.parse(
-          localStorage.getItem(
-            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
-          )
-        ).pictureUrl,
-        displayName: JSON.parse(
-          localStorage.getItem(
-            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
-          )
-        ).name,
+        uid: "Ua28a9b8f51a7009c0361e8b9c3df674z",
+        pictureUrl: "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png",
+        displayName: "Book",
         firstName: "",
         lastName: "",
         studentId: "",
