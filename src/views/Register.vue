@@ -308,7 +308,7 @@ export default {
       // this.form.pictureUrl = this.lineProfile.pictureUrl;
       console.log("Form : ", this.form);
       await this.$store.dispatch("user/createUser", this.form);
-      this.$router.push("/");
+      this.$router.push("/homepage");
     },
     onlyText(event) {
       if (!REGEX_TEXT.test(event.key)) {
