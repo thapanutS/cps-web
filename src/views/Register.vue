@@ -111,8 +111,8 @@
                 >
                   <ListboxOption
                     as="template"
-                    v-for="person in major"
-                    :key="person.id"
+                    v-for="(person, index) in major"
+                    :key="index"
                     :value="person"
                     v-slot="{ active, selected }"
                   >
@@ -203,11 +203,11 @@
         <div class="w-full md:w-1/2 px-3 md:mb-0 mt-7">
           <button
             :class="[
-              validate(formValue) ? 'bg-primary' : 'bg-gray disabled',
+              validate() ? 'bg-primary' : 'bg-gray disabled',
               'w-full py-3 rounded-md font-medium text-white shadow-lg hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105',
             ]"
-            @click="register(form, formValue)"
-            :disabled="!validate(formValue)"
+            @click="register()"
+            :disabled="!validate()"
           >
             Registrar
           </button>
@@ -218,8 +218,6 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
-import { reactive, ref, computed } from "vue";
 import {
   Listbox,
   ListboxButton,
@@ -228,7 +226,7 @@ import {
   ListboxOptions,
 } from "@headlessui/vue";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
-import { useStore } from "vuex";
+import config from "../../config";
 
 const REGEX_TEXT = /^[a-zA-Z]*$/;
 const REGEX_NUMBER = /^[0-9]*$/;
@@ -244,99 +242,97 @@ export default {
     CheckIcon,
     SelectorIcon,
   },
-  setup() {
-    const router = useRouter();
-    const store = useStore();
-    const major = [
-      {
+  data() {
+    return {
+      major: [
+        {
+          id: 1,
+          name: "CS",
+        },
+        {
+          id: 2,
+          name: "IT",
+        },
+      ],
+      selected: {
         id: 1,
         name: "CS",
       },
-      {
-        id: 2,
-        name: "IT",
-      },
-    ];
-    const selected = ref(major[0]);
-
-    const formValue = computed(() => reactive(form));
-    const selectedMajor = computed(() => ref(selected));
-    // const lineProfile = JSON.parse(localStorage.getItem(
-    //   `LIFF_STORE:${process.env.VUE_APP_LINE_LIFF_ID}:decodedIDToken`
-    // ));
-
-    var form = reactive({
-      uid: "", // mock up
-      // uid: this.lineProfile.sub, // mock up
-      // uid: "Ua28a9b8f51a7009c0361e8b9c3df674a", // mock up
-      pictureUrl: "",
-      // pictureUrl: this.lineProfile.picture,
-      // pictureUrl:
-      //   "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png", // mock up
-      displayName: "", // mock up
-      // displayName: "Jack", // mock up
-      firstName: "",
-      lastName: "",
-      studentId: "",
-      email: "",
-      phone: "",
-      role: "STUDENT",
-      address: "",
-      major: "",
-      historyEvent: [],
-      activeEvent: [],
-      point: 0,
-      achievement: [],
-    });
-
-    return {
-      major,
-      selected,
-      form,
-      store,
-      selectedMajor,
-      formValue,
-      // lineProfile,
-
-      validate: (formValue) => {
-        var status = false;
-        if (
-          formValue.firstName &&
-          formValue.lastName &&
-          formValue.studentId &&
-          (formValue.email.includes(`@su.ac.th`) ||
-            formValue.email.includes(`@silpakorn.edu`)) &&
-          formValue.phone &&
-          formValue.address
-        ) {
-          status = true;
-        }
-        return status;
-      },
-      register: async (form, formValue) => {
-        form.firstName =
-          formValue.firstName.charAt(0).toUpperCase() +
-          formValue.firstName.slice(1);
-        form.lastName =
-          formValue.lastName.charAt(0).toUpperCase() +
-          formValue.lastName.slice(1);
-        form.major = ref(selected).name;
-        form.uid = this.lineProfile.sub;
-        form.pictureUrl = this.lineProfile.pictureUrl;
-        await store.dispatch("user/createUser", formValue);
-        router.push("/");
-      },
-      onlyText: (event) => {
-        if (!REGEX_TEXT.test(event.key)) {
-          return event.preventDefault();
-        }
-      },
-      onlyNumber: (event) => {
-        if (!REGEX_NUMBER.test(event.key)) {
-          return event.preventDefault();
-        }
+      form: {
+        uid: JSON.parse(
+          localStorage.getItem(
+            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
+          )
+        ).sub,
+        pictureUrl: JSON.parse(
+          localStorage.getItem(
+            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
+          )
+        ).pictureUrl,
+        displayName: JSON.parse(
+          localStorage.getItem(
+            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
+          )
+        ).name,
+        firstName: "",
+        lastName: "",
+        studentId: "",
+        email: "",
+        phone: "",
+        role: "STUDENT",
+        address: "",
+        major: "",
+        historyEvent: [],
+        activeEvent: [],
+        point: 0,
+        achievement: [],
       },
     };
+  },
+  computed: {
+    selectedValue() {
+      return this.selected;
+    },
+  },
+  methods: {
+    validate() {
+      if (
+        this.form.firstName &&
+        this.form.lastName &&
+        this.form.studentId &&
+        (this.form.email.includes(`@su.ac.th`) ||
+          this.form.email.includes(`@silpakorn.edu`)) &&
+        this.form.phone &&
+        this.form.address
+      ) {
+        return true;
+      }
+      return false;
+    },
+    async register() {
+      this.form.firstName =
+        this.form.firstName.charAt(0).toUpperCase() +
+        this.form.firstName.slice(1);
+      this.form.lastName =
+        this.form.lastName.charAt(0).toUpperCase() +
+        this.form.lastName.slice(1);
+      this.form.major = this.selectedValue.name;
+      // this.form.uid = this.lineProfile.sub;
+      // this.form.pictureUrl = this.lineProfile.pictureUrl;
+      console.log("Form : ", this.form);
+      await this.$store.dispatch("user/createUser", this.form);
+      this.$router.push("/");
+    },
+    onlyText(event) {
+      if (!REGEX_TEXT.test(event.key)) {
+        return event.preventDefault();
+      }
+    },
+    onlyNumber(event) {
+      if (!REGEX_NUMBER.test(event.key)) {
+        return event.preventDefault();
+      }
+    },
   },
 };
 </script>
