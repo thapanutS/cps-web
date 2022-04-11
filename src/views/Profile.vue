@@ -176,19 +176,6 @@ export default {
   setup() {
     const isLoading = ref(false);
     const store = useStore();
-    const fetchData = async () => {
-      isLoading.value = true;
-      await store.dispatch(
-        "user/getUserProfile",
-        "Ua28a9b8f51a7009c0361e8b9c3df674a" // mock user id, get profile
-      );
-      await store.dispatch(
-        "user/getEventListByUid",
-        "Ua28a9b8f51a7009c0361e8b9c3df674a" // for get event list
-      );
-      isLoading.value = false;
-    };
-    fetchData();
     const personalInfo = computed(() => store.state.user.userProfile);
     const activeEvent = computed(() => store.state.user.eventList);
     const historyEvent = computed(() => store.state.user.eventList);
@@ -198,6 +185,22 @@ export default {
       \n-\n
       ${moment(eventEnd).format("DD/MM/YYYY")}`;
     };
+
+    const fetchData = async () => {
+      isLoading.value = true;
+      // await store.dispatch(
+      //   "user/getUserProfile",
+      //   "Ua28a9b8f51a7009c0361e8b9c3df674a" // mock user id, get profile
+      // );
+      await store.dispatch("user/getEventListByUid", this.profileInfo.value.uid);
+      // await store.dispatch(
+      //   "user/getEventListByUid",
+      //   "Ua28a9b8f51a7009c0361e8b9c3df674a" // for get event list
+      // );
+      isLoading.value = false;
+    };
+    fetchData();
+
     return {
       isLoading,
       fetchData,
