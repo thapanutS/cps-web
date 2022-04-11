@@ -24,7 +24,7 @@ const actions = {
       let response = null;
     try {
       response = await axios.get(`${config.api.baseUrl}/user/${uid}`);
-      console.log("User.data : ", response.data);
+      console.log("response : ", response.data);
       commit("setUserProfile", response.data);
     } catch (error) {
       console.log(error);
@@ -54,9 +54,8 @@ const actions = {
 // mutations
 const mutations = {
   setUserProfile(state, userProfile) {
-    console.log("setUserProfile : ", userProfile);
     state.userProfile = userProfile; // for data from register
-    console.log("state.userProfile : ", state.userProfile);
+    console.log("state.userProfile [Updated] : ", state.userProfile);
   },
   setEventList(state, eventList) {
     state.eventList = eventList;
