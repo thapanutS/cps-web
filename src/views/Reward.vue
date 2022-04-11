@@ -62,11 +62,7 @@ export default {
       await store.dispatch("item/fetchItemList");
       isLoading.value = false;
     };
-    const logProfile = (profileInfo) => {
-      console.log("profileInfo : ", profileInfo);
-    };
     fetchData();
-    logProfile();
     const claimItem = (item) => {
       Swal.fire({
         title: `คุณแน่ใจว่าต้องการแลก ${item.name} ?`,

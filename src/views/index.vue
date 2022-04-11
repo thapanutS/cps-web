@@ -35,7 +35,6 @@ export default {
     };
   },
   created() {
-    console.log("Create starting");
     this.fetchData();
   },
   computed: {
@@ -45,10 +44,8 @@ export default {
   },
   methods: {
     async fetchData() {
-      console.log("Line init");
       await lineUtils.init();
       if (!config.dev_status) {
-        console.log("!config.dev_status");
         await lineUtils.login();
         this.isLoading = true;
         const lineProfile = JSON.parse(
@@ -56,12 +53,10 @@ export default {
             `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
           )
         );
-        console.log('lineProfile localStorage');
         (this.uid = lineProfile.sub),
           (this.displayName = lineProfile.name),
           (this.pictureUrl = lineProfile.picture);
       } else {
-        console.log("config.dev_status");
         (this.uid = "Ua28a9b8f51a7009c0361e8b9c3df674a"),
           (this.displayName = "Book"),
           (this.pictureUrl =
@@ -70,12 +65,10 @@ export default {
       await this.isRegistered();
     },
     async isRegistered() {
-      console.log("isRegistered Method");
       const response = await this.$store.dispatch(
         "user/getUserProfile",
         this.uid
       );
-      console.log("Response --> ", response);
       if (response) {
         console.log("user is registered");
         this.isLoading = false;

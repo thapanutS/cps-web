@@ -3,17 +3,15 @@ import liff from "@line/liff";
 import config from "../../config";
 class LineUtil {
   init() {
-    console.log("LIFF INIT Starting");
-    console.log(`LINE_LIFF_ID : ${process.env.VUE_APP_LINE_LIFF_ID}`);
     return liff
       .init({
         liffId: `${process.env.VUE_APP_LINE_LIFF_ID}`,
       })
       .then(() => {
-        console.log("LIFF INIT Success");
+        console.log(`LIFF Init Success`);
       })
       .catch((err) => {
-        console.log("Init error", err);
+        console.log("Init error : ", err);
       });
   }
 
@@ -21,18 +19,13 @@ class LineUtil {
     console.log("LIFF Ready Starting");
     liff.ready
       .then(async () => {
-        console.log("LIFF isLoggedIn Starting");
         if (liff.isLoggedIn()) {
-        console.log("Accept conditional isLoggedIn");
           const decodedIDToken = await this.getDecodedIDToken();
-          console.log('decodedIDToken : ',decodedIDToken);
-          console.log('decodedIDToken : ',JSON.stringify(decodedIDToken));
           localStorage.setItem(
             `LIFF_STORE:${config.line.liff_id}:decodedIDToken`,
             JSON.stringify(decodedIDToken)
           );
         } else {
-          console.log("LIFF Login & redirectUri Starting");
           liff
             .login({
               redirectUri: window.location,
@@ -41,12 +34,12 @@ class LineUtil {
               console.log(`LIFF Login Success`);
             })
             .catch((err) => {
-              console.log("Login error", err);
+              console.log("Login error : ", err);
             });
         }
       })
       .catch((err) => {
-        console.log("Login error", err);
+        console.log("LIFF Ready error : ", err);
       });
   }
 
