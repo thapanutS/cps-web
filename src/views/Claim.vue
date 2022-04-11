@@ -53,9 +53,9 @@ export default {
     const claimList = computed(() => store.state.claim.claimList);
     const userProfile = computed(() => store.state.user.userProfile);
     const isLoadingStatus = computed(() => isLoading.value);
-    const profileInfo = computed(() => store.state.user.userProfile); 
+    const personalInfo = computed(() => store.state.user.userProfile); 
 
-    const fetchData = async () => {
+    const fetchData = async (personalInfo) => {
       isLoading.value = true;
       // await store.dispatch(
       //   "user/getUserProfile",
@@ -64,7 +64,7 @@ export default {
       await store.dispatch(
         "claim/fetchClaimListByUid",
         // store.state.user.userProfile.uid
-        this.profileInfo.value.uid
+        personalInfo.value.uid
       );
       // await store.dispatch(
       //   "claim/fetchClaimListByUid",
@@ -73,13 +73,13 @@ export default {
       // );
       isLoading.value = false;
     };
-    fetchData();
+    fetchData(personalInfo);
     return {
       isLoading,
       userProfile,
       claimList,
       isLoadingStatus,
-      profileInfo,
+      personalInfo,
     };
   },
 };

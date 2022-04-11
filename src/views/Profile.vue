@@ -186,7 +186,7 @@ export default {
       ${moment(eventEnd).format("DD/MM/YYYY")}`;
     };
 
-    const fetchData = async () => {
+    const fetchData = async (personalInfo) => {
       isLoading.value = true;
       // await store.dispatch(
       //   "user/getUserProfile",
@@ -194,7 +194,7 @@ export default {
       // );
       await store.dispatch(
         "user/getEventListByUid",
-        this.profileInfo.value.uid
+        personalInfo.value.uid
       );
       // await store.dispatch(
       //   "user/getEventListByUid",
@@ -202,7 +202,7 @@ export default {
       // );
       isLoading.value = false;
     };
-    fetchData();
+    fetchData(personalInfo);
 
     return {
       isLoading,
