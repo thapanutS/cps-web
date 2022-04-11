@@ -56,6 +56,7 @@ export default {
             `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
           )
         );
+        console.log('lineProfile localStorage');
         (this.uid = lineProfile.sub),
           (this.displayName = lineProfile.name),
           (this.pictureUrl = lineProfile.picture);
