@@ -117,6 +117,7 @@ export default {
     ...mapGetters({
       eventListData: "event/getEventList",
       myEventListData: "event/getMyEventList",
+      userProfileData: "user/getUserProfile",
     }),
     eventList() {
       // return this.eventListData;
@@ -147,7 +148,6 @@ export default {
               .includes(this.searchValue.toLowerCase());
           }
         } else {
-          //EVENTLIST WITHOUT FILTER
           return event.name
             .toLowerCase()
             .includes(this.searchValue.toLowerCase());
@@ -155,12 +155,40 @@ export default {
       });
     },
     myEventList() {
-      return this.myEventListData;
-      // return this.myEventListData.filter((event) => {
-      //   return event.name
-      //     .toLowerCase()
-      //     .includes(this.searchValue.value.toLowerCase());
-      // });
+      return this.myEventListData.filter((event) => {
+        if (
+          this.filterList[0].isSelected ||
+          this.filterList[1].isSelected ||
+          this.filterList[2].isSelected ||
+          this.filterList[3].isSelected ||
+          this.filterList[4].isSelected ||
+          this.filterList[5].isSelected
+        ) {
+          let displayEvent = false;
+          event.tags.forEach((tag) => {
+            for (let index = 0; index < this.filterList.length; index++) {
+              if (
+                this.filterList[index].isSelected &&
+                this.filterList[index].type === tag
+              ) {
+                displayEvent = true;
+              }
+            }
+          });
+          if (displayEvent) {
+            return event.name
+              .toLowerCase()
+              .includes(this.searchValue.toLowerCase());
+          }
+        } else {
+          return event.name
+            .toLowerCase()
+            .includes(this.searchValue.toLowerCase());
+        }
+      });
+    },
+    userProfile() {
+      return this.userProfile || JSON.parse(localStorage.getItem(`Profile`));
     },
   },
   data() {
@@ -182,10 +210,7 @@ export default {
     async initailData() {
       this.isLoading = true;
       await this.$store.dispatch("event/getAllEvent");
-      await this.$store.dispatch(
-        `event/getMyEventList`,
-        "Ua28a9b8f51a7009c0361e8b9c3df674a"
-      );
+      await this.$store.dispatch(`event/getMyEventList`, this.userProfile.uid);
       this.isLoading = false;
     },
     searchFunction() {},
