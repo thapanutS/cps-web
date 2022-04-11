@@ -27,7 +27,7 @@
           : `bg-quaternary text-black`,
       ]"
     >
-      <button v-if="btnRegisterStatus(eventDetail)" @click="registerEvent()">
+      <button v-if="btnRegisterStatus(eventDetail)" @click="registerEvent(personalInfo)">
         เข้าร่วมกิจกรรม
       </button>
       <button v-else>ปิดลงทะเบียนแล้ว</button>
@@ -53,7 +53,7 @@ export default {
 
     return {
       eventDetail: computed(() => store.state.event.eventDetail),
-      userPersonalInfo: computed(() => store.state.user.user.personalInfo),
+      personalInfo: computed(() => store.state.user.userProfile),
       btnRegisterStatus: async (eventDetail) => {
         const event = await eventDetail;
         if (event.members.length < event.maxMember && event.status === "OPEN") {
@@ -61,7 +61,7 @@ export default {
         }
         return false;
       },
-      registerEvent: () => {
+      registerEvent: (personalInfo) => {
         Swal.fire({
           title: `คุณแน่ใจว่าต้องการเข้าร่วมกิจกรรมนี้ ?`,
           text: "เมื่อเข้าร่วมแล้วไม่สามารถยกเลิกได้",
@@ -74,7 +74,8 @@ export default {
         }).then(async (result) => {
           if (result.isConfirmed) {
             const registerStatus = await store.dispatch("event/register", {
-              uid: "Ua28a9b8f51a7009c0361e8b9c3df674a",
+              uid: personalInfo.value.uid,
+              // uid: "Ua28a9b8f51a7009c0361e8b9c3df674a",
               eventId: route.params.id,
             });
             if (registerStatus === "SUCCESSFUL") {
