@@ -4,11 +4,17 @@
       <img src="@/assets/logo/cps-logo.png" width="250" alt="cps-logo" />
       <div>
         <img
-          src="@/assets/profile/profile-default.png"
+          :src="form.pictureUrl"
           width="150"
           alt=""
           class="mt-6 object-cover rounded-full shadow-lg"
         />
+        <!-- <img
+          src="@/assets/profile/profile-default.png"
+          width="150"
+          alt=""
+          class="mt-6 object-cover rounded-full shadow-lg"
+        /> -->
       </div>
     </div>
     <div class="container px-5">
@@ -24,6 +30,7 @@
             name="display"
             placeholder="Display"
             class="mt-1 px-3 block w-full border bg-white h-11 rounded-xl shadow-lg focus:outline-none focus:bg-white-100 focus:ring-0"
+            v-model="form.displayName"
           />
         </div>
 
@@ -226,7 +233,7 @@ import {
   ListboxOptions,
 } from "@headlessui/vue";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
-
+import config from "../../config";
 const REGEX_TEXT = /^[a-zA-Z]*$/;
 const REGEX_NUMBER = /^[0-9]*$/;
 
@@ -258,9 +265,24 @@ export default {
         name: "CS",
       },
       form: {
-        uid: "Ua28a9b8f51a7009c0361e8b9c3df674z",
-        pictureUrl: "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png",
-        displayName: "Book",
+        uid: JSON.parse(
+          localStorage.getItem(
+            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
+          )
+        ).sub,
+        // uid: "Ua28a9b8f51a7009c0361e8b9c3df674z",
+        pictureUrl: JSON.parse(
+          localStorage.getItem(
+            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
+          )
+        ).picture,
+        // pictureUrl: "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png",
+        displayName: JSON.parse(
+          localStorage.getItem(
+            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
+          )
+        ).name,
+        // displayName: "Book",
         firstName: "",
         lastName: "",
         studentId: "",
