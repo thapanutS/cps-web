@@ -326,9 +326,6 @@ export default {
         this.form.lastName.charAt(0).toUpperCase() +
         this.form.lastName.slice(1);
       this.form.major = this.selectedValue.name;
-      // this.form.uid = this.lineProfile.sub;
-      // this.form.pictureUrl = this.lineProfile.pictureUrl;
-      console.log("Form : ", this.form);
       await this.$store.dispatch("user/createUser", this.form);
       this.$router.push("/homepage");
     },
