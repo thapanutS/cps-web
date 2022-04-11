@@ -14,8 +14,8 @@
       <div class="flex flex-row bg-white rounded-xl shadow-lg">
         <div class="w-2/5 py-4 pl-3 pr-5">
           <img
-            v-if="personalInfo.pictureUrl"
-            :src="personalInfo.pictureUrl"
+            v-if="userProfile.pictureUrl"
+            :src="userProfile.pictureUrl"
             width="150"
             alt=""
             class="object-cover rounded-full shadow-lg"
@@ -30,24 +30,24 @@
         </div>
         <div class="w-3/5 py-4 pr-3 flex flex-col items-start">
           <div class="text-2xl font-bold">
-            {{ personalInfo.displayName }}
+            {{ userProfile.displayName }}
           </div>
           <div class="flex flex-row justify-start w-full mt-1">
             <div class="w-1/4 flex">Major</div>
             <div class="w-3/4 text-ellipsis whitespace-nowrap overflow-hidden">
-              {{ personalInfo.major }}
+              {{ userProfile.major }}
             </div>
           </div>
           <div class="flex flex-row justify-start w-full">
             <div class="w-1/4 flex">Name</div>
             <div class="w-3/4 text-ellipsis whitespace-nowrap overflow-hidden">
-              {{ `${personalInfo.firstName} ${personalInfo.lastName}` }}
+              {{ `${userProfile.firstName} ${userProfile.lastName}` }}
             </div>
           </div>
           <div class="flex flex-row justify-start w-full">
             <div class="w-2/4 flex">Student ID</div>
             <div class="text-ellipsis whitespace-nowrap overflow-hidden">
-              {{ personalInfo.studentId }}
+              {{ userProfile.studentId }}
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@
             </div>
             <div class="py-4 px-4 mt-3 text-left bg-gray rounded-xl">
               <div class="h-20 overflow-y-auto text-sm">
-                {{ personalInfo.address }}
+                {{ userProfile.address }}
               </div>
             </div>
           </div>
@@ -176,7 +176,11 @@ export default {
   setup() {
     const isLoading = ref(false);
     const store = useStore();
-    const personalInfo = computed(() => store.state.user.userProfile);
+    const userProfile = computed(
+      () =>
+        store.state.user.userProfile ||
+        JSON.parse(localStorage.getItem(`Profile`))
+    );
     const activeEvent = computed(() => store.state.user.eventList);
     const historyEvent = computed(() => store.state.user.eventList);
     const isLoadingStatus = computed(() => isLoading.value);
@@ -186,20 +190,17 @@ export default {
       ${moment(eventEnd).format("DD/MM/YYYY")}`;
     };
 
-    const fetchData = async (personalInfo) => {
+    const fetchData = async (userProfile) => {
       isLoading.value = true;
-      await store.dispatch(
-        "user/getEventListByUid",
-        personalInfo.value.uid
-      );
+      await store.dispatch("user/getEventListByUid", userProfile.value.uid);
       isLoading.value = false;
     };
-    fetchData(personalInfo);
+    fetchData(userProfile);
 
     return {
       isLoading,
       fetchData,
-      personalInfo,
+      userProfile,
       activeEvent,
       historyEvent,
       formatDate,
