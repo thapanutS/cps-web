@@ -49,32 +49,37 @@ export default {
   },
   setup() {
     const isLoading = ref(false);
-
     const store = useStore();
-    const fetchData = async () => {
-      isLoading.value = true;
-
-      await store.dispatch(
-        "user/getUserProfile",
-        "Ua28a9b8f51a7009c0361e8b9c3df674a"
-      );
-      await store.dispatch(
-        "claim/fetchClaimListByUid",
-        // store.state.user.userProfile.uid
-        "Ua28a9b8f51a7009c0361e8b9c3df674a"
-      );
-      isLoading.value = false;
-    };
     const claimList = computed(() => store.state.claim.claimList);
     const userProfile = computed(() => store.state.user.userProfile);
     const isLoadingStatus = computed(() => isLoading.value);
+    const profileInfo = computed(() => store.state.user.userProfile); 
 
+    const fetchData = async () => {
+      isLoading.value = true;
+      // await store.dispatch(
+      //   "user/getUserProfile",
+      //   "Ua28a9b8f51a7009c0361e8b9c3df674a"
+      // );
+      await store.dispatch(
+        "claim/fetchClaimListByUid",
+        // store.state.user.userProfile.uid
+        this.profileInfo.value.uid
+      );
+      // await store.dispatch(
+      //   "claim/fetchClaimListByUid",
+      //   // store.state.user.userProfile.uid
+      //   "Ua28a9b8f51a7009c0361e8b9c3df674a"
+      // );
+      isLoading.value = false;
+    };
     fetchData();
     return {
       isLoading,
       userProfile,
       claimList,
       isLoadingStatus,
+      profileInfo,
     };
   },
 };
