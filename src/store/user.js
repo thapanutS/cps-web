@@ -24,7 +24,6 @@ const actions = {
       let response = null;
     try {
       response = await axios.get(`${config.api.baseUrl}/user/${uid}`);
-      console.log("response : ", response.data);
       commit("setUserProfile", response.data);
     } catch (error) {
       console.log(error);
@@ -36,7 +35,6 @@ const actions = {
   },
   // async createUser(infomation) {
   async createUser({ commit }, infomation) {
-    console.log("infomation : ",infomation);
     const user = await axios.post(
       `${config.api.baseUrl}/user/create`,
       infomation
