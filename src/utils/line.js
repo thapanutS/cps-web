@@ -25,6 +25,7 @@ class LineUtil {
         if (liff.isLoggedIn()) {
         console.log("Accept conditional isLoggedIn");
           const decodedIDToken = await this.getDecodedIDToken();
+          console.log('decodedIDToken : ',decodedIDToken);
           localStorage.setItem(
             `LIFF_STORE:${config.line.liff_id}:decodedIDToken`,
             decodedIDToken
