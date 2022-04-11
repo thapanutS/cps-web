@@ -53,7 +53,6 @@ const actions = {
 const mutations = {
   setUserProfile(state, userProfile) {
     state.userProfile = userProfile; // for data from register
-    console.log("state.userProfile [Updated] : ", state.userProfile);
   },
   setEventList(state, eventList) {
     state.eventList = eventList;
