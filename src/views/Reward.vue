@@ -12,10 +12,10 @@
       :lock-scroll="true"
     ></loading>
     <UserInfoBar
-      :studentId="personalInfo.studentId"
-      :firstName="personalInfo.firstName"
-      :lastName="personalInfo.lastName"
-      :point="personalInfo.point"
+      :studentId="userProfile.studentId"
+      :firstName="userProfile.firstName"
+      :lastName="userProfile.lastName"
+      :point="userProfile.point"
     />
 
     <!-- ITEM LIST  -->
@@ -54,7 +54,11 @@ export default {
     const isLoading = ref(false);
     const store = useStore();
     const itemList = computed(() => store.state.item.itemList);
-    const personalInfo = computed(() => store.state.user.userProfile);
+    const userProfile = computed(
+      () =>
+        store.state.user.userProfile ||
+        JSON.parse(localStorage.getItem(`Profile`))
+    );
     const isLoadingStatus = computed(() => isLoading.value);
     const profileInfo = computed(() => store.state.user.userProfile);
     const fetchData = async () => {
@@ -102,7 +106,7 @@ export default {
     return {
       isLoading,
       itemList,
-      personalInfo,
+      userProfile,
       claimItem,
       isLoadingStatus,
       profileInfo,
