@@ -59,12 +59,6 @@ export default {
     const profileInfo = computed(() => store.state.user.userProfile);
     const fetchData = async () => {
       isLoading.value = true;
-
-      // await store.dispatch("user/getUserProfile", profileInfo.value.uid);
-      // await store.dispatch(
-      //   "user/getUserProfile",
-      //   "Ua28a9b8f51a7009c0361e8b9c3df674a"
-      // );
       await store.dispatch("item/fetchItemList");
       isLoading.value = false;
     };
