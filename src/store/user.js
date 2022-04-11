@@ -9,7 +9,6 @@ const state = () => ({
 // getters
 const getters = {
   getUserProfile() {
-    console.log('getUserProfile ->> : ',state.userProfile);
     return state.userProfile;
   },
   getEventList() {
@@ -24,6 +23,10 @@ const actions = {
       let response = null;
     try {
       response = await axios.get(`${config.api.baseUrl}/user/${uid}`);
+      localStorage.setItem(
+        `Profile`,
+        JSON.stringify(response.data)
+      );
       commit("setUserProfile", response.data);
     } catch (error) {
       console.log(error);
