@@ -192,7 +192,10 @@ export default {
       //   "user/getUserProfile",
       //   "Ua28a9b8f51a7009c0361e8b9c3df674a" // mock user id, get profile
       // );
-      await store.dispatch("user/getEventListByUid", this.profileInfo.value.uid);
+      await store.dispatch(
+        "user/getEventListByUid",
+        this.profileInfo.value.uid
+      );
       // await store.dispatch(
       //   "user/getEventListByUid",
       //   "Ua28a9b8f51a7009c0361e8b9c3df674a" // for get event list

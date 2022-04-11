@@ -56,14 +56,11 @@ export default {
     const itemList = computed(() => store.state.item.itemList);
     const personalInfo = computed(() => store.state.user.userProfile);
     const isLoadingStatus = computed(() => isLoading.value);
-    const profileInfo = computed(() => store.state.user.userProfile);    
+    const profileInfo = computed(() => store.state.user.userProfile);
     const fetchData = async () => {
       isLoading.value = true;
 
-      await store.dispatch(
-        "user/getUserProfile",
-        profileInfo.uid
-      );
+      // await store.dispatch("user/getUserProfile", profileInfo.value.uid);
       // await store.dispatch(
       //   "user/getUserProfile",
       //   "Ua28a9b8f51a7009c0361e8b9c3df674a"
@@ -72,7 +69,7 @@ export default {
       isLoading.value = false;
     };
     const logProfile = (profileInfo) => {
-      console.log('profileInfo : ',profileInfo);
+      console.log("profileInfo : ", profileInfo);
     };
     fetchData();
     logProfile();
@@ -112,7 +109,14 @@ export default {
         }
       });
     };
-    return { isLoading, itemList, personalInfo, claimItem, isLoadingStatus, profileInfo };
+    return {
+      isLoading,
+      itemList,
+      personalInfo,
+      claimItem,
+      isLoadingStatus,
+      profileInfo,
+    };
   },
 };
 </script>
