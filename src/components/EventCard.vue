@@ -5,7 +5,7 @@
     </div>
     <div class="flex justify-between text-left px-3 mt-2">
       <div>
-        <div id="topic">{{ nameEvent }}</div>
+        <div id="topic">{{ name }}</div>
         <div id="description">
           {{ description }}
         </div>
@@ -30,7 +30,7 @@
 <script>
 export default {
   name: "WorkshopCard",
-  props: ["nameEvent", "img", "description", "registerEnd", "point", "tags"],
+  props: ["name", "img", "description", "registerEnd", "point", "tags"],
   data() {
     return {
       tagsList: [],
