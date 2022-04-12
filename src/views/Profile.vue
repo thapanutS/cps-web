@@ -75,7 +75,7 @@
               Achivement
             </div>
             <div
-              class="achivement-content py-4 pl-4 pr-2 mt-3 flex flex-row text-left bg-gray rounded-xl"
+              class="achivement-content py-4 px-4 mt-3 flex flex-row text-left bg-gray rounded-xl"
             >
               <div class="block items-center h-28 w-full overflow-auto">
                 <div class="inline-block my-2 items-center w-1/2">
