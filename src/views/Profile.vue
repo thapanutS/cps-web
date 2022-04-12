@@ -130,6 +130,7 @@
               </div>
             </div>
           </div>
+
           <div class="w-full mt-3">
             <div
               class="flex w-2/4 items-center justify-center h-8 font-bold bg-secondary text-white shadow-lg rounded-xl"
@@ -139,7 +140,7 @@
             <div class="py-4 px-4 mt-3 text-left bg-gray rounded-xl">
               <div class="action-workshop h-24 text-sm overflow-y-auto">
                 <div
-                  v-for="(item, index) in activeEvent"
+                  v-for="(item, index) in historyEvent"
                   :key="index"
                   class="action-box pb-3 flex items-center my-3"
                 >
@@ -176,26 +177,28 @@ export default {
   setup() {
     const isLoading = ref(false);
     const store = useStore();
+
     const userProfile = computed(
       () =>
         store.state.user.userProfile ||
         JSON.parse(localStorage.getItem(`Profile`))
     );
-    const activeEvent = computed(() => store.state.user.eventList);
-    const historyEvent = computed(() => store.state.user.eventList);
-    const isLoadingStatus = computed(() => isLoading.value);
-    const formatDate = (eventStart, eventEnd) => {
-      return `${moment(eventStart).format("DD/MM/YYYY")}
-      \n-\n
-      ${moment(eventEnd).format("DD/MM/YYYY")}`;
-    };
-
     const fetchData = async (userProfile) => {
       isLoading.value = true;
-      await store.dispatch("user/getEventListByUid", userProfile.value.uid);
+      await store.dispatch("user/getEventActiveByUid", userProfile.value.uid);
+      await store.dispatch("user/getEventHistoryByUid", userProfile.value.uid);
       isLoading.value = false;
     };
     fetchData(userProfile);
+
+    const activeEvent = computed(() => store.state.user.eventActiveList);
+    const historyEvent = computed(() => store.state.user.eventHistoryList);
+    const isLoadingStatus = computed(() => isLoading.value);
+    const formatDate = (eventStart, eventEnd) => {
+      return `${moment(eventStart).format("DD")}
+      \n-\n
+      ${moment(eventEnd).format("DD MMM YYYY")}`;
+    };    
 
     return {
       isLoading,
