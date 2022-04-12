@@ -64,17 +64,14 @@ const actions = {
     const response = await axios.get(
       `${config.api.baseUrl}/event/list/active/${uid}`
     );
-    console.log('Response EventActive : ',response.data);
-    commit("setEventActiveList", response.data);
+    commit("setEventActiveList", response.data.data);
   },
 
   async getEventHistoryByUid({ commit }, uid) {
     const response = await axios.get(
       `${config.api.baseUrl}/event/list/history/${uid}`
     );
-    console.log('Response EventHistory : ',response.data);
-
-    commit("setEventHistoryList", response.data);
+    commit("setEventHistoryList", response.data.data);
   },
 };
 
