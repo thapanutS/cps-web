@@ -75,17 +75,17 @@
               Achivement
             </div>
             <div
-              class="achivement-content py-4 px-4 mt-3 flex flex-row text-left bg-gray rounded-xl"
+              class="achivement-content py-4 pl-4 pr-2 mt-3 flex flex-row text-left bg-gray rounded-xl"
             >
               <div class="block items-center h-28 w-full overflow-auto">
                 <div class="inline-block my-2 items-center w-1/2">
                   <div
                     class="achivement-image w-1/2 p-3 bg-white rounded-full shadow-lg"
                   >
-                    <img src="@/assets/achivement/medal.png" />
+                    <img src="@/assets/achivement/beginer.png" />
                   </div>
                   <p class="achivement-description">
-                    เข้าร่วมกิจกรรมครบ 3 ครั้ง
+                    สมาชิกใหม่
                   </p>
                 </div>
                 <div class="inline-block my-2 items-center w-1/2">
@@ -95,7 +95,37 @@
                     <img src="@/assets/achivement/coins.png" />
                   </div>
                   <p class="achivement-description">
-                    เข้าร่วมกิจกรรมครบ 3 ครั้ง
+                    มีคะแนนครบ 100 Points
+                  </p>
+                </div>
+                <div class="inline-block my-2 items-center w-1/2">
+                  <div
+                    class="achivement-image w-1/2 p-3 bg-white rounded-full shadow-lg"
+                  >
+                    <img src="@/assets/achivement/bronze-medal.png" />
+                  </div>
+                  <p class="achivement-description">
+                    เข้าร่วมกิจกรรมครบ 25 ครั้ง
+                  </p>
+                </div>
+                <div class="inline-block my-2 items-center w-1/2">
+                  <div
+                    class="achivement-image w-1/2 p-3 bg-white rounded-full shadow-lg"
+                  >
+                    <img src="@/assets/achivement/silver-medals.png" />
+                  </div>
+                  <p class="achivement-description">
+                    เข้าร่วมกิจกรรมครบ 50 ครั้ง
+                  </p>
+                </div>
+                <div class="inline-block my-2 items-center w-1/2">
+                  <div
+                    class="achivement-image w-1/2 p-3 bg-white rounded-full shadow-lg"
+                  >
+                    <img src="@/assets/achivement/gold-medal.png" />
+                  </div>
+                  <p class="achivement-description">
+                    เข้าร่วมกิจกรรมครบ 75 ครั้ง
                   </p>
                 </div>
               </div>
