@@ -3,7 +3,7 @@
     class="card-container bg-white flex items-center justify-between mx-2 rounded"
   >
     <div>
-      <img :src="img" alt="" />
+      <img :src="img" alt="" class="rounded-l" />
     </div>
     <div>
       <div class="my-1">{{ name }}</div>
