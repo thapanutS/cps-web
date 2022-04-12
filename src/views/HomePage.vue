@@ -62,6 +62,7 @@
             :img="event.img"
             :name="event.name"
             :description="event.description"
+            :registerStart="event.registerStart"
             :registerEnd="event.registerEnd"
             :point="event.point"
             :tags="event.tags"

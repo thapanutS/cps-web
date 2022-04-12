@@ -11,7 +11,8 @@
         </div>
         <div class="flex my-2">
           <div id="register-end">
-            เหลือเวลารับสมัครอีก {{ registerEnd }} วัน
+            เหลือเวลารับสมัครอีก
+            {{ formatDate(registerStart, registerEnd) }} วัน
           </div>
           <div
             v-for="(item, index) in tagsList"
@@ -28,9 +29,18 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   name: "WorkshopCard",
-  props: ["name", "img", "description", "registerEnd", "point", "tags"],
+  props: [
+    "name",
+    "img",
+    "description",
+    "registerStart",
+    "registerEnd",
+    "point",
+    "tags",
+  ],
   data() {
     return {
       tagsList: [],
@@ -42,6 +52,13 @@ export default {
   methods: {
     initailData() {
       this.tagsList = JSON.parse(JSON.stringify(this.tags));
+    },
+    formatDate(registerStart, registerEnd) {
+      const date = `${
+        moment(registerEnd).format("DD") - moment(registerStart).format("DD")
+      }`
+
+      return date.charAt(0) === '-' ? date.substring(1) : date;
     },
   },
 };
