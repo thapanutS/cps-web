@@ -4,6 +4,8 @@ import config from "../../config";
 const state = () => ({
   userProfile: null,
   eventList: null,
+  eventActiveList: null,
+  eventHistoryList: null,
 });
 
 // getters
@@ -11,32 +13,38 @@ const getters = {
   getUserProfile() {
     return state.userProfile;
   },
+
   getEventList() {
     return state.eventList;
+  },
+
+  getEventActiveList() {
+    return state.eventActiveList;
+  },
+
+  getEvenHistoryList() {
+    return state.eventHistoryList;
   },
 };
 
 // actions
 const actions = {
-  // async getUserProfile(uid) {
-    async getUserProfile({ commit }, uid) {
-      let response = null;
+  async getUserProfile({ commit }, uid) {
+    let response = null;
     try {
       response = await axios.get(`${config.api.baseUrl}/user/${uid}`);
-      localStorage.setItem(
-        `Profile`,
-        JSON.stringify(response.data)
-      );
+      localStorage.setItem(`Profile`, JSON.stringify(response.data));
       commit("setUserProfile", response.data);
     } catch (error) {
       console.log(error);
     }
     return response;
   },
+
   async setUserProfile({ commit }, profile) {
     commit("setUserProfile", profile);
   },
-  // async createUser(infomation) {
+
   async createUser({ commit }, infomation) {
     const user = await axios.post(
       `${config.api.baseUrl}/user/create`,
@@ -44,21 +52,48 @@ const actions = {
     );
     commit("setUserProfile", user.data);
   },
-  async getEventListByUid({ commit }, uid) {
-    const eventList = await axios.get(
+
+  async getEventByUid({ commit }, uid) {
+    const response = await axios.get(
       `${config.api.baseUrl}/event/list/${uid}`
     );
-    commit("setEventList", eventList.data);
+    commit("setEventList", response.data);
+  },
+
+  async getEventActiveByUid({ commit }, uid) {
+    const response = await axios.get(
+      `${config.api.baseUrl}/event/list/active/${uid}`
+    );
+    console.log('Response EventActive : ',response.data);
+    commit("setEventActiveList", response.data);
+  },
+
+  async getEventHistoryByUid({ commit }, uid) {
+    const response = await axios.get(
+      `${config.api.baseUrl}/event/list/history/${uid}`
+    );
+    console.log('Response EventHistory : ',response.data);
+
+    commit("setEventHistoryList", response.data);
   },
 };
 
 // mutations
 const mutations = {
   setUserProfile(state, userProfile) {
-    state.userProfile = userProfile; // for data from register
+    state.userProfile = userProfile;
   },
+
   setEventList(state, eventList) {
     state.eventList = eventList;
+  },
+
+  setEventActiveList(state, eventActiveList) {
+    state.eventActiveList = eventActiveList;
+  },
+
+  setEventHistoryList(state, eventHistoryList) {
+    state.eventHistoryList = eventHistoryList;
   },
 };
 
