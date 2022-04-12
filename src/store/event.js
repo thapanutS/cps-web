@@ -34,8 +34,8 @@ const actions = {
     commit("setMyEventList", myEventList.data.data);
   },
   async fetchEventDetail({ commit }, _id) {
-    const event = await axios.get(`${config.api.baseUrl}/event/${_id}`);
-    commit("setEventDetail", event.data);
+    const response = await axios.get(`${config.api.baseUrl}/event/${_id}`);
+    commit("setEventDetail", response.data);
   },
   async register({ commit }, payload) {
     const registerStatus = await axios.post(
