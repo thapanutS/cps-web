@@ -1,5 +1,5 @@
 import axios from "axios";
-import config from "../../config"
+import config from "../../config";
 // initial state
 const state = () => ({
   eventDetail: null,
@@ -31,12 +31,10 @@ const actions = {
     const myEventList = await axios.get(
       `${config.api.baseUrl}/event/list/${uid}`
     );
-    commit("setMyEventList", myEventList.data);
+    commit("setMyEventList", myEventList.data.data);
   },
   async fetchEventDetail({ commit }, _id) {
-    const event = await axios.get(
-      `${config.api.baseUrl}/event/${_id}`
-    );
+    const event = await axios.get(`${config.api.baseUrl}/event/${_id}`);
     commit("setEventDetail", event.data);
   },
   async register({ commit }, payload) {
