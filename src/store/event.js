@@ -2,7 +2,7 @@ import axios from "axios";
 import config from "../../config"
 // initial state
 const state = () => ({
-  eventDetail: {},
+  eventDetail: null,
   eventList: null,
   myEventList: null,
   registerStatus: null,
