@@ -58,7 +58,6 @@
         <div class="customBox">
           <div class="w-full">
             <div
-              @click="$router.push(`/`)"
               class="flex w-2/5 items-center justify-center h-8 font-bold bg-secondary text-white shadow-lg rounded-xl"
             >
               Addresss
