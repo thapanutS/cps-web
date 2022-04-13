@@ -73,7 +73,11 @@ export default {
         return member === this.userProfile.uid;
       });
 
-      if (event.members.length < event.maxMember && event.status === "started" && checkMember === undefined) {
+      if (
+        event.members.length < event.maxMember &&
+        event.status === "opened" &&
+        checkMember === undefined
+      ) {
         return true;
       }
       return false;
