@@ -22,7 +22,7 @@
     <section
       :class="[
         `mt-2 pt-2 bg-white overflow-y-scroll`,
-        claimList.length == 0 ? `flex justify-center` : ``,
+        !claimList.length ? `flex justify-center` : ``,
       ]"
       style="height: 82.9vh"
     >
@@ -35,10 +35,10 @@
         />
       </div>
       <div
-        v-if="claimList.length == 0"
+        v-if="!claimList.length"
         class="flex justify-center items-center"
       >
-        <img src="@/assets/not-found/not-found.png" width="120" />
+        <img src="@/assets/not-found/not-found.png" width="150" />
       </div>
     </section>
   </div>
