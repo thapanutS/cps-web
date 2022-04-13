@@ -19,7 +19,13 @@
     />
 
     <!-- ITEM LIST  -->
-    <section :class="[`mt-2 pt-2 bg-white overflow-y-scroll`, claimList.length == 0 ? `flex justify-center` : ``]" style="height: 82.9vh" >
+    <section
+      :class="[
+        `mt-2 pt-2 bg-white overflow-y-scroll`,
+        claimList.length == 0 ? `flex justify-center` : ``,
+      ]"
+      style="height: 82.9vh"
+    >
       <div class="mt-2" v-for="claim in claimList" :key="claim._id">
         <ClaimCard
           :img="claim.itemImg"
@@ -28,7 +34,10 @@
           :status="claim.status"
         />
       </div>
-      <div v-if="claimList.length == 0" class="flex justify-center items-center">
+      <div
+        v-if="claimList.length == 0"
+        class="flex justify-center items-center"
+      >
         <img src="@/assets/not-found/not-found.png" width="120" />
       </div>
     </section>
