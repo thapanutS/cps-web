@@ -54,9 +54,7 @@ const actions = {
   },
 
   async getEventByUid({ commit }, uid) {
-    const response = await axios.get(
-      `${config.api.baseUrl}/event/list/${uid}`
-    );
+    const response = await axios.get(`${config.api.baseUrl}/event/list/${uid}`);
     commit("setEventList", response.data);
   },
 
@@ -72,6 +70,13 @@ const actions = {
       `${config.api.baseUrl}/event/list/history/${uid}`
     );
     commit("setEventHistoryList", response.data.data);
+  },
+
+  async updateProfile({ commit }, uid) {
+    const response = await axios.patch(
+      `${config.api.baseUrl}/user/update/profile/${uid}`
+    );
+    commit("setUserProfile", response.data.data);
   },
 };
 

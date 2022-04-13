@@ -57,7 +57,7 @@ export default {
           (this.displayName = lineProfile.name),
           (this.pictureUrl = lineProfile.picture);
       } else {
-        (this.uid = "Ua28a9b8f51a7009c0361e8b9c3df674a"),
+        (this.uid = "U7b339cfc34febd8abb683887a0a5eede"),
           (this.displayName = "Book"),
           (this.pictureUrl =
             "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png");
@@ -70,6 +70,10 @@ export default {
         this.uid
       );
       if (response) {
+        await this.$store.dispatch(
+          "user/updateProfile",
+          this.uid
+        );
         console.log("user is registered");
         this.isLoading = false;
         this.$router.push("/homepage");
