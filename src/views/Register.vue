@@ -246,6 +246,7 @@ import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
 import config from "../../config";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import VConsole from "vconsole";
 
 const REGEX_TEXT = /^[a-zA-Z]*$/;
 const REGEX_NUMBER = /^[0-9]*$/;
@@ -264,6 +265,12 @@ export default {
     CheckIcon,
     SelectorIcon,
     Loading,
+  },
+  created() {
+    var vConsole = new VConsole();
+    vConsole.show();
+    console.log("Hello world");
+    // vConsole.destroy();
   },
   data() {
     return {
