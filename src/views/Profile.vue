@@ -206,6 +206,11 @@ export default {
   setup() {
     const isLoading = ref(false);
     const store = useStore();
+    const userProfile = computed(
+      () =>
+        store.state.user.userProfile ||
+        JSON.parse(localStorage.getItem(`Profile`))
+    );
     const fetchData = async () => {
       isLoading.value = true;
       if (!config.dev_status) {
@@ -228,15 +233,10 @@ export default {
           "Ua28a9b8f51a7009c0361e8b9c3df674a"
         );
       }
-
       isLoading.value = false;
     };
     fetchData();
-    const userProfile = computed(
-      () =>
-        store.state.user.userProfile ||
-        JSON.parse(localStorage.getItem(`Profile`))
-    );
+
     const activeEvent = computed(() => store.state.user.eventActiveList);
     const historyEvent = computed(() => store.state.user.eventHistoryList);
     const isLoadingStatus = computed(() => isLoading.value);
