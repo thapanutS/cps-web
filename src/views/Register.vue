@@ -331,7 +331,7 @@ export default {
         this.form.lastName.slice(1);
       this.form.major = this.selectedValue.name;
       await this.$store.dispatch("user/createUser", this.form);
-      this.$router.go("/homepage");
+      this.$router.push("/homepage");
     },
     onlyText(event) {
       if (!REGEX_TEXT.test(event.key)) {
