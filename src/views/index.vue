@@ -54,7 +54,7 @@ export default {
             `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
           )
         );
-        this.uid = lineProfile.sub
+        this.uid = lineProfile.sub;
       } else {
         this.isLoading = true;
         (this.uid = "Ua28a9b8f51a7009c0361e8b9c3df674a"),
