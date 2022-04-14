@@ -9,12 +9,12 @@ import HomePage from "../views/HomePage.vue";
 
 const routes = [
   {
-    path: "/Index",
+    path: "/index",
     name: "Index",
     component: Index,
   },
   {
-    path: "/profile",
+    path: "/",
     name: "Profile",
     component: Profile,
   },
@@ -24,7 +24,7 @@ const routes = [
     component: Register,
   },
   {
-    path: "/",
+    path: "/reward",
     name: "Reward",
     component: Reward,
   },

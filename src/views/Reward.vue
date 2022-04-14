@@ -69,7 +69,6 @@ export default {
           "Ua28a9b8f51a7009c0361e8b9c3df674a"
         );
       }
-
       isLoading.value = false;
     };
     fetchData();

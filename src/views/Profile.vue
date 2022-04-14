@@ -199,25 +199,41 @@ import { ref } from "vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import Layout from "@/components/Layout.vue";
+import lineUtils from "@/utils/line.js";
+import config from "../../config";
 export default {
   components: { Loading, Layout },
   setup() {
     const isLoading = ref(false);
     const store = useStore();
+    const fetchData = async (userProfile) => {
+      isLoading.value = true;
+      if (!config.dev_status) {
+        await lineUtils.initAndLogin();
+        await store.dispatch("user/getEventActiveByUid", userProfile.value.uid);
+        await store.dispatch(
+          "user/getEventHistoryByUid",
+          userProfile.value.uid
+        );
+      } else {
+        await store.dispatch(
+          "user/getEventActiveByUid",
+          "Ua28a9b8f51a7009c0361e8b9c3df674a"
+        );
+        await store.dispatch(
+          "user/getEventHistoryByUid",
+          "Ua28a9b8f51a7009c0361e8b9c3df674a"
+        );
+      }
 
+      isLoading.value = false;
+    };
+    fetchData(userProfile);
     const userProfile = computed(
       () =>
         store.state.user.userProfile ||
         JSON.parse(localStorage.getItem(`Profile`))
     );
-    const fetchData = async (userProfile) => {
-      isLoading.value = true;
-      await store.dispatch("user/getEventActiveByUid", userProfile.value.uid);
-      await store.dispatch("user/getEventHistoryByUid", userProfile.value.uid);
-      isLoading.value = false;
-    };
-    fetchData(userProfile);
-
     const activeEvent = computed(() => store.state.user.eventActiveList);
     const historyEvent = computed(() => store.state.user.eventHistoryList);
     const isLoadingStatus = computed(() => isLoading.value);
