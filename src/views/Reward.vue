@@ -46,6 +46,7 @@ import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import Layout from "@/components/Layout.vue";
 import lineUtils from "@/utils/line.js";
+import config from "../../config";
 export default {
   name: "Reward",
   components: {
@@ -60,10 +61,18 @@ export default {
     const fetchData = async () => {
       isLoading.value = true;
       await store.dispatch("item/fetchItemList");
-      await lineUtils.initAndLogin();
+      if (!config.dev_status) {
+        await lineUtils.initAndLogin();
+      } else {
+        await store.dispatch(
+          "user/getUserProfile",
+          "Ua28a9b8f51a7009c0361e8b9c3df674a"
+        );
+      }
+
       isLoading.value = false;
     };
-    fetchData();    
+    fetchData();
     const itemList = computed(() => store.state.item.itemList);
     const userProfile = computed(
       () =>
