@@ -206,10 +206,15 @@ export default {
   setup() {
     const isLoading = ref(false);
     const store = useStore();
+    const initAndLogin = async () => {
+      if (!config.dev_status) {
+        await lineUtils.initAndLogin();
+      }
+    };
+    initAndLogin();
     const fetchData = async (userProfile) => {
       isLoading.value = true;
       if (!config.dev_status) {
-        await lineUtils.initAndLogin();
         await store.dispatch("user/getEventActiveByUid", userProfile.value.uid);
         await store.dispatch(
           "user/getEventHistoryByUid",
