@@ -19,12 +19,6 @@
           alt=""
           class="mt-6 object-cover rounded-full shadow-lg"
         />
-        <!-- <img
-          src="@/assets/profile/profile-default.png"
-          width="150"
-          alt=""
-          class="mt-6 object-cover rounded-full shadow-lg"
-        /> -->
       </div>
     </div>
     <div class="container px-5">
@@ -246,7 +240,6 @@ import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
 import config from "../../config";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-import VConsole from "vconsole";
 
 const REGEX_TEXT = /^[a-zA-Z]*$/;
 const REGEX_NUMBER = /^[0-9]*$/;
@@ -254,6 +247,7 @@ const userProfileLine = JSON.parse(
   localStorage.getItem(`LIFF_STORE:${config.line.liff_id}:decodedIDToken`)
 );
 const userProfileLocal = JSON.parse(localStorage.getItem(`Profile`));
+
 export default {
   name: "RegisterPage",
   components: {
@@ -265,12 +259,6 @@ export default {
     CheckIcon,
     SelectorIcon,
     Loading,
-  },
-  created() {
-    var vConsole = new VConsole();
-    vConsole.show();
-    console.log("Hello world");
-    // vConsole.destroy();
   },
   data() {
     return {
