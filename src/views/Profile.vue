@@ -1,5 +1,6 @@
 <template>
   <div class="register">
+    <Layout />
     <loading
       :active="isLoadingStatus"
       :can-cancel="false"
@@ -10,7 +11,7 @@
       :width="70"
       :lock-scroll="true"
     ></loading>
-    <div class="container px-3 pt-3">
+    <div class="container px-3 pt-3" style="height: 90vh">
       <div class="flex flex-row bg-white rounded-xl shadow-lg">
         <div class="w-2/5 py-4 pl-3 pr-5">
           <img
@@ -84,9 +85,7 @@
                   >
                     <img src="@/assets/achivement/beginer.png" />
                   </div>
-                  <p class="achivement-description">
-                    สมาชิกใหม่
-                  </p>
+                  <p class="achivement-description">สมาชิกใหม่</p>
                 </div>
                 <div class="inline-block my-2 items-center w-1/2">
                   <div
@@ -94,9 +93,7 @@
                   >
                     <img src="@/assets/achivement/coins.png" />
                   </div>
-                  <p class="achivement-description">
-                    มีคะแนนครบ 100 Points
-                  </p>
+                  <p class="achivement-description">มีคะแนนครบ 100 Points</p>
                 </div>
                 <div class="inline-block my-2 items-center w-1/2">
                   <div
@@ -201,8 +198,9 @@ import moment from "moment";
 import { ref } from "vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import Layout from "@/components/Layout.vue";
 export default {
-  components: { Loading },
+  components: { Loading, Layout },
   setup() {
     const isLoading = ref(false);
     const store = useStore();
@@ -227,7 +225,7 @@ export default {
       return `${moment(eventStart).format("DD")}
       \n-\n
       ${moment(eventEnd).format("DD MMM YYYY")}`;
-    };    
+    };
 
     return {
       isLoading,

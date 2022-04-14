@@ -1,6 +1,7 @@
 <template>
   <div class="reward bg-quaternary">
     <!-- POINT BAR -->
+    <Layout />
     <loading
       :active="isLoadingStatus"
       :can-cancel="false"
@@ -43,12 +44,14 @@ import Swal from "sweetalert2";
 import { ref } from "vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import Layout from "@/components/Layout.vue";
 export default {
   name: "Reward",
   components: {
     ItemCard,
     UserInfoBar,
     Loading,
+    Layout,
   },
   setup() {
     const isLoading = ref(false);

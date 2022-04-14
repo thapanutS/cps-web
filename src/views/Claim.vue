@@ -1,5 +1,6 @@
 <template>
   <div class="reward bg-quaternary">
+    <Layout />
     <!-- POINT BAR -->
     <loading
       :active="isLoadingStatus"
@@ -52,12 +53,14 @@ import UserInfoBar from "@/components/UserInfoBar.vue";
 import { ref } from "vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import Layout from "@/components/Layout.vue";
 export default {
   name: "Claim",
   components: {
     ClaimCard,
     Loading,
     UserInfoBar,
+    Layout,
   },
   setup() {
     const isLoading = ref(false);

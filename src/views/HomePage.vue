@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Layout />
     <loading
       :active="isLoading"
       :can-cancel="false"
@@ -10,7 +11,7 @@
       :width="70"
       :lock-scroll="true"
     ></loading>
-    <div class="sticky top-0 z-1 bg-white pt-2">
+    <div class="sticky top-0 z-1 bg-white">
       <section>
         <div class="flex-1 px-5">
           <SearchBar
@@ -92,6 +93,7 @@
     </section>
 
     <!-- DISPLAY FILTER -->
+    <!-- <BottomNavbar /> -->
   </div>
 </template>
 
@@ -102,6 +104,7 @@ import SearchBar from "@/components/SearchBar.vue";
 import FilterChip from "@/components/FilterChip.vue";
 import EventCard from "@/components/EventCard.vue";
 import { mapGetters } from "vuex";
+import Layout from "@/components/Layout.vue";
 
 export default {
   name: "Test",
@@ -110,6 +113,8 @@ export default {
     SearchBar,
     FilterChip,
     Loading,
+    // BottomNavbar,
+    Layout,
   },
   created() {
     this.initailData();
