@@ -8,11 +8,12 @@
       loader="dots"
       :height="60"
       :width="70"
-      :opacity="1"
-      background-color
       :lock-scroll="true"
     ></loading>
-    <b>Index Page</b>
+    <!-- <b>Index Page</b> -->
+    <div class="flex items-center h-screen">
+      <img src="@/assets/logo/cps-logo.png" alt="cps-logo" />
+    </div>
   </div>
 </template>
 
@@ -57,6 +58,7 @@ export default {
           (this.displayName = lineProfile.name),
           (this.pictureUrl = lineProfile.picture);
       } else {
+        this.isLoading = true;
         (this.uid = "U7b339cfc34febd8abb683887a0a5eede"),
           (this.displayName = "Book"),
           (this.pictureUrl =
@@ -70,10 +72,7 @@ export default {
         this.uid
       );
       if (response) {
-        await this.$store.dispatch(
-          "user/updateProfile",
-          this.uid
-        );
+        await this.$store.dispatch("user/updateProfile", this.uid);
         console.log("user is registered");
         this.isLoading = false;
         this.$router.push("/homepage");
