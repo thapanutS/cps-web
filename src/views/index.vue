@@ -54,12 +54,10 @@ export default {
             `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
           )
         );
-        (this.uid = lineProfile.sub),
-          (this.displayName = lineProfile.name),
-          (this.pictureUrl = lineProfile.picture);
+        this.uid = lineProfile.sub
       } else {
         this.isLoading = true;
-        (this.uid = "U7b339cfc34febd8abb683887a0a5eede"),
+        (this.uid = "Ua28a9b8f51a7009c0361e8b9c3df674a"),
           (this.displayName = "Book"),
           (this.pictureUrl =
             "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png");
@@ -72,7 +70,9 @@ export default {
         this.uid
       );
       if (response) {
-        await this.$store.dispatch("user/updateProfile", this.uid);
+        if (!config.dev_status) {
+          await this.$store.dispatch("user/updateProfile", this.uid);
+        }
         console.log("user is registered");
         this.isLoading = false;
         this.$router.push("/homepage");
