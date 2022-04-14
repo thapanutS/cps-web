@@ -46,11 +46,11 @@ const actions = {
   },
 
   async createUser({ commit }, infomation) {
-    const user = await axios.post(
+    const response = await axios.post(
       `${config.api.baseUrl}/user/create`,
       infomation
     );
-    commit("setUserProfile", user.data);
+    commit("setUserProfile", response.data.data);
   },
 
   async getEventByUid({ commit }, uid) {
