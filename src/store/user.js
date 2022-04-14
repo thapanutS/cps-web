@@ -46,13 +46,10 @@ const actions = {
   },
 
   async createUser({ commit }, infomation) {
-    console.log('createUser - store : ',infomation);
     const response = await axios.post(
       `${config.api.baseUrl}/user/create`,
       infomation
     );
-    console.log('response - store : ',response.data.data);
-
     commit("setUserProfile", response.data.data);
   },
 
