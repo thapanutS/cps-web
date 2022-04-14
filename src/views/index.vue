@@ -10,9 +10,8 @@
       :width="70"
       :lock-scroll="true"
     ></loading>
-    <!-- <b>Index Page</b> -->
-    <div class="flex items-center h-screen">
-      <img src="@/assets/logo/cps-logo.png" alt="cps-logo" />
+    <div class="flex justify-center items-center h-screen">
+      <img src="@/assets/logo/cps-logo.png" width="300" alt="cps-logo" />
     </div>
   </div>
 </template>
