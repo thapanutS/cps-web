@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="search z-50">
+    <div class="search">
       <input
         type="text"
         placeholder="ค้นหาข้อมูล"
