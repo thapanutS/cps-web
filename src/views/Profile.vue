@@ -206,19 +206,17 @@ export default {
   setup() {
     const isLoading = ref(false);
     const store = useStore();
-    const initAndLogin = async () => {
-      if (!config.dev_status) {
-        await lineUtils.initAndLogin();
-      }
-    };
-    initAndLogin();
-    const fetchData = async (userProfile) => {
+    const fetchData = async () => {
       isLoading.value = true;
       if (!config.dev_status) {
-        await store.dispatch("user/getEventActiveByUid", userProfile.value.uid);
+        await lineUtils.initAndLogin();
+        await store.dispatch(
+          "user/getEventActiveByUid",
+          this.userProfile.value.uid
+        );
         await store.dispatch(
           "user/getEventHistoryByUid",
-          userProfile.value.uid
+          this.userProfile.value.uid
         );
       } else {
         await store.dispatch(
@@ -233,7 +231,7 @@ export default {
 
       isLoading.value = false;
     };
-    fetchData(userProfile);
+    fetchData();
     const userProfile = computed(
       () =>
         store.state.user.userProfile ||
