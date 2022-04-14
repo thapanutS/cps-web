@@ -314,6 +314,7 @@ export default {
         this.userProfileLocal.pictureUrl || this.userProfileLine.picture;
       this.form.displayName =
         this.userProfileLocal.displayName || this.userProfileLine.name;
+        console.log(JSON.stringify(this.form,null,4));
     },
     validate() {
       if (
