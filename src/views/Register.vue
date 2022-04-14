@@ -244,6 +244,9 @@ import {
 } from "@headlessui/vue";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
 import config from "../../config";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+
 const REGEX_TEXT = /^[a-zA-Z]*$/;
 const REGEX_NUMBER = /^[0-9]*$/;
 const userProfileLine = JSON.parse(
@@ -260,6 +263,7 @@ export default {
     ListboxOptions,
     CheckIcon,
     SelectorIcon,
+    Loading,
   },
   data() {
     return {
