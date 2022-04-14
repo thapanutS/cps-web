@@ -35,10 +35,7 @@
           :status="claim.status"
         />
       </div>
-      <div
-        v-if="!claimList.length"
-        class="flex justify-center items-center"
-      >
+      <div v-if="!claimList.length" class="flex justify-center items-center">
         <img src="@/assets/not-found/not-found.png" width="150" />
       </div>
     </section>

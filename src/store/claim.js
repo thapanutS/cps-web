@@ -1,5 +1,5 @@
 import axios from "axios";
-import config from "../../config"
+import config from "../../config";
 
 const state = () => ({
   claimList: null,
@@ -17,9 +17,7 @@ const getters = {
 
 const actions = {
   async fetchClaimListByUid({ commit }, uid) {
-    const claimList = await axios.get(
-      `${config.api.baseUrl}/claim/${uid}`
-    );
+    const claimList = await axios.get(`${config.api.baseUrl}/claim/${uid}`);
     commit("setClaimList", claimList.data);
     return claimList;
   },

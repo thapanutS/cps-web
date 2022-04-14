@@ -161,8 +161,7 @@ export default {
       });
     },
     myEventList() {
-      return this.myEventListData. filter(
-        (event) => {
+      return this.myEventListData.filter((event) => {
         if (
           this.filterList[0].isSelected ||
           this.filterList[1].isSelected ||
