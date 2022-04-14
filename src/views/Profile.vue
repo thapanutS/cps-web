@@ -11,7 +11,7 @@
       :width="70"
       :lock-scroll="true"
     ></loading>
-    <div class="container px-3 pt-3" style="height: 90vh">
+    <div class="container px-3 pt-3">
       <div class="flex flex-row bg-white rounded-xl shadow-lg">
         <div class="w-2/5 py-4 pl-3 pr-5">
           <img
@@ -242,7 +242,7 @@ export default {
 <style lang="scss" scoped>
 .register {
   height: 100%;
-  min-height: 90vh;
+  min-height: 95vh;
   background: #cbe2e0;
   .actionBox {
     height: 67vh;
