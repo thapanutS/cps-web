@@ -234,6 +234,8 @@ import {
 } from "@headlessui/vue";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
 import config from "../../config";
+import { mapGetters } from "vuex";
+
 const REGEX_TEXT = /^[a-zA-Z]*$/;
 const REGEX_NUMBER = /^[0-9]*$/;
 
@@ -247,6 +249,27 @@ export default {
     ListboxOptions,
     CheckIcon,
     SelectorIcon,
+  },
+  created() {
+    this.initialData();
+  },
+  computed: {
+    selectedValue() {
+      return this.selected;
+    },
+    ...mapGetters({
+      userProfileData: "user/getUserProfile",
+    }),
+    userProfileLine() {
+      return JSON.parse(
+        localStorage.getItem(`LIFF_STORE:${config.line.liff_id}:decodedIDToken`)
+      );
+    },
+    userProfileLocal() {
+      return (
+        this.userProfileData || JSON.parse(localStorage.getItem(`Profile`))
+      );
+    },
   },
   data() {
     return {
@@ -265,24 +288,9 @@ export default {
         name: "CS",
       },
       form: {
-        uid: JSON.parse(
-          localStorage.getItem(
-            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
-          )
-        ).sub,
-        // uid: "Ua28a9b8f51a7009c0361e8b9c3df674z",
-        pictureUrl: JSON.parse(
-          localStorage.getItem(
-            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
-          )
-        ).picture,
-        // pictureUrl: "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png",
-        displayName: JSON.parse(
-          localStorage.getItem(
-            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
-          )
-        ).name,
-        // displayName: "Book",
+        uid: "",
+        pictureUrl: "",
+        displayName: "",
         firstName: "",
         lastName: "",
         studentId: "",
@@ -298,12 +306,15 @@ export default {
       },
     };
   },
-  computed: {
-    selectedValue() {
-      return this.selected;
-    },
-  },
+
   methods: {
+    initialData() {
+      this.form.uid = this.userProfileLocal.uid || this.userProfileLine.sub;
+      this.form.pictureUrl =
+        this.userProfileLocal.pictureUrl || this.userProfileLine.picture;
+      this.form.displayName =
+        this.userProfileLocal.displayName || this.userProfileLine.name;
+    },
     validate() {
       if (
         this.form.firstName &&
