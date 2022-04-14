@@ -55,6 +55,11 @@ class LineUtil {
   async getDecodedIDToken() {
     return await liff.getDecodedIDToken();
   }
+
+  async initAndLogin(){
+    await this.init();
+    await this.login();
+  }
 }
 
 const lineUtil = new LineUtil();
