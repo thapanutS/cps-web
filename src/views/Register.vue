@@ -261,9 +261,6 @@ export default {
     CheckIcon,
     SelectorIcon,
   },
-  created() {
-    window.location.reload();
-  },
   data() {
     return {
       isLoading: false,
