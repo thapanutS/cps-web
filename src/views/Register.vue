@@ -236,7 +236,10 @@ import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
 import config from "../../config";
 const REGEX_TEXT = /^[a-zA-Z]*$/;
 const REGEX_NUMBER = /^[0-9]*$/;
-
+const userProfileLine = JSON.parse(
+  localStorage.getItem(`LIFF_STORE:${config.line.liff_id}:decodedIDToken`)
+);
+const userProfileLocal = JSON.parse(localStorage.getItem(`Profile`));
 export default {
   name: "RegisterPage",
   components: {
@@ -265,24 +268,13 @@ export default {
         name: "CS",
       },
       form: {
-        uid: JSON.parse(
-          localStorage.getItem(
-            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
-          )
-        ).sub,
-        // uid: "Ua28a9b8f51a7009c0361e8b9c3df674z",
-        pictureUrl: JSON.parse(
-          localStorage.getItem(
-            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
-          )
-        ).picture,
-        // pictureUrl: "https://www.img.in.th/images/33fdad6bd60ea49e0aea95f7eb751d32.png",
-        displayName: JSON.parse(
-          localStorage.getItem(
-            `LIFF_STORE:${config.line.liff_id}:decodedIDToken`
-          )
-        ).name,
-        // displayName: "Book",
+        uid: userProfileLine ? userProfileLine.sub : userProfileLocal.uid,
+        pictureUrl: userProfileLine
+          ? userProfileLine.picture
+          : userProfileLocal.pictureUrl,
+        displayName: userProfileLine
+          ? userProfileLine.name
+          : userProfileLocal.displayName,
         firstName: "",
         lastName: "",
         studentId: "",
