@@ -1,5 +1,15 @@
 <template>
   <div class="profile">
+    <loading
+      :active="isLoading"
+      :can-cancel="false"
+      :is-full-page="true"
+      color="#15C5B5"
+      loader="dots"
+      :height="60"
+      :width="70"
+      :lock-scroll="true"
+    ></loading>
     <div class="flex flex-col items-center py-10">
       <img src="@/assets/logo/cps-logo.png" width="250" alt="cps-logo" />
       <div>
@@ -253,6 +263,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       major: [
         {
           id: 1,
@@ -311,6 +322,7 @@ export default {
       return false;
     },
     async register() {
+      this.isLoading = true;
       this.form.firstName =
         this.form.firstName.charAt(0).toUpperCase() +
         this.form.firstName.slice(1);
