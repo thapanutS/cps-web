@@ -1,5 +1,5 @@
 <template>
-  <button :class="[`filter`, `px-2`, isSelected ? ` selected` : '']">
+  <button :class="[`filter px-2`, isSelected ? ` selected` : '']">
     {{ text }}
   </button>
 </template>
