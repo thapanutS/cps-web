@@ -45,6 +45,7 @@ import { ref } from "vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import Layout from "@/components/Layout.vue";
+import lineUtils from "@/utils/line.js";
 export default {
   name: "Reward",
   components: {
@@ -56,6 +57,13 @@ export default {
   setup() {
     const isLoading = ref(false);
     const store = useStore();
+    const fetchData = async () => {
+      isLoading.value = true;
+      await store.dispatch("item/fetchItemList");
+      await lineUtils.initAndLogin();
+      isLoading.value = false;
+    };
+    fetchData();    
     const itemList = computed(() => store.state.item.itemList);
     const userProfile = computed(
       () =>
@@ -64,12 +72,6 @@ export default {
     );
     const isLoadingStatus = computed(() => isLoading.value);
     const profileInfo = computed(() => store.state.user.userProfile);
-    const fetchData = async () => {
-      isLoading.value = true;
-      await store.dispatch("item/fetchItemList");
-      isLoading.value = false;
-    };
-    fetchData();
     const claimItem = (item) => {
       Swal.fire({
         title: `คุณแน่ใจว่าต้องการแลก ${item.name} ?`,
