@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="flex justify-center p-1.5 bg-white">
-      <nav class="cps-logo">
+      <nav class="cps-logo z-50">
         <img src="@/assets/logo/cps-logo.png" alt="cps-logo" />
       </nav>
     </div>
     <router-view />
     <div
       id="b-nav"
-      class="flex justify-between fixed bottom-0 w-full py-3 px-4 bg-white"
+      class="flex justify-between fixed bottom-0 w-full py-3 px-4 bg-white z-50"
     >
       <div>
         <router-link to="/homepage" @click="currentPage('HOME')">
