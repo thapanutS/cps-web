@@ -211,17 +211,18 @@ export default {
         store.state.user.userProfile ||
         JSON.parse(localStorage.getItem(`Profile`))
     );
-    const fetchData = async () => {
+    const activeEvent = computed(() => store.state.user.eventActiveList);
+    const historyEvent = computed(() => store.state.user.eventHistoryList);
+    const isLoadingStatus = computed(() => isLoading.value);
+
+    const fetchData = async (userProfile) => {
       isLoading.value = true;
       if (!config.dev_status) {
         await lineUtils.initAndLogin();
-        await store.dispatch(
-          "user/getEventActiveByUid",
-          this.userProfile.value.uid
-        );
+        await store.dispatch("user/getEventActiveByUid", userProfile.value.uid);
         await store.dispatch(
           "user/getEventHistoryByUid",
-          this.userProfile.value.uid
+          userProfile.value.uid
         );
       } else {
         await store.dispatch(
@@ -235,11 +236,8 @@ export default {
       }
       isLoading.value = false;
     };
-    fetchData();
+    fetchData(userProfile);
 
-    const activeEvent = computed(() => store.state.user.eventActiveList);
-    const historyEvent = computed(() => store.state.user.eventHistoryList);
-    const isLoadingStatus = computed(() => isLoading.value);
     const formatDate = (eventStart, eventEnd) => {
       return `${moment(eventStart).format("DD")}
       \n-\n
