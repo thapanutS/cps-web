@@ -51,6 +51,8 @@ import { ref } from "vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import Layout from "@/components/Layout.vue";
+import lineUtils from "@/utils/line.js";
+import config from "../../config";
 export default {
   name: "Claim",
   components: {
@@ -72,7 +74,18 @@ export default {
 
     const fetchData = async (userProfile) => {
       isLoading.value = true;
-      await store.dispatch("claim/fetchClaimListByUid", userProfile.value.uid);
+      if (!config.dev_status) {
+        await lineUtils.initAndLogin();
+        await store.dispatch(
+          "claim/fetchClaimListByUid",
+          userProfile.value.uid
+        );
+      } else {
+        await store.dispatch(
+          "claim/fetchClaimListByUid",
+          "Ua28a9b8f51a7009c0361e8b9c3df674a"
+        );
+      }
       isLoading.value = false;
     };
     fetchData(userProfile);
