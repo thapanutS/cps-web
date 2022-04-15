@@ -14,7 +14,7 @@ const routes = [
     component: Index,
   },
   {
-    path: "/",
+    path: "/profile",
     name: "Profile",
     component: Profile,
   },
@@ -29,7 +29,7 @@ const routes = [
     component: Reward,
   },
   {
-    path: "/claim",
+    path: "/",
     name: "Claim",
     component: Claim,
   },
