@@ -9,7 +9,7 @@ import HomePage from "../views/HomePage.vue";
 
 const routes = [
   {
-    path: "/index",
+    path: "/",
     name: "Index",
     component: Index,
   },
@@ -29,7 +29,7 @@ const routes = [
     component: Reward,
   },
   {
-    path: "/",
+    path: "/claim",
     name: "Claim",
     component: Claim,
   },
