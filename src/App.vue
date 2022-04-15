@@ -1,21 +1,9 @@
 <template>
   <div>
-    <!-- <div v-if="$route.name !== 'Register' || $route.name !== 'Index'" class="flex justify-center p-2">
-      <div class="cps-logo">
-        <img src="@/assets/logo/cps-logo.png" alt="cps-logo" />
-      </div>
-    </div> -->
     <router-view />
-    <!-- <BottomNavbar v-if="$route.name !== 'Register' || $route.name !== 'Index'" /> -->
   </div>
 </template>
 <script>
-// import BottomNavbar from "@/components/BottomNavbar.vue";
-export default {
-  components: {
-    // BottomNavbar,
-  },
-};
 </script>
 <style>
 #app {
