@@ -108,7 +108,7 @@ export default {
               itemId: item._id,
             }
           );
-          fetchData();
+          fetchData(userProfile);
           if (claimCreated === "SUCCESSFUL") {
             isLoading.value = false;
             Swal.fire(
