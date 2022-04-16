@@ -47,6 +47,7 @@ import "vue-loading-overlay/dist/vue-loading.css";
 import Layout from "@/components/Layout.vue";
 import lineUtils from "@/utils/line.js";
 import config from "../../config";
+import VConsole from 'vconsole';
 export default {
   name: "Reward",
   components: {
@@ -56,6 +57,8 @@ export default {
     Layout,
   },
   setup() {
+    const vConsole = new VConsole();
+    vConsole.show();
     const isLoading = ref(false);
     const store = useStore();
     const itemList = computed(() => store.state.item.itemList);
@@ -70,6 +73,7 @@ export default {
       await store.dispatch("item/fetchItemList");
       if (!config.dev_status) {
         await lineUtils.initAndLogin();
+        console.log('userProfile : ',userProfile);
         await store.dispatch(
           "user/getUserProfile",
           userProfile.value.uid
