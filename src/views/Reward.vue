@@ -92,6 +92,7 @@ export default {
         cancelButtonText: "ยกเลิก",
       }).then(async (result) => {
         if (result.isConfirmed) {
+          isLoading.value = true;
           const claimCreated = await store.dispatch(
             "claim/createClaimRequest",
             {
@@ -101,12 +102,14 @@ export default {
           );
           fetchData();
           if (claimCreated === "SUCCESSFUL") {
+            isLoading.value = false;
             Swal.fire(
               "ทำการแลกของเรียบร้อย!",
               "ตรวจสอบรายละเอียดที่รายการเคลม.",
               "success"
             );
           } else {
+            isLoading.value = false;
             Swal.fire(
               "ทำการแลกของไม่สำเร็จ!",
               "Point สำหรับการแลกไม่เพียงพอ",
