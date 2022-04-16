@@ -105,7 +105,6 @@ import FilterChip from "@/components/FilterChip.vue";
 import EventCard from "@/components/EventCard.vue";
 import { mapGetters } from "vuex";
 import Layout from "@/components/Layout.vue";
-import VConsole from 'vconsole';
 export default {
   name: "Test",
   components: {
@@ -117,8 +116,6 @@ export default {
     Layout,
   },
   created() {
-    const vConsole = new VConsole();
-    vConsole.show();
     this.initailData();
   },
   computed: {

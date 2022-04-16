@@ -47,7 +47,6 @@ import "vue-loading-overlay/dist/vue-loading.css";
 import Layout from "@/components/Layout.vue";
 import lineUtils from "@/utils/line.js";
 import config from "../../config";
-import VConsole from 'vconsole';
 export default {
   name: "Reward",
   components: {
@@ -57,8 +56,6 @@ export default {
     Layout,
   },
   setup() {
-    const vConsole = new VConsole();
-    vConsole.show();
     const isLoading = ref(false);
     const store = useStore();
     const itemList = computed(() => store.state.item.itemList);
@@ -71,19 +68,17 @@ export default {
     const fetchData = async (userProfile) => {
       isLoading.value = true;
       await store.dispatch("item/fetchItemList");
+      let userID = null;
       if (!config.dev_status) {
         await lineUtils.initAndLogin();
-        console.log('userProfile : ',userProfile);
-        await store.dispatch(
-          "user/getUserProfile",
-          userProfile.value.uid
-        );        
+        userID = userProfile.value.uid;
       } else {
-        await store.dispatch(
-          "user/getUserProfile",
-          "Ua28a9b8f51a7009c0361e8b9c3df674a"
-        );
+        userID = "Ua28a9b8f51a7009c0361e8b9c3df674a";
       }
+      await store.dispatch(
+        "user/getUserProfile",
+        userID
+      );
       isLoading.value = false;
     };
     fetchData(userProfile);
@@ -100,10 +95,16 @@ export default {
       }).then(async (result) => {
         if (result.isConfirmed) {
           isLoading.value = true;
+          let userID = null;
+          if (!config.dev_status) {
+            userID = userProfile.value.uid;
+          } else {
+            userID = "Ua28a9b8f51a7009c0361e8b9c3df674a";
+          }
           const claimCreated = await store.dispatch(
             "claim/createClaimRequest",
             {
-              uid: "Ua28a9b8f51a7009c0361e8b9c3df674a",
+              uid: userID,
               itemId: item._id,
             }
           );
