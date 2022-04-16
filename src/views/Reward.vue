@@ -58,11 +58,22 @@ export default {
   setup() {
     const isLoading = ref(false);
     const store = useStore();
-    const fetchData = async () => {
+    const itemList = computed(() => store.state.item.itemList);
+    const userProfile = computed(
+      () =>
+        store.state.user.userProfile ||
+        JSON.parse(localStorage.getItem(`Profile`))
+    );
+    const isLoadingStatus = computed(() => isLoading.value);
+    const fetchData = async (userProfile) => {
       isLoading.value = true;
       await store.dispatch("item/fetchItemList");
       if (!config.dev_status) {
         await lineUtils.initAndLogin();
+        await store.dispatch(
+          "user/getUserProfile",
+          userProfile.value.uid
+        );        
       } else {
         await store.dispatch(
           "user/getUserProfile",
@@ -71,15 +82,7 @@ export default {
       }
       isLoading.value = false;
     };
-    fetchData();
-    const itemList = computed(() => store.state.item.itemList);
-    const userProfile = computed(
-      () =>
-        store.state.user.userProfile ||
-        JSON.parse(localStorage.getItem(`Profile`))
-    );
-    const isLoadingStatus = computed(() => isLoading.value);
-    const profileInfo = computed(() => store.state.user.userProfile);
+    fetchData(userProfile);
     const claimItem = (item) => {
       Swal.fire({
         title: `คุณแน่ใจว่าต้องการแลก ${item.name} ?`,
@@ -125,7 +128,6 @@ export default {
       userProfile,
       claimItem,
       isLoadingStatus,
-      profileInfo,
     };
   },
 };
