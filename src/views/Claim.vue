@@ -74,18 +74,17 @@ export default {
 
     const fetchData = async (userProfile) => {
       isLoading.value = true;
+      let userID = null;
       if (!config.dev_status) {
         await lineUtils.initAndLogin();
-        await store.dispatch(
-          "claim/fetchClaimListByUid",
-          userProfile.value.uid
-        );
+        userID = userProfile.value.uid;
       } else {
-        await store.dispatch(
-          "claim/fetchClaimListByUid",
-          "Ua28a9b8f51a7009c0361e8b9c3df674a"
-        );
+        userID = "Ua28a9b8f51a7009c0361e8b9c3df674a";
       }
+      await store.dispatch(
+        "claim/fetchClaimListByUid",
+        userID
+      );
       isLoading.value = false;
     };
     fetchData(userProfile);

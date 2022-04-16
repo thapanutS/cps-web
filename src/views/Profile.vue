@@ -217,23 +217,21 @@ export default {
 
     const fetchData = async (userProfile) => {
       isLoading.value = true;
+      let userID = null;
       if (!config.dev_status) {
         await lineUtils.initAndLogin();
-        await store.dispatch("user/getEventActiveByUid", userProfile.value.uid);
-        await store.dispatch(
-          "user/getEventHistoryByUid",
-          userProfile.value.uid
-        );
+        userID = userProfile.value.uid;
       } else {
-        await store.dispatch(
-          "user/getEventActiveByUid",
-          "Ua28a9b8f51a7009c0361e8b9c3df674a"
-        );
-        await store.dispatch(
-          "user/getEventHistoryByUid",
-          "Ua28a9b8f51a7009c0361e8b9c3df674a"
-        );
+        userID = "Ua28a9b8f51a7009c0361e8b9c3df674a";
       }
+      await store.dispatch(
+        "user/getEventActiveByUid",
+        userID
+      );
+      await store.dispatch(
+        "user/getEventHistoryByUid",
+        userID
+      );
       isLoading.value = false;
     };
     fetchData(userProfile);
