@@ -74,18 +74,11 @@ export default {
 
     const fetchData = async (userProfile) => {
       isLoading.value = true;
-      const userID = !config.dev_status ? userProfile.value.uid : "Ua28a9b8f51a7009c0361e8b9c3df674a";
-      !config.dev_status ? await lineUtils.initAndLogin() : '';
-      // if (!config.dev_status) {
-      //   await lineUtils.initAndLogin();
-      //   userID = userProfile.value.uid;
-      // } else {
-      //   userID = "Ua28a9b8f51a7009c0361e8b9c3df674a";
-      // }
-      await store.dispatch(
-        "claim/fetchClaimListByUid",
-        userID
-      );
+      const userID = !config.dev_status
+        ? userProfile.value.uid
+        : "Ua28a9b8f51a7009c0361e8b9c3df674a";
+      !config.dev_status ? await lineUtils.initAndLogin() : "";
+      await store.dispatch("claim/fetchClaimListByUid", userID);
       isLoading.value = false;
     };
     fetchData(userProfile);
