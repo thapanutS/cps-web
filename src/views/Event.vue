@@ -1,5 +1,16 @@
 <template>
   <div class="event flex flex-col">
+    <Layout />
+    <loading
+      :active="isLoadingStatus"
+      :can-cancel="false"
+      :is-full-page="true"
+      color="#15C5B5"
+      loader="dots"
+      :height="60"
+      :width="70"
+      :lock-scroll="true"
+    ></loading>
     <section class="mt-3">
       <div class="text-lg font-bold truncate">{{ getEventDetail.name }}</div>
       <div class="poster mt-3">
@@ -43,7 +54,14 @@
 import Swal from "sweetalert2";
 import { mapGetters } from "vuex";
 import moment from "moment";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+import Layout from "@/components/Layout.vue";
 export default {
+  components: {
+    Layout,
+    Loading,
+  },
   created() {
     this.initailData();
   },
@@ -58,6 +76,11 @@ export default {
     getEventDetail() {
       return this.eventDetail[0];
     },
+  },
+  data() {
+    return {
+      isLoading: false,
+    };
   },
   methods: {
     async initailData() {
@@ -94,17 +117,20 @@ export default {
         cancelButtonText: "ยกเลิก",
       }).then(async (result) => {
         if (result.isConfirmed) {
+          this.isLoading = true;
           const registerStatus = await this.$store.dispatch("event/register", {
             uid: this.userProfile.uid,
             eventId: this.$route.params.id,
           });
           if (registerStatus === "SUCCESSFUL") {
+            this.isLoading = false;
             Swal.fire(
               "เข้าร่วมกิจกรรมเรียบร้อย!",
               "ตรวจสอบได้ที่รายการกิจกรรมของคุณ.",
               "success"
             );
           } else {
+            this.isLoading = false;
             Swal.fire(
               "เข้าร่วมกิจกรรมไม่สำเร็จ!",
               "จำนวนผู้เข้าร่วมเต็มแล้ว หรือ คุณเข้าร่วมกิจกรรมนี้แล้ว",
