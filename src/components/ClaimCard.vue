@@ -7,7 +7,9 @@
     </div>
     <div>
       <div class="my-1">{{ name }}</div>
-      <div class="my-1 claim-date">Claim date : {{ formatDate(claimDate) }}</div>
+      <div class="my-1 claim-date">
+        Claim date : {{ formatDate(claimDate) }}
+      </div>
     </div>
     <div class="mr-2">
       <div
