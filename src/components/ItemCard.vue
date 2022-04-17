@@ -2,11 +2,11 @@
   <div
     class="card-container bg-white flex items-center justify-between mx-2 rounded"
   >
-    <div>
+    <div class="w-1/4">
       <img :src="img" alt="" />
     </div>
-    <div>
-      <div class="my-1">{{ name }}</div>
+    <div class="w-2/4">
+      <div class="my-1 truncate">{{ name }}</div>
       <div class="flex justify-center">
         <div
           class="card-tube rounded-full px-3 whitespace-nowrap flex justify-center"
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="mr-2">
+    <div class="mr-2 w-1/4">
       <div>{{ point }} Points</div>
       <div>
         <button
