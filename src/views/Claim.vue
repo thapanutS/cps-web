@@ -1,5 +1,5 @@
 <template>
-  <div class="reward bg-quaternary">
+  <div class="claim bg-quaternary">
     <Layout />
     <!-- POINT BAR -->
     <loading
@@ -93,7 +93,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.reward {
+.claim {
   height: 100%;
   min-height: 90vh;
 }
