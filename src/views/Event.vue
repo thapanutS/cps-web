@@ -11,42 +11,45 @@
       :width="70"
       :lock-scroll="true"
     ></loading>
-    <section class="mt-3">
-      <div class="text-lg font-bold truncate">{{ getEventDetail.name }}</div>
-      <div class="poster mt-3">
-        <img :src="getEventDetail.img" class="mx-auto" alt="" />
-      </div>
-    </section>
-    <section class="text-left mt-4 getEventDetail detail">
-      <div class="text-base">{{ getEventDetail.description }}</div>
-      <div id="point" class="mt-2">
-        คะแนนที่ได้ {{ getEventDetail.point }} pt
-      </div>
-      <div class="date">
-        <div class="mt-2">
-          กิจกรรมเริ่มวันที่
-          {{ formatDate(getEventDetail.eventStart) }} ถึงวันที่
-          {{ formatDate(getEventDetail.eventEnd) }}
+    <div class="mx-8">
+      <section class="mt-3">
+        <div class="text-lg font-bold truncate">{{ getEventDetail.name }}</div>
+        <div class="poster mt-3">
+          <img :src="getEventDetail.img" class="mx-auto" alt="" />
         </div>
-        <div class="mt-2">
-          ปิดรับสมัครวันที่ : {{ formatDate(getEventDetail.registerEnd) }}
+      </section>
+      <section class="text-left mt-4 getEventDetail detail">
+        <div class="text-base">{{ getEventDetail.description }}</div>
+        <div id="point" class="mt-2">
+          คะแนนที่ได้ {{ getEventDetail.point }} pt
         </div>
-        <div class="mt-2">สถานที่ {{ getEventDetail.location }}</div>
-      </div>
-    </section>
-    <section
-      :class="[
-        ` rounded py-2 my-2`,
-        btnRegisterStatus()
-          ? `bg-secondary text-white`
-          : `bg-quaternary text-black`,
-      ]"
-    >
-      <button v-if="btnRegisterStatus()" @click="registerEvent()">
-        เข้าร่วมกิจกรรม
-      </button>
-      <button v-else>ปิดลงทะเบียนแล้ว</button>
-    </section>
+        <div class="date">
+          <div class="mt-2">
+            กิจกรรมเริ่มวันที่
+            {{ formatDate(getEventDetail.eventStart) }} ถึงวันที่
+            {{ formatDate(getEventDetail.eventEnd) }}
+          </div>
+          <div class="mt-2">
+            ปิดรับสมัครวันที่ : {{ formatDate(getEventDetail.registerEnd) }}
+          </div>
+          <div class="mt-2">สถานที่ {{ getEventDetail.location }}</div>
+        </div>
+      </section>
+      <section
+        :class="[
+          ` rounded py-2 my-2`,
+          btnRegisterStatus()
+            ? `bg-secondary text-white`
+            : `bg-quaternary text-black`,
+        ]"
+      >
+        <button v-if="btnRegisterStatus()" @click="registerEvent()">
+          เข้าร่วมกิจกรรม
+        </button>
+        <button v-else>ปิดลงทะเบียนแล้ว</button>
+      </section>      
+    </div>
+
   </div>
 </template>
 
@@ -151,8 +154,6 @@ export default {
 .event {
   height: 100%;
   min-height: 90vh;
-  width: 80vw;
-  margin: 0 auto;
   .poster {
     img {
       width: 28rem;
