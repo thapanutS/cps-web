@@ -193,7 +193,9 @@ export default {
       });
     },
     userProfile() {
-      return this.userProfile || JSON.parse(localStorage.getItem(`Profile`));
+      return (
+        this.userProfileData || JSON.parse(localStorage.getItem(`Profile`))
+      );
     },
   },
   data() {
