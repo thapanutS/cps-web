@@ -7,7 +7,7 @@
     </div>
     <div>
       <div class="my-1">{{ name }}</div>
-      <div class="my-1 claim-date">Claim date {{ claimDate }}</div>
+      <div class="my-1 claim-date">Claim date : {{ formatDate(claimDate) }}</div>
     </div>
     <div class="mr-2">
       <div
@@ -26,9 +26,18 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   name: "ClaimCard",
   props: ["img", "name", "claimDate", "status"],
+  setup() {
+    const formatDate = (claimDate) => {
+      return `${moment(claimDate).format("DD MMM YYYY")}`;
+    };
+    return {
+      formatDate,
+    };
+  },
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
