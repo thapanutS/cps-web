@@ -47,9 +47,8 @@
           เข้าร่วมกิจกรรม
         </button>
         <button v-else>ปิดลงทะเบียนแล้ว</button>
-      </section>      
+      </section>
     </div>
-
   </div>
 </template>
 
