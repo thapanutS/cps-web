@@ -67,10 +67,10 @@ export default {
   &.waiting {
     background-color: #5a959a;
   }
-  &.confirmed {
+  &.confirm {
     background-color: green;
   }
-  &.rejected {
+  &.cancel {
     background-color: #af032b;
   }
 }
