@@ -124,7 +124,8 @@ export default {
             uid: this.userProfile.uid,
             eventId: this.$route.params.id,
           });
-          if (registerStatus === "SUCCESSFUL") {
+          if (registerStatus.data === "SUCCESSFUL") {
+            console.log("registerStatus  -> ", registerStatus);
             this.isLoading = false;
             Swal.fire(
               "เข้าร่วมกิจกรรมเรียบร้อย!",

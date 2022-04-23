@@ -20,7 +20,10 @@
     />
 
     <!-- ITEM LIST  -->
-    <section class="mt-2 pt-2 bg-white overflow-y-scroll" style="height: 82.9vh">
+    <section
+      class="mt-2 pt-2 bg-white overflow-y-scroll"
+      style="height: 82.9vh"
+    >
       <div class="mt-2" v-for="item in itemList" :key="item._id">
         <ItemCard
           :img="item.img"
@@ -54,7 +57,7 @@ export default {
     Loading,
     Layout,
   },
-  setup() {
+  async setup() {
     const isLoading = ref(false);
     const store = useStore();
     const itemList = computed(() => store.state.item.itemList);
