@@ -57,7 +57,7 @@ export default {
     Loading,
     Layout,
   },
-  async setup() {
+  setup() {
     const isLoading = ref(false);
     const store = useStore();
     const itemList = computed(() => store.state.item.itemList);
@@ -77,7 +77,7 @@ export default {
       await store.dispatch("user/getUserProfile", userID);
       isLoading.value = false;
     };
-    await fetchData(userProfile);
+    fetchData(userProfile);
     const claimItem = (item) => {
       Swal.fire({
         title: `คุณแน่ใจว่าต้องการแลก ${item.name} ?`,
@@ -104,7 +104,7 @@ export default {
               itemId: item._id,
             }
           );
-          await fetchData(userProfile);
+          fetchData(userProfile);
           if (claimCreated === "SUCCESSFUL") {
             isLoading.value = false;
             Swal.fire(
