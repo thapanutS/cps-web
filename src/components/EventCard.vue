@@ -15,11 +15,11 @@
             {{ formatDate(registerStart, registerEnd) }} วัน
           </div>
           <div
-            v-for="(item, index) in tagsList"
-            :key="index"
-            :class="[`mx-1 px-2 event`, item.toLowerCase()]"
+            v-for="item in tagsList"
+            :key="item.id"
+            :class="[`mx-1 px-2 event`, item.tag.toLowerCase()]"
           >
-            {{ item }}
+            {{ item.tagName }}
           </div>
         </div>
       </div>
@@ -51,14 +51,37 @@ export default {
   },
   methods: {
     initailData() {
-      this.tagsList = JSON.parse(JSON.stringify(this.tags));
+      console.log("Props : ", this.nameEvent);
+      console.log("Props : ", this.img);
+      let tagsList = [];
+      this.tags.forEach((tag, index) => {
+        let tagName = "";
+        if (tag === `skill`) {
+          tagName = "พัฒนาทักษะ";
+        } else if (tag === "contest") {
+          tagName = "ประกวดแข่งขัน";
+        } else if (tag === "guild") {
+          tagName = "แนะแนว";
+        } else if (tag === "cram") {
+          tagName = "ติวสอบ";
+        } else if (tag === "language") {
+          tagName = "พัฒนาภาษา";
+        } else {
+          tagName = "กิจกรรมอื่นๆ";
+        }
+        tagsList.push({
+          id: index,
+          tag: tag,
+          tagName: tagName,
+        });
+      });
     },
     formatDate(registerStart, registerEnd) {
       const date = `${
         moment(registerEnd).format("DD") - moment(registerStart).format("DD")
-      }`
+      }`;
 
-      return date.charAt(0) === '-' ? date.substring(1) : date;
+      return date.charAt(0) === "-" ? date.substring(1) : date;
     },
   },
 };
