@@ -14,6 +14,7 @@
             เหลือเวลารับสมัครอีก
             {{ formatDate(registerStart, registerEnd) }} วัน
           </div>
+
           <div
             v-for="item in tagsList"
             :key="item.id"
@@ -51,29 +52,29 @@ export default {
   },
   methods: {
     initailData() {
-      console.log("Props : ", this.nameEvent);
-      console.log("Props : ", this.img);
-      let tagsList = [];
+      console.log("Props : ", this.name);
+      console.log("Props : ", this.tags);
       this.tags.forEach((tag, index) => {
         let tagName = "";
-        if (tag === `skill`) {
+        if (tag.toLowerCase() === `skill`) {
           tagName = "พัฒนาทักษะ";
-        } else if (tag === "contest") {
+        } else if (tag.toLowerCase() === "contest") {
           tagName = "ประกวดแข่งขัน";
-        } else if (tag === "guild") {
+        } else if (tag.toLowerCase() === "guild") {
           tagName = "แนะแนว";
-        } else if (tag === "cram") {
+        } else if (tag.toLowerCase() === "cram") {
           tagName = "ติวสอบ";
-        } else if (tag === "language") {
+        } else if (tag.toLowerCase() === "language") {
           tagName = "พัฒนาภาษา";
         } else {
           tagName = "กิจกรรมอื่นๆ";
         }
-        tagsList.push({
+        this.tagsList.push({
           id: index,
           tag: tag,
           tagName: tagName,
         });
+        console.log(this.tagsList);
       });
     },
     formatDate(registerStart, registerEnd) {

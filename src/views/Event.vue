@@ -132,6 +132,7 @@ export default {
               "ตรวจสอบได้ที่รายการกิจกรรมของคุณ.",
               "success"
             );
+            this.$router.push("/");
           } else {
             this.isLoading = false;
             Swal.fire(
