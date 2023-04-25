@@ -1,6 +1,6 @@
 export default {
   api: {
-    baseUrl: process.env.VUE_APP_API_URL,
+    baseUrl: 'https://odd-rose-magpie-veil.cyclic.app',
   },
   line: {
     liff_id: process.env.VUE_APP_LINE_LIFF_ID,
